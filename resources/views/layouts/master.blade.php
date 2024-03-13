@@ -13,7 +13,15 @@
 </head>
 <body>
 
-{{-- @include('frontend.partials.preloader') --}}
+@include('frontend.partials.preloader')
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Start Body Overlay
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="body-overlay" class="body-overlay"></div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Body Overlay
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 @yield('content')
 
