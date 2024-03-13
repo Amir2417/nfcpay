@@ -430,3 +430,136 @@ $(document).ready(function() {
   
 
 })(jQuery);
+
+/**
+ * Function For Get All Country list by AJAX Request
+ * @param {HTML DOM} targetElement
+ * @param {Error Place Element} errorElement
+ * @returns
+ */
+var allCountries = "";
+function getAllCountries(hitUrl,targetElement = $(".country-select"),errorElement = $(".country-select").siblings(".select2")) {
+  if(targetElement.length == 0) {
+    return false;
+  }
+  var CSRF = $("meta[name=csrf-token]").attr("content");
+  var data = {
+    _token      : CSRF,
+  };
+  $.post(hitUrl,data,function() {
+    // success
+    $(errorElement).removeClass("is-invalid");
+    $(targetElement).siblings(".invalid-feedback").remove();
+  }).done(function(response){
+    // Place States to States Field
+    var options = "<option selected disabled>Select Country</option>";
+    var selected_old_data = "";
+    if($(targetElement).attr("data-old") != null) {
+        selected_old_data = $(targetElement).attr("data-old");
+    }
+    $.each(response,function(index,item) {
+        options += `<option value="${item.name}" data-id="${item.id}" data-mobile-code="${item.mobile_code}" ${selected_old_data == item.name ? "selected" : ""}>${item.name}</option>`;
+    });
+
+
+    allCountries = response;
+
+
+    $(targetElement).html(options);
+  }).fail(function(response) {
+    var faildMessage = "Something went wrong! Please try again.";
+    var faildElement = `<span class="invalid-feedback" role="alert">
+                            <strong>${faildMessage}</strong>
+                        </span>`;
+    $(errorElement).addClass("is-invalid");
+    if($(targetElement).siblings(".invalid-feedback").length != 0) {
+        $(targetElement).siblings(".invalid-feedback").text(faildMessage);
+    }else {
+      errorElement.after(faildElement);
+    }
+  });
+}
+$('.select2-basic').select2();
+$('.select2-multi-select').select2();
+$(".select2-auto-tokenize").select2({
+tags: true,
+tokenSeparators: [',']
+});
+
+function placePhoneCode(code) {
+  if(code != undefined) {
+      code = code.replace("+","");
+      code = "+" + code;
+      $("input.phone-code").val(code);
+      $("div.phone-code").html(code);
+  }
+}
+
+$(document).on("keyup",".number-input",function(){
+  var pattern = /^[0-9]*\.?[0-9]*$/;
+  var value = $(this).val();
+  var test = pattern.test(value);
+  if(test == false) {
+    var rightValue = value;
+    if(value.length > 0) {
+      for (let index = 0; index < value.length; index++){
+        if(!$.isNumeric(rightValue)) {
+          rightValue = rightValue.slice(0, -1);
+        }
+      }
+    }
+    $(this).val(rightValue);
+  }
+});
+
+var timeOut;
+function itemSearch(inputElement,tableElement,URL,minTextLength = 3) {
+  $(inputElement).bind("keyup",function(){
+    clearTimeout(timeOut);
+    timeOut = setTimeout(executeItemSearch, 500,$(this),tableElement,URL,minTextLength);
+  });
+}
+function executeItemSearch(inputElement,tableElement,URL,minTextLength) {
+  $(tableElement).parent().find(".search-result-table").remove();
+  var searchText = inputElement.val();
+  if(searchText.length > minTextLength) {
+    // console.log(searchText);
+    $(tableElement).addClass("d-none");
+    makeSearchItemXmlRequest(searchText,tableElement,URL);
+  }else {
+    $(tableElement).removeClass("d-none");
+  }
+}
+
+function makeSearchItemXmlRequest(searchText,tableElement,URL) {
+  var data = {
+    _token      : laravelCsrf(),
+    text        : searchText,
+  };
+  $.post(URL,data,function(response) {
+    //response
+  }).done(function(response){
+    itemSearchResult(response,tableElement);
+    // if($(tableElement).siblings(".search-result-table").length > 0) {
+    //     $(tableElement).parent().find(".search-result-table").html(response);
+    // }else{
+    //     $(tableElement).after(`<div class="search-result-table"></div>`);
+    //     $(tableElement).parent().find(".search-result-table").html(response);
+    // }
+  }).fail(function(response) {
+    throwMessage('error',["Something went wrong! Please try again."]);
+  });
+}
+
+function itemSearchResult(response,tableElement) {
+  if(response == "") {
+    throwMessage('error',["No data found!"]);
+  }
+  if($(tableElement).siblings(".search-result-table").length > 0) {
+    $(tableElement).parent().find(".search-result-table").html(response);
+  }else{
+    $(tableElement).after(`<div class="search-result-table"></div>`);
+    $(tableElement).parent().find(".search-result-table").html(response);
+  }
+}
+

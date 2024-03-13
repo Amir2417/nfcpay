@@ -23,12 +23,12 @@
                 </button>
                 <div class="notification-wrapper">
                     <div class="notification-header">
-                        <h5 class="title">Notification</h5>
+                        <h5 class="title">{{ __("Notification") }}</h5>
                     </div>
                     <ul class="notification-list">
                         <li>
                             <div class="thumb">
-                                <img src="../assets/images/user/user-1.png" alt="user">
+                                <img src="{{ asset('public/frontend') }}/images/user/user-1.png" alt="user">
                             </div>
                             <div class="content">
                                 <div class="title-area">
@@ -38,36 +38,13 @@
                                 <span class="sub-title">Hi, How are you? What about our next meeting</span>
                             </div>
                         </li>
-                        <li>
-                            <div class="thumb">
-                                <img src="../assets/images/user/user-2.png" alt="user">
-                            </div>
-                            <div class="content">
-                                <div class="title-area">
-                                    <h6 class="title">Add money request</h6>
-                                    <span class="time">Thu 3.30PM</span>
-                                </div>
-                                <span class="sub-title">Hi, How are you? What about our next meeting</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="thumb">
-                                <img src="../assets/images/user/user-3.png" alt="user">
-                            </div>
-                            <div class="content">
-                                <div class="title-area">
-                                    <h6 class="title">Money out request</h6>
-                                    <span class="time">Thu 3.30PM</span>
-                                </div>
-                                <span class="sub-title">Hi, How are you? What about our next meeting</span>
-                            </div>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
             <div class="header-user-wrapper">
                 <div class="header-user-thumb">
-                    <a href="user-profile.html"><img src="../assets/images/user/user-1.png" alt="user"></a>
+                    <a href="{{ setRoute('user.profile.index') }}"><img src="{{ auth()->user()->userImage ?? asset('public/frontend/images/user/user-1.png') }}" alt="user"></a>
                 </div>
             </div>
         </div>

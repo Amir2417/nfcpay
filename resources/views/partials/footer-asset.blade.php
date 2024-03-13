@@ -15,7 +15,7 @@
 <!-- nice select js -->
 <script src="{{ asset('public/frontend/js/jquery.nice-select.js') }}"></script>
 <!-- Select 2 JS -->
-<script src="{{ asset('public/backend/js/select2.min.js') }}"></script>
+<script src="{{ asset('public/backend/js/select2.js') }}"></script>
 <!-- Popup -->
 <script src="{{ asset('public/backend/library/popup/jquery.magnific-popup.js') }}"></script>
 <!-- Apex Chart -->

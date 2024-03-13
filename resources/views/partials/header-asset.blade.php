@@ -15,5 +15,7 @@
 <link rel="stylesheet" href="{{ asset('public/frontend') }}/css/animate.css">
 <!-- nice select css -->
 <link rel="stylesheet" href="{{ asset('public/frontend') }}/css/nice-select.css">
+<!-- select2 css -->
+<link rel="stylesheet" href="{{ asset('public/frontend/css/select2.css') }}">
 <!-- main style css link -->
 <link rel="stylesheet" href="{{ asset('public/frontend') }}/css/style.css">

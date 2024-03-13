@@ -33,29 +33,27 @@
 
 
 <div class="main-section-wrapper">
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      Start Dashboard
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <div class="page-wrapper">
 
+      @include('user.partials.side-nav')
 
+      <div class="main-wrapper">
+          <div class="main-body-wrapper">
+              @include('user.partials.top-nav')
+              
+              @yield('content')
+            
+          </div>
+      </div>
+  </div>
+
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      End Dashboard
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 </div>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Start Dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<div class="page-wrapper">
-
-    @include('user.partials.side-nav')
-
-    <div class="main-wrapper">
-        <div class="main-body-wrapper">
-            @include('user.partials.top-nav')
-            <div class="body-wrapper">
-                @yield('content')
-            </div>
-        </div>
-    </div>
-</div>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    End Dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 
 @include('partials.footer-asset')
 @include('admin.partials.notify')
