@@ -3,49 +3,49 @@
 /* SPAN elements with the classes below are added by prettyprint. */
 /* plain text */
 .pln {
-  color: #c4c5cf;
+  color: #ffffffc7;
 }
 .prettyprint{overflow:auto!important;}
 
 @media screen {
   /* string content */
   .str {
-    color: #d63384;
+    color: #11dd9c;
   }
 
   /* a keyword */
   .kwd {
-    color: #c4c5cf;
+    color: #ffffff;
   }
 
   /* a comment */
   .com {
-    color: #c4c5cf;
+    color: #6e6e69;
   }
 
   /* a type name */
   .typ {
-    color: #ffffff;
+    color: #447b88;
   }
 
   /* a literal value */
   .lit {
-    color: #c4c5cf;
+    color: #445588;
   }
 
   /* punctuation */
   .pun {
-    color: #c4c5cf;
+    color: #ad7c22;
   }
 
   /* lisp open bracket */
   .opn {
-    color: #c4c5cf;
+    color: #333333;
   }
 
   /* lisp close bracket */
   .clo {
-    color: #c4c5cf;
+    color: #333333;
   }
 
   /* a markup tag name */
@@ -65,7 +65,7 @@
 
   /* a declaration */
   .dec {
-    color: #c4c5cf;
+    color: #333333;
   }
 
   /* a variable name */
@@ -122,15 +122,14 @@
 }
 /* Style */
 pre.prettyprint {
-  background: #101436;
+  background: #F0F0F0;
+  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
   font-size: 14px;
   line-height: 1.5;
-  border: 1px solid #363a5d;
-  border-radius: 10px;
+  border: 1px solid #cccccc;
 padding: 20px;
 text-align:left;
 width: auto;
-margin-top: 20px;
 }
 
 /* Specify class=linenums on a pre to get line numbering */

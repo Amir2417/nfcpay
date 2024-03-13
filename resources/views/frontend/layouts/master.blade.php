@@ -14,13 +14,21 @@
 </head>
 <body>
 
-{{-- @include('frontend.partials.preloader') --}}
-@include('frontend.partials.scroll-to-top')
-@include('frontend.partials.header')
+@include('frontend.partials.preloader')
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Start Body Overlay
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="body-overlay" class="body-overlay"></div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    End Body Overlay
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div class="main-section-wrapper">
+    @include('frontend.partials.header')
 
-@yield("content")
+    @yield("content")
 
-@include('frontend.partials.footer')
+    @include('frontend.partials.footer')
+</div>
 @include('partials.footer-asset')
 @include('frontend.partials.extensions.tawk-to')
 
