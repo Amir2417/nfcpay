@@ -18,7 +18,7 @@ class BasicSettingsSeeder extends Seeder
         $data = [
             'site_name'         => "NFCPay",
             'site_title'        => "Contactless Payment System",
-            'base_color'        => "#F26822",
+            'base_color'        => "#00B98E",
             'secondary_color'   => "#262626",
             'otp_exp_seconds'   => "3600",
             'timezone'          => "Asia/Dhaka",
