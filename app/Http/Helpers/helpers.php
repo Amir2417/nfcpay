@@ -1113,7 +1113,7 @@ function get_admin($username) {
 
 function setPageTitle(string $title) {
     $basic_settings = BasicSettingsProvider::get();
-    return $basic_settings->site_name . " | " . $title;
+    return $basic_settings->site_name . " - " . $title;
 }
 
 function make_username($first_name,$last_name,$table = "users") {

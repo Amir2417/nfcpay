@@ -74,7 +74,7 @@
                                     ])
                                 </div>
                                 <div class="col-xl-6 col-lg-6 form-group">
-                                    <label>{{__("Country")}}<span>*</span></label>
+                                    <label>{{__("Country")}}</label>
                                     <select class="form--control select2-auto-tokenize country-select" data-placeholder="{{ __("Select Country") }}" data-old="{{ old('country',auth()->user()->address->country ?? "") }}" name="country"></select>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 form-group">

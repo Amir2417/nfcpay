@@ -12,7 +12,7 @@
     <div class="account-inner">
         <div class="account-area change-form">
             <div class="account-thumb">
-                <img src="{{ asset('public/frontend') }}/images/banner/bg.jpg" alt="element">
+                <img src="{{ asset('public/frontend') }}/images/element/process.png" alt="element">
             </div>
             <div class="account-form-area">
                 <div class="account-logo">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-lg-12 text-center">
                             <div class="account-item">
-                                <label>{{ __("Back To") }} <a href="{{ setRoute('frontend.index') }}">{{ __("Login") }}</a></label>
+                                <label>{{ __("Back To") }} <a href="{{ setRoute('user.login') }}">{{ __("Login") }}</a></label>
                             </div>
                         </div>
                     </div>

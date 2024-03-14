@@ -6058,3 +6058,69 @@ pre.prettyprint {
     margin-top: -10px;
   }
 }
+
+
+.otp {
+  width: 52px;
+  height: 50px;
+  text-align: center;
+  padding: 0;
+  margin: 10px;
+  border-radius: 3px;
+  background-color: transparent;
+}
+@media only screen and (max-width: 991px) {
+  .otp{
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .otp {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .otp {
+    width: 35px;
+    height: 35px;
+    margin: 3px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .otp {
+    margin: 0;
+  }
+}
+.otp:focus {
+  border: 2px solid var(--primary-color);
+}
+.otp.required {
+  border: 3px solid #ea5455;
+}
+
+#time {
+  color: #ea5455;
+}
+
+.white-popup{
+  background: #0B1628;
+}
+.white-popup .card{
+  background: #0B1628;
+}
+.mfp-close-btn-in .mfp-close {
+  color: #ddd;
+}
+.white-popup .foot button{
+  padding: 8px 25px;
+  color: #fff !important;
+}
+.white-popup .foot button::before{
+  display: none;
+}
+.white-popup .foot button.modal-close{
+  background: transparent;
+}
