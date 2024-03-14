@@ -162,7 +162,7 @@ class UserCareController extends Controller
         try{
             Notification::send($users,new SendMail((object) $request->all()));
         }catch(Exception $e) {
-            return back()->with(['error' => ['Something went worng! Please try again']]);
+            return back()->with(['error' => ['Something went worng! Please try again.']]);
         }
 
         return back()->with(['success' => ['Email successfully sended']]);
@@ -234,7 +234,7 @@ class UserCareController extends Controller
         } catch (Exception $e) {
             return back()->with(['error' => ['Something went worng! Please try again.']]);
         }
-
+        
         return back()->with(['success' => ['Profile Information Updated Successfully!']]);
     }
 
@@ -303,7 +303,7 @@ class UserCareController extends Controller
             $user->update([
                 'kyc_verified'  => GlobalConst::PENDING,
             ]);
-            return back()->with(['error' => ['Something went worng! Please try again']]);
+            return back()->with(['error' => ['Something went worng! Please try again.']]);
         }
         return back()->with(['success' => ['User KYC successfully approved']]);
     }
@@ -332,7 +332,7 @@ class UserCareController extends Controller
                 'reject_reason' => null,
             ]);
 
-            return back()->with(['error' => ['Something went worng! Please try again']]);
+            return back()->with(['error' => ['Something went worng! Please try again.']]);
         }
 
         return back()->with(['success' => ['User KYC information is rejected']]);

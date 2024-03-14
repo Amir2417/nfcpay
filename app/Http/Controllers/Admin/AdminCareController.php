@@ -242,14 +242,13 @@ class AdminCareController extends Controller
             ];
         }
 
-        // admin role update
+        
         DB::beginTransaction();
         try{
             // Delete Currenct Role
             DB::table('admin_has_roles')->where("admin_id",$admin->id)->delete();
             DB::table('admin_has_roles')->insert($role_data);
-            // $admin->roles()->delete();
-            // AdminHasRole::insert($role_data);
+           
             DB::commit();
         }catch(Exception $e) {
             DB::rollBack();
@@ -305,7 +304,7 @@ class AdminCareController extends Controller
             return Response::error($error,null,500);
         }
 
-        $success = ['success' => ['Admin status updated successfully!']];
+        $success = ['success' => [__('Admin status updated successfully!')]];
         return Response::success($success,null,200);
     }
 
@@ -410,7 +409,7 @@ class AdminCareController extends Controller
      */
     public function rolePermissionIndex()
     {
-        // dd('working');
+
         $page_title = "Permission Group";
         $roles = AdminRole::get();
         $permissions = AdminRolePermission::get();
@@ -535,7 +534,7 @@ class AdminCareController extends Controller
             }
         }
 
-        $page_title = "Role Permission (" . $permission->name . ")";
+        $page_title = __("Role Permission (") . $permission->name . ")";
 
         return view('admin.sections.admin-care.role.assign-permission', compact(
             "permission",

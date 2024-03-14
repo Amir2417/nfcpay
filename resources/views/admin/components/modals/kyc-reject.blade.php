@@ -14,7 +14,7 @@
                             <div class="row mb-10-none">
                                 <div class="col-xl-12 col-lg-12 form-group">
                                         @include('admin.components.form.textarea',[
-                                            'label'     => "Explain Rejection Reason*",
+                                            'label'     => __("Explain Rejection Reason")."*",
                                             'name'      => "reason",
                                             'value'     => old("reason"),
                                         ])

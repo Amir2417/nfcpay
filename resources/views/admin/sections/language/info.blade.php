@@ -28,7 +28,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Key</th>
+                            <th>{{ __("Key") }}</th>
                             <th>{{ ucwords($language->name) }}</th>
                             <th></th>
                         </tr>

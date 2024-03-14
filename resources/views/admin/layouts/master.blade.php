@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ asset('public/backend/css/lightcase.css') }}">
 
     <!-- Fileholder CSS CDN -->
-    <link rel="stylesheet" href="https://cdn.appdevs.net/fileholder/v1.0/css/fileholder-style.css" type="text/css">
+    <link rel="stylesheet" href="https://rokon.appdevs.net/fileholder-laravel/public/fileholder/css/fileholder-style.css" type="text/css">
 
     <!-- main style css link -->
     <link rel="stylesheet" href="{{ asset('public/backend/css/style.css') }}">
@@ -78,10 +78,7 @@
 <script src="{{ asset('public/backend/js/smoothscroll.js') }}"></script>
 <!-- easypiechart js -->
 <script src="{{ asset('public/backend/js/jquery.easypiechart.js') }}"></script>
-<!-- apexcharts js -->
-<script src="{{ asset('public/backend/js/apexcharts.js') }}"></script>
-<!-- chart js -->
-<script src="{{ asset('public/backend/js/chart.js') }}"></script>
+
 <!-- nice select js -->
 <script src="{{ asset('public/backend/js/jquery.nice-select.js') }}"></script>
 <!-- select2 js -->
@@ -96,7 +93,8 @@
 <script src="{{ asset('public/backend/js/lightcase.js') }}"></script>
 <!--  Rich text Editor JS -->
 <script src="{{ asset('public/backend/js/ckeditor.js') }}"></script>
-
+<!-- main -->
+<script src="{{ asset('public/backend/js/main.js') }}"></script>
 
 @include('admin.partials.notify')
 @include('admin.partials.auth-control')
@@ -106,10 +104,10 @@
     var fileHolderAfterLoad = {};
 </script>
 
-<script src="https://cdn.appdevs.net/fileholder/v1.0/js/fileholder-script.js" type="module"></script>
+<script src="https://rokon.appdevs.net/fileholder-laravel/public/fileholder/js/fileholder-script.js" type="module"></script>
 <script type="module">
-    import { fileHolderSettings } from "https://cdn.appdevs.net/fileholder/v1.0/js/fileholder-settings.js";
-    import { previewFunctions } from "https://cdn.appdevs.net/fileholder/v1.0/js/fileholder-script.js";
+    import { fileHolderSettings } from "https://rokon.appdevs.net/fileholder-laravel/public/fileholder/js/fileholder-settings.js";
+    import { previewFunctions } from "https://rokon.appdevs.net/fileholder-laravel/public/fileholder/js/fileholder-script.js";
 
     var inputFields = document.querySelector(".file-holder");
     fileHolderAfterLoad.previewReInit = function(inputFields){
@@ -134,8 +132,7 @@
       $("a[data-rel^=lightcase]").lightcase();
     })
 </script>
-<!-- main -->
-<script src="{{ asset('public/backend/js/main.js') }}"></script>
+
 @stack('script')
 
 </body>

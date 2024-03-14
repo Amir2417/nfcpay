@@ -104,7 +104,7 @@ class AppOnboardScreensController extends Controller
             return Response::error($error,null,500);
         }
 
-        $success = ['success' => ['Onboard screen status updated successfully!.']];
+        $success = ['success' => [__('Onboard screen status updated successfully!')]];
         return Response::success($success,null,200);
 
 
@@ -154,7 +154,7 @@ class AppOnboardScreensController extends Controller
             return back()->withErrors($validator)->withInput()->with(['error' => ['Something went worng! Please try again.']]);
         }
 
-        return back()->with(['success' => ['Onboard screen information updated successfully!']]);
+        return back()->with(['success' => [__('Onboard screen information updated successfully!')]]);
     }
 
     /**

@@ -23,7 +23,7 @@
     <div class="table-area">
         <div class="table-wrapper">
             <div class="table-header">
-                <h5 class="title">{{ $page_title }}</h5>
+                <h5 class="title">{{ __($page_title) }}</h5>
             </div>
             <div class="table-responsive">
                 <div class="table-area">

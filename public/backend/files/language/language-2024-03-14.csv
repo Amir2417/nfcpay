@@ -38,7 +38,7 @@ Phone,Phone,Teléfono,هاتف
 Address,Address,DIRECCIÓN,عنوان
 City,City,Ciudad,مدينة
 State,State,Estado,ولاية
-Enter First Name,Enter First Name,Ingrese el primer nombre,أدخل الاسم الأول
+Enter First Name,Enter First Name,Ingrese el nombre,أدخل الاسم الأول
 Enter Last Name,Enter Last Name,Introduzca el apellido,إدخال اسم آخر
 Enter Number,Enter Number,Ingresar número,أدخل رقم
 Enter Address,Enter Address,Ingresa la direccion,أدخل العنوان
@@ -116,10 +116,10 @@ The email field is required.,The email field is required.,Se requiere el campo d
 The subject field is required.,The subject field is required.,Se requiere el campo de sujeto.,حقل الموضوع مطلوب.
 The attachment field is required.,The attachment field is required.,Se requiere el campo de fijación.,حقل المرفق مطلوب.
 Oops!! Failed to upload attachment. Please try again.,Oops!! Failed to upload attachment. Please try again.,¡¡Ups!! No se pudo cargar el archivo adjunto. Inténtalo de nuevo.,أُووبس!! فشل في تحميل المرفق. حاول مرة اخرى.
-Support ticket created successfully!,Support ticket created successfully!,¡Ticket de apoyo creado con éxito!,تذكرة الدعم التي تم إنشاؤها بنجاح!
+Support ticket created successfully!,Support ticket created successfully!,¡Ticket de apoyo creado con éxito!,تذكرة دعم تم إنشاؤها بنجاح!
 SMS Sending failed! Please try again.,SMS Sending failed! Please try again.,¡El envío de SMS falló! Inténtalo de nuevo.,فشل إرسال الرسائل القصيرة! حاول مرة اخرى.
 This support ticket is closed.,This support ticket is closed.,Este boleto de soporte está cerrado.,تذكرة الدعم هذه مغلقة.
-Support Details,Support Details,Detalles de soporte,تفاصيل الدعم
+Support Details,Support Details,Detalles de apoyo,تفاصيل الدعم
 Description,Description,Descripción,وصف
 Are you sure to mark as solved,Are you sure to mark as solved,¿Estás seguro de marcar como resuelto?,هل أنت متأكد من أن تحل كما تم حلها
 Because it's not reversible.,Because it's not reversible.,Porque no es reversible.,لأنه غير قابل للعكس.
@@ -171,14 +171,242 @@ Clear All,Clear All,Limpiar todo,امسح الكل
 No new notification found!,No new notification found!,¡No se encontró una nueva notificación!,لم يتم العثور على إشعار جديد!
 Settings,Settings,Ajustes,إعدادات
 Admin Profile,Admin Profile,Perfil de administración,ملف تعريف المسؤول
-Change Password,Change Password,Cambiar la contraseña,تغيير كلمة المرور
 Language,Language,Idioma,لغة
 English,English,Inglés,إنجليزي
 Layout Mode,Layout Mode,Modo de diseño,وضع التصميم
 Dark Mode,Dark Mode,Modo oscuro,الوضع المظلم
-Topbar Color,Topbar Color,Color topbar,لون الشفر
+Topbar Color,Topbar Color,Color topbar,لون الشريط
 Light Mode,Light Mode,Modo de luz,وضع الضوء
 Sidebar Color,Sidebar Color,Color de la barra lateral,لون الشريط الجانبي
 Min Sidebar Color,Min Sidebar Color,Min Color de la barra lateral,لون الشريط الجانبي
 Direction,Direction,Dirección,اتجاه
 RTL Support,Rtl support,Soporte RTL,دعم RTL
+Profile Image,Profile Image,Imagen de perfil,صورة الملف الشخصي
+Save & Change,Save & Change,Guardar cambios,حفظ وتغيير
+Profile Information Updated Successfully!,Profile Information Updated Successfully!,¡Información de perfil actualizada con éxito!,معلومات الملف الشخصي تحديث بنجاح!
+Welcome To,Welcome To,Bienvenido a,مرحبا بك في
+Admin Panel,Admin Panel,Panel de administrador,لوحة الادارة
+Developed by,Developed by,Desarrollado por,طورت بواسطة
+AppDevs,AppDevs,Appdevs,appdevs
+Password updated successfully!,Password updated successfully!,¡Contraseña actualizada exitosamente!,تم تحديث كلمة السر بنجاح!
+Interface Panel,Interface Panel,Panel de interfaz,لوحة واجهة
+Active Users,Active Users,Usuarios activos,المستخدمين النشطين
+Email Unverified,Email Unverified,Correo electrónico no verificado,البريد الإلكتروني غير التحقق
+KYC Unverified,KYC Unverified,KYC no verificado,KYC غير التحقق
+All Users,All Users,Todos los usuarios,جميع المستخدمين
+Email To Users,Email To Users,Correo electrónico a los usuarios,البريد الإلكتروني للمستخدمين
+Banned Users,Banned Users,Usuarios prohibidos,المستخدمين المحظورون
+Admin Care,Admin who,Administrador que,المسؤول الذي
+All Admin,All Admin,Todos los administradores,كل المشرف
+Admin Role,Admin Role,Rol de administrador,دور المسؤول
+Role Permission,Role Permission,Permiso de rol,إذن الدور
+Email To Admin,Email To Admin,Correo electrónico al administrador,البريد الإلكتروني إلى المسؤول
+Web Settings,Web Settings,Configuración web,إعدادات الويب
+Basic Settings,Basic Settings,Ajustes básicos,الإعدادات الأساسية
+Image Assets,Image Assets,Activos de imagen,أصول الصورة
+Setup SEO,Setup SEO,Configuración de SEO,إعداد SEO
+App Settings,App Settings,Ajustes de Aplicacion,إعدادات التطبيقات
+Splash Screen,Splash Screen,Pantalla de bienvenida,شاشة البداية
+Onboard Screen,Onboard Screen,Pantalla a bordo,على متن الشاشة
+Languages,Languages,Lenguas,اللغات
+Setup Email,Setup Email,Correo electrónico de configuración,إعداد البريد الإلكتروني
+Email Method,Email Method,Método de correo electrónico,طريقة البريد الإلكتروني
+Setup KYC,Setup KYC,Configurar KYC,إعداد KYC
+Verification Center,Verification Center,Centro de verificación,مركز التحقق
+Setup Web Content,Setup Web Content,Configurar contenido web,إعداد محتوى الويب
+Setup Section,Setup Section,Sección de configuración,قسم الإعداد
+Setup Pages,Setup Pages,Configuración de páginas,صفحات الإعداد
+Extensions,Extensions,Extensiones,الامتدادات
+Useful Links,Useful Links,Enlaces útiles,روابط مفيدة
+Push Notification,Push Notification,Notificación de inserción,إشعار دفع
+Setup Notification,Setup Notification,Notificación de configuración,إشعار الإعداد
+Send Notification,Send Notification,Enviar notificación,إرسال إشعار
+Bonus,Bonus,Prima,علاوة
+GDPR Cookie,GDPR Cookie,Galleta GDPR,ملف تعريف الارتباط الناتج المحلي الإجمالي
+Server Info,Server Info,Información del servidor,معلومات الخادم
+Clear Cache,Clear Cache,Limpiar cache,مسح ذاكرة التخزين المؤقت
+Action,Action,Acción,فعل
+User Overview,User Overview,Descripción general del usuario,نظرة عامة على المستخدم
+Add/Subtract Balance,Add/Subtract Balance,Balance de suma/resta,إضافة/طرح التوازن
+Login Logs,Login Logs,Iniciar sesión,سجلات تسجيل الدخول
+Send Email,Send Email,Enviar correo electrónico,ارسل بريد الكتروني
+Login as Member,Login as Member,Iniciar sesión como miembro,تسجيل الدخول كعضو
+Email Logs,Email Logs,Registros de correo electrónico,سجلات البريد الإلكتروني
+Full Name,Full Name,Nombre completo,الاسم الكامل
+Last Login,Last Login,Último acceso,آخر تسجيل دخول
+Information of User,Information of User,Información del usuario,معلومات المستخدم
+Phone Number,Phone Number,Número de teléfono,رقم التليفون
+Type Here,Type Here,Escriba aquí,أكتب هنا
+User Status,User Status,Estatus de usuario,حالة المستخدم
+Email Verification,Email Verification,verificacion de email,تأكيد بواسطة البريد الالكتروني
+2FA Verification,2FA Verification,Verificación de 2FA,2FA التحقق
+KYC Verification,KYC Verification,Verificación de KYC,التحقق من KYC
+Send,Send,Enviar,يرسل
+Type,Type,Tipo,يكتب
+Select Type,Select Type,Seleccione tipo,اختر صنف
+Balance Add,Balance Add,Balance Agregar,إضافة التوازن
+Balance Subtract,Balance Subtract,Balance Restar,توازن طرح
+User Wallet,User Wallet,Billetera del usuario,محفظة المستخدم
+Select User Wallet,Select User Wallet,Seleccione la billetera del usuario,حدد محفظة المستخدم
+Amount,Amount,Cantidad,كمية
+Remark,Remark,Observación,ملاحظة
+The username field is required.,The username field is required.,Se requiere el campo de nombre de usuario.,حقل اسم المستخدم مطلوب.
+The message field is required.,The message field is required.,Se requiere el campo de mensaje.,حقل الرسالة مطلوب.
+Opps! User not exists,Opps! User not exists,¡Opps! El usuario no existe,أوس! المستخدم لا يوجد
+Mail successfully sended,Mail successfully sended,Correo enviado con éxito,تم إرسال البريد بنجاح
+User Login Logs,User Login Logs,Registros de inicio de sesión de usuario,سجلات تسجيل الدخول المستخدم
+SL,SL,SLE,إس إل
+IP,IP,IP,IP
+MAC,MAC,MAC,ماك
+Location,Location,Ubicación,موقع
+Browser,Browser,Navegador,متصفح
+OS,YOU,TÚ,أنت
+Login at,Login at,Iniciar sesión en,تسجيل الدخول في
+User Email Logs,User Email Logs,Registros de correo electrónico de usuario,سجلات البريد الإلكتروني للمستخدم
+Mail Sender(Method),Mail Sender(Method),Remitente de correo (método),مرسل البريد (الطريقة)
+Email Unverified Users,Email Unverified Users,Envíe un correo electrónico a usuarios no verificados,بريد إلكتروني لم يتم التحقق من المستخدمين
+SMS Unverified Users,SMS Unverified Users,Usuarios no verificados de SMS,الرسائل القصيرة المستخدمين لم يتم التحقق منها
+KYC Unverified Users,KYC Unverified Users,Usuarios no verificados de KYC,kyc المستخدمين غير المؤكدين
+User Care,User Care,Cuidado de los usuarios,رعاية المستخدم
+User Details,User Details,Detalles de usuario,بيانات المستخدم
+User Profile,User Profile,Perfil del usuario,ملف تعريفي للمستخدم
+Kyc Profile,Kyc Profile,Perfil de KYC,ملف KYC
+Edit KYC,Edit KYC,Editar kyc,تحرير KYC
+Information of Logs,Information of Logs,Información de los registros,معلومات السجلات
+File not found!,File not found!,¡Archivo no encontrado!,لم يتم العثور على الملف!
+Approve,Approve,Aprobar,يعتمد
+Reject,Reject,Rechazar,يرفض
+KYC Information not submitted yet,KYC Information not submitted yet,Información de KYC aún no se ha enviado,معلومات KYC لم يتم تقديمها بعد
+Are you sure to approve,Are you sure to approve,¿Estás seguro de aprobar,هل أنت متأكد من الموافقة
+KYC information.,KYC information.,Información de KYC.,معلومات KYC.
+Rejejct KYC,Rejejct kyc,REJEJCT KYC,Rejejct KYC
+Explain Rejection Reason,Explain Rejection Reason,Explicar la razón de rechazo,شرح سبب الرفض
+User already KYC verified,User already KYC verified,Usuario ya KYC Verificado,تم التحقق من المستخدم بالفعل KYC
+User KYC information not found,User KYC information not found,Información del usuario de KYC no encontrada,لم يتم العثور على معلومات المستخدم KYC
+User KYC successfully approved,User KYC successfully approved,El usuario KYC aprobó con éxito,وافق المستخدم KYC بنجاح
+The reason field is required.,The reason field is required.,Se requiere el campo de la razón.,سبب الحقل مطلوب.
+User KYC information is rejected,User KYC information is rejected,La información del usuario KYC es rechazada,تم رفض معلومات المستخدم KYC
+User do not have sufficient balance,User do not have sufficient balance,El usuario no tiene suficiente equilibrio,المستخدم ليس لديه توازن كاف
+User wallet not found!,User wallet not found!,¡Billetera de usuario no encontrada!,محفظة المستخدم لم يتم العثور عليها!
+Transaction success,Transaction success,Éxito de la transacción,نجاح المعاملة
+Details,Details,Detalles,تفاصيل
+Email successfully sended,Email successfully sended,Correo electrónico enviado correctamente,أرسل البريد الإلكتروني بنجاح
+Add Admin,Add Admin,Agregar administrador,إضافة المسؤول
+Role,Role,Role,دور
+Cancel,Cancel,Cancelar,يلغي
+Add,Add,Agregar,يضيف
+Generate,Generate,Generar,يولد
+Select Role,Select Role,Rol de selección,حدد الدور
+The role field is required.,The role field is required.,Se requiere el campo de roles.,حقل الدور مطلوب.
+The phone field is required.,The phone field is required.,Se requiere el campo del teléfono.,حقل الهاتف مطلوب.
+Role assign faild!,Role assign faild!,¡Role asignar fallas!,دور تعيين فشل!
+New admin created successfully!,New admin created successfully!,¡Nuevo administrador creado con éxito!,تم إنشاء مسؤول جديد بنجاح!
+Edit Admin,Edit admin,Editar administrador,تحرير المسؤول
+Admin information updated successfully!,Admin information updated successfully!,Información de administración actualizada con éxito!,معلومات المسؤول تحديث بنجاح!
+Are you sure to remove,Are you sure to remove,¿Estás seguro de eliminar,هل أنت متأكد من إزالته
+Admin Roles,Admin Roles,Roles de administración,أدوار المشرف
+All Admin Roles,All Admin Roles,Todos los roles de administración,جميع أدوار المشرف
+Role Name,Role Name,Nombre de rol,اسم الدور
+Asign Admin,Asign admin,Asignar administrador,تعيين المشرف
+Add New Role,Add New Role,Agregar un nuevo rol,أضف دورًا جديدًا
+Edit Role,Edit Role,Rol de edición,تحرير الدور
+Are you sure to delete this role?,Are you sure to delete this role?,¿Estás seguro de eliminar este papel?,هل أنت متأكد من حذف هذا الدور؟
+Admin status updated successfully!,Admin status updated successfully!,Estado de administrador actualizado con éxito!,تم تحديث حالة المسؤول بنجاح!
+Admin role created successfully!,Admin role created successfully!,¡Rol de administración creado con éxito!,تم إنشاء دور المسؤول بنجاح!
+Opps! Target not found!,Opps! Target not found!,¡Opps! Objetivo no encontrado!,أوس! الهدف لم يتم العثور عليه!
+Opps! Target role not found!,Opps! Target role not found!,¡Opps! ¡Rol de objetivo no encontrado!,أوس! الدور المستهدف لم يتم العثور عليه!
+Admin role updated successfully!,Admin role updated successfully!,¡Rol de administración actualizado con éxito!,تم تحديث دور المسؤول بنجاح!
+Super admin role can\'t deletable.,Super admin role can\'t deletable.,El rol super administrador puede ser eliminable.,دور المشرف الفائق يمكن أن يكون قابلاً للحذف.
+Admin role deleted successfully!,Admin role deleted successfully!,¡Rol de administración eliminado con éxito!,تم حذف دور المسؤول بنجاح!
+Permission Group,Permission Group,Grupo de permisos,مجموعة الإذن
+Permission Name,Permission Name,Nombre de permiso,اسم إذن
+Add New Permission,Add New Permission,Agregar nuevo permiso,أضف إذنًا جديدًا
+Title,Title,Título,عنوان
+URI,Type,Tipo,يكتب
+SL NO,SL NO,SI. NO,SL. لا
+Assign Permission Page/Task,Assign Permission Page/Task,Asignar la página/tarea de permiso,تعيين صفحة/مهمة إذن
+Select Pages,Select Pages,Seleccionar páginas,حدد الصفحات
+Are you sure to delete this permission? It will also delete all permissions against this role.,Are you sure to delete this permission? It will also delete all permissions against this role.,¿Estás seguro de eliminar este permiso? También eliminará todos los permisos contra este papel.,هل أنت متأكد من حذف هذا الإذن؟ كما ستحذف جميع الأذونات ضد هذا الدور.
+Permission created successfully!,Permission created successfully!,¡Permiso creado con éxito!,إذن تم إنشاؤه بنجاح!
+Permission not found!,Permission not found!,¡Permiso no encontrado!,إذن لم يتم العثور عليه!
+Permission updated successfully!,Permission updated successfully!,¡Permiso actualizado con éxito!,تم تحديث إذن بنجاح!
+Permission deleted successfully!,Permission deleted successfully!,¡Permiso eliminado con éxito!,تم حذف إذن بنجاح!
+Role Permission (,Role Permission (,Permiso de rol (,إذن الأدوار (
+Permission assign successfully!,Permission assign successfully!,Permiso asignar con éxito!,إذن تعيين بنجاح!
+Can\'t deletable system super admin,Can\'t deletable system super admin,¿Puede \ 't System Deletable Super Admin,لا يمكن \ 't super super admin
+Admin deleted successfully!,Admin deleted successfully!,Admin eliminado con éxito!,تم حذف المسؤول بنجاح!
+Email send successfully!,Email send successfully!,¡Envíe el correo electrónico con éxito!,إرسال البريد الإلكتروني بنجاح!
+All Permissions,All Permissions,Todos los permisos,جميع الأذونات
+Site Base Color,Site Base Color,Color base del sitio,لون قاعدة الموقع
+Site Name,Site Name,Nombre del sitio,اسم الموقع
+Web Version,Web Version,Versión web,إصدار الويب
+Site Title,Site Title,Título del sitio,عنوان الموقع
+OTP Expiration,OTP Expiration,Vencimiento de OTP,انتهاء صلاحية OTP
+TimeZone,TimeZone,Zona horaria,وحدة زمنية
+Activation Settings,Activation Settings,Configuración de activación,إعدادات التنشيط
+User Registration,User Registration,registro de usuario,تسجيل المستخدم
+Activated,Activated,Activado,مفعل
+Deactivated,Deactivated,Desactivado,إلغاء تنشيط
+Secure Password,Secure Password,Contraseña segura,كلمة مرور تأمين
+Agree Policy,Agree Policy,Política de acuerdo,توافق على السياسة
+Force SSL,Force SSL,Forzar SSL,قوة SSL
+Email Notification,Email Notification,Notificación de correo electrónico,إشعار البريد الإلكتروني
+The base color field is required.,The base color field is required.,Se requiere el campo de color base.,حقل اللون الأساسي مطلوب.
+The site name field is required.,The site name field is required.,Se requiere el campo Nombre del sitio.,حقل اسم الموقع مطلوب.
+The web version field is required.,The web version field is required.,Se requiere el campo de la versión web.,حقل إصدار الويب مطلوب.
+The site title field is required.,The site title field is required.,Se requiere el campo de título del sitio.,حقل عنوان الموقع مطلوب.
+The otp exp seconds field is required.,The otp exp seconds field is required.,Se requiere el campo OTP EXP segundos.,مطلوب حقل OTP Exp Seconds.
+The timezone field is required.,The timezone field is required.,Se requiere el campo de la zona horaria.,مطلوب حقل المنطقة الزمنية.
+Basic settings not found!,Basic settings not found!,Configuración básica no encontrada!,الإعدادات الأساسية غير موجودة!
+Basic settings updated successfully!,Basic settings updated successfully!,Configuración básica actualizada con éxito!,الإعدادات الأساسية تحديث بنجاح!
+You have to configure your system mail first.,You have to configure your system mail first.,Primero debe configurar el correo de su sistema.,يجب عليك تكوين بريد النظام الخاص بك أولاً.
+Please setup KYC field first. Go to [Setup KYC] page from sidebar,Please setup KYC field first. Go to [Setup KYC] page from sidebar,Configure el campo KYC primero. Vaya a la página [Configurar KYC] desde la barra lateral,يرجى إعداد حقل KYC أولاً. انتقل إلى صفحة [Setup KYC] من الشريط الجانبي
+Basic settings status updated successfully!,Basic settings status updated successfully!,Estado de configuración básica actualizada correctamente!,تم تحديث حالة الإعدادات الأساسية بنجاح!
+Seconds,Seconds,Segundos,ثوان
+Logo (Light Version),Logo (Light Version),Logotipo (versión ligera),شعار (إصدار الضوء)
+Logo (Dark Version),Logo (Dark Version),Logotipo (versión oscura),شعار (نسخة مظلمة)
+Favicon (Light Version),Favicon (Light Version),Favicon (versión ligera),Favicon (نسخة خفيفة)
+Favicon (Dark Version),Favicon (Dark Version),Favicon (versión oscura),Favicon (نسخة مظلمة)
+Search Engine Optimization (SEO),Search Engine Optimization (SEO),Optimización de motores de búsqueda (SEO),تحسين محرك البحث (SEO)
+Image assets updated successfully!,Image assets updated successfully!,¡Activos de imagen actualizados con éxito!,أصول الصورة تحديث بنجاح!
+Thumbnail Image,Thumbnail Image,Imagen en miniatura,صورة مصغرة
+Social Title,Social Title,Título social,العنوان الاجتماعي
+Social Description,Social Description,Descripción social,الوصف الاجتماعي
+Tags,Tags,Etiquetas,العلامات
+The title field is required.,The title field is required.,Se requiere el campo de título.,مطلوب حقل العنوان.
+SEO information updated successfully!,SEO information updated successfully!,¡Información de SEO actualizada con éxito!,تم تحديث معلومات كبار المسئولين الاقتصاديين بنجاح!
+Image,Image,Imagen,صورة
+App Version,App Version,Version de aplicacion,نسخة التطبيق
+The version field is required.,The version field is required.,Se requiere el campo de versión.,حقل الإصدار مطلوب.
+Splash screen updated successfully!,Splash screen updated successfully!,¡Pantalla de salpicaduras actualizada con éxito!,تم تحديث شاشة دفقة بنجاح!
+Sub Title,Sub Title,Subtítulo,العنوان الفرعي
+Add New Screen,Add New Screen,Agregar nueva pantalla,أضف شاشة جديدة
+Edit Screen,Edit Screen,Pantalla de edición,تحرير الشاشة
+Onboard Screen Added Successfully!,Onboard Screen Added Successfully!,¡Pantalla a bordo agregada con éxito!,أضيفت الشاشة على متن الطائرة بنجاح!
+Onboard screen status updated successfully!,Onboard screen status updated successfully!,Estado de la pantalla a bordo actualizado correctamente!,تم تحديث حالة الشاشة على متن الطائرة بنجاح!
+Onboard screen information updated successfully!,Onboard screen information updated successfully!,Información de pantalla a bordo actualizada correctamente!,تم تحديث معلومات الشاشة على متن الطائرة بنجاح!
+Screen deleted successfully!,Screen deleted successfully!,¡Pantalla eliminada con éxito!,تم حذف الشاشة بنجاح!
+delete,delete,borrar,يمسح
+this screen?,this screen?,esta pantalla?,هذه الشاشة؟
+Language Manager,Language Manager,Administrador de idiomas,مدير اللغة
+Code,Code,Código,شفرة
+Selectable,Selectable,Seleccionable,يمكن اختياره
+Are you sure to delete this language?,Are you sure to delete this language?,¿Estás seguro de eliminar este idioma?,هل أنت متأكد من حذف هذه اللغة؟
+Add Language,Add Language,Agregar lenguaje,إضافة لغة
+Language Name,Language Name,Nombre del lenguaje,اسم اللغة
+Language Code,Language Code,Código de lenguaje,رمز اللغة
+LTR,LTR,LTR,لتر
+RTL,RTL,RTL,من اليمين إلى اليسار
+Select Language,Select Language,Seleccione el idioma,اختار اللغة
+"Language File (.xlsx, .csv)","Language File (.xlsx, .csv)","Archivo de idioma (.xlsx, .csv)",ملف اللغة (.xlsx ، .csv)
+The code field is required.,The code field is required.,Se requiere el campo de código.,حقل الكود مطلوب.
+The dir field is required.,The dir field is required.,Se requiere el campo Dir.,حقل دير مطلوب.
+Language created successfully!,Language created successfully!,¡Lenguaje creado con éxito!,اللغة التي تم إنشاؤها بنجاح!
+Language updated successfully!,Language updated successfully!,¡Lenguaje actualizado con éxito!,تم تحديث اللغة بنجاح!
+Language deleted successfully!,Language deleted successfully!,Lenguaje eliminado con éxito!,تم حذف اللغة بنجاح!
+Language status updated successfully!,Language status updated successfully!,Estado del idioma actualizado con éxito!,تم تحديث حالة اللغة بنجاح!
+Language Information,Language Information,Información del idioma,معلومات اللغة
+Language Keywords of English,Language Keywords of English,Palabras clave del idioma del inglés,الكلمات الرئيسية للغة للغة الإنجليزية
+Edit Language,Edit Language,Editar lenguaje,تحرير اللغة
+Import,Import,Importar,يستورد
+Download,Download,Descargar,تحميل

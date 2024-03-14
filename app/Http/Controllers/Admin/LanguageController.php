@@ -171,7 +171,7 @@ class LanguageController extends Controller
             return Response::error($errors,null,500);
         }
 
-        $success = ['success' => ['Language status updated successfully!']];
+        $success = ['success' => [__('Language status updated successfully!')]];
         return Response::success($success);
     }
 

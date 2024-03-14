@@ -36,12 +36,11 @@ class WebSettingsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'base_color'        => 'required|string',
-            'secondary_color'   => 'required|string',
+            'web_version'       => 'required',
             'site_name'         => 'required|string',
             'site_title'        => 'required|string',
             'otp_exp_seconds'   => 'required|string',
             'timezone'          => 'required|string',
-            'web_version'       => 'required|string',
         ]);
 
         $validated = $validator->validate();
@@ -79,7 +78,7 @@ class WebSettingsController extends Controller
         // Check Email configure
         if ($validated['input_name'] == "email_verification") {
             if (!$basic_settings->mail_config) {
-                $warning = ['warning' => ['You have to configure your system mail first.']];
+                $warning = ['warning' => [__('You have to configure your system mail first.')]];
                 return Response::warning($warning, null, 400);
             }
         }
@@ -87,7 +86,7 @@ class WebSettingsController extends Controller
         if($validated['input_name'] == "kyc_verification") {
             $data = SetupKyc::first()->fields ?? null;
             if($data == null) {
-                $warning = ['warning' => ['Please setup KYC field first. Go to [Setup KYC] page from sidebar']];
+                $warning = ['warning' => [__('Please setup KYC field first. Go to [Setup KYC] page from sidebar')]];
                 return Response::warning($warning, null, 400);
             }
         }
@@ -95,7 +94,7 @@ class WebSettingsController extends Controller
         $validated['status'] = ($validated['status'] == true) ? false : true;
 
         if (!$basic_settings) {
-            $error = ['error' => ['Basic settings not found!']];
+            $error = ['error' => [__('Basic settings not found!')]];
             return Response::error($error, null, 404);
         }
 
@@ -105,11 +104,11 @@ class WebSettingsController extends Controller
                 $validated['input_name'] => $validated['status'],
             ]);
         } catch (Exception $e) {
-            $error = ['error' => ['Something went wrong!. Please try again.']];
+            $error = ['error' => [__('Something went wrong!. Please try again.')]];
             return Response::error($error, null, 500);
         }
 
-        $success = ['success' => ['Basic settings status updated successfully!']];
+        $success = ['success' => [__('Basic settings status updated successfully!')]];
         return Response::success($success, null, 200);
     }
 
@@ -164,7 +163,7 @@ class WebSettingsController extends Controller
             return back()->with(['error' => ['Something went wrong! Please try again.']]);
         }
 
-        return back()->with(['success' => ['Image assets updated successfully!.']]);
+        return back()->with(['success' => ['Image assets updated successfully!']]);
     }
 
     /**

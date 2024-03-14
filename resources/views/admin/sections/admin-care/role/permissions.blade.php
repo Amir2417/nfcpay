@@ -35,7 +35,7 @@
                         'href'          => "#permission-add",
                         'class'         => "modal-btn",
                         'permission'    => "admin.admins.role.permission.store",
-                        'text'          => "Add New",
+                        'text'          => __("Add New"),
                     ])
                 </div>
             </div>
@@ -43,10 +43,10 @@
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th>SL NO</th>
-                            <th>Permission Name</th>
-                            <th>Role Name</th>
-                            <th>Status</th>
+                            <th>{{ __("SL") }}</th>
+                            <th>{{ __("Permission Name") }}</th>
+                            <th>{{ __("Role Name") }}</th>
+                            <th>{{ __("Status") }}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -56,7 +56,7 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td><span>{{ $item->name }}</span></td>
                                 <td><span>{{ $item->role->name }}</span></td>
-                                <td>{{ $item->stringStatus }}</td>
+                                <td>{{ __($item->stringStatus) }}</td>
                                 <td>
                                     @include('admin.components.link.info-default',[
                                         'href'          => setRoute('admin.admins.role.permission',$item->slug),
@@ -96,7 +96,7 @@
 
             var actionRoute =  "{{ setRoute('admin.admins.role.permission.dalete') }}";
             var target      = oldData.id;
-            var message     = "Are you sure to delete this permission? It will also delete all permissions against this role.";
+            var message     = `{{ __("Are you sure to delete this permission? It will also delete all permissions against this role.") }}`;
 
             openDeleteModal(actionRoute,target,message);
         });
