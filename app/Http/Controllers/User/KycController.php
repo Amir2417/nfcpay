@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Constants\GlobalConst;
 use App\Models\Admin\SetupKyc;
 use Illuminate\Support\Facades\DB;
+use App\Models\Admin\BasicSettings;
 use App\Http\Controllers\Controller;
 use App\Traits\ControlDynamicInputFields;
 use Illuminate\Support\Facades\Validator;
@@ -17,20 +18,23 @@ class KycController extends Controller
     
     public function index()
     {
+        $basic_settings   = BasicSettings::first();
+        
+        if($basic_settings['kyc_verification'] == false) return back()->with(['success' => ['No need to identity verification!!']]);
+
         $page_title = "KYC Verification";
-        $user = auth()->user();
-        $user_kyc = SetupKyc::userKyc()->first();
+        $user       = auth()->user();
+        $user_kyc   = SetupKyc::userKyc()->first();
         if(!$user_kyc) return redirect()->route('user.dashboard');
 
-        $kyc_data = $user_kyc->fields;
+        $kyc_data   = $user_kyc->fields;
         $kyc_fields = [];
         if($kyc_data) {
             $kyc_fields = array_reverse($kyc_data);
         }
 
-        $kyc_data = $user_kyc;
 
-        return view('user.sections.kyc.index',compact('page_title','user','kyc_fields','kyc_data'));
+        return view('user.sections.kyc.index',compact('page_title','user','kyc_fields','user_kyc'));
     }
 
     public function store(Request $request) {
@@ -63,7 +67,7 @@ class KycController extends Controller
                 'kyc_verified'  => GlobalConst::DEFAULT,
             ]);
             $this->generatedFieldsFilesDelete($get_values);
-            return back()->with(['error' => ['Something went wrong! Please try again']]);
+            return back()->with(['error' => ['Something went wrong! Please try again.']]);
         }
 
         return redirect()->route('user.kyc.index')->with(['success' => ['KYC information successfully submitted']]);

@@ -1,0 +1,138 @@
+Key,en,es,ar
+Home,Home,Hogar,بيت
+About Us,About Us,Sobre nosotros,معلومات عنا
+Services,Services,Servicios,خدمات
+Web Journal,Web Journal,Diario web,مجلة الويب
+Developer,Developer,Desarrollador,مطور
+Contact,Contact,Contacto,اتصال
+Join Now,Join Now,Únete ahora,نضم الان
+Enter Email,Enter Email,Ingrese correo electrónico,أدخل البريد الإلكتروني
+Enter Password,Enter Password,Introducir la contraseña,أدخل كلمة المرور
+Forgot Password,Forgot Password,Has olvidado tu contraseña,هل نسيت كلمة السر
+Login Now,Login Now,Inicia sesión ahora,تسجيل الدخول الآن
+Don't Have An Account?,Don't Have An Account?,¿No tienes una cuenta?,ليس لديك حساب؟
+Register Now,Register Now,Regístrate ahora,سجل الان
+By clicking Login you are agreeing with our,By clicking Login you are agreeing with our,"Al hacer clic en Iniciar sesión, está de acuerdo con nuestro",بالنقر فوق تسجيل الدخول ، فأنت توافق على
+Terms of feature,Terms of feature,Términos de característica,شروط الميزة
+First Name,First Name,Nombre de pila,الاسم الأول
+Last Name,Last Name,Apellido,اسم العائلة
+Email,Email,Correo electrónico,بريد إلكتروني
+Password,Password,Contraseña,كلمة المرور
+I have agreed with,I have agreed with,He estado de acuerdo con,لقد وافقت مع
+Terms Of Use & Privacy Policy,Terms Of Use & Privacy Policy,Términos de uso y política de privacidad,شروط الاستخدام وسياسة الخصوصية
+Already Have An Account?,Already Have An Account?,¿Ya tienes una cuenta?,هل لديك حساب؟
+Dashboard,Dashboard,Panel,لوحة القيادة
+Payments,Payments,Pagos,المدفوعات
+2FA Security,2FA Security,2FA SEGURIDAD,2FA الأمن
+Logout,Logout,Cerrar sesión,تسجيل خروج
+Need Help?,Need Help?,¿Necesitas ayuda?,تحتاج مساعدة؟
+Please check our docs,Please check our docs,Por favor revise nuestros documentos,يرجى التحقق من مستنداتنا
+Get Support,Get Support,Obtener apoyo,احصل على الدعم
+Are you sure to,Are you sure to,¿Estás seguro de,هل أنت متأكد من ذلك
+Profile,Profile,Perfil,حساب تعريفي
+Profile Settings,Profile Settings,Configuración de perfil,إعدادات الملف الشخصي
+Delete Profile,Delete Profile,Borrar perfil,حذف الملف الشخصي
+Country,Country,País,دولة
+Select Country,Select Country,Seleccionar país,حدد الدولة
+Phone,Phone,Teléfono,هاتف
+Address,Address,DIRECCIÓN,عنوان
+City,City,Ciudad,مدينة
+State,State,Estado,ولاية
+Enter First Name,Enter First Name,Ingrese el primer nombre,أدخل الاسم الأول
+Enter Last Name,Enter Last Name,Introduzca el apellido,إدخال اسم آخر
+Enter Number,Enter Number,Ingresar número,أدخل رقم
+Enter Address,Enter Address,Ingresa la direccion,أدخل العنوان
+Enter City,Enter City,Entrar en la ciudad,أدخل المدينة
+Enter State,Enter State,Ingrese el estado,إدخال الدولة
+Zip Code,Zip Code,Código postal,الرمز البريدي
+Enter Zip,Enter Zip,Ingrese zip,أدخل الرمز البريدي
+Update,Update,Actualizar,تحديث
+Something went wrong! Please try again.,Something went wrong! Please try again.,¡Algo salió mal! Inténtalo de nuevo.,هناك خطأ ما! حاول مرة اخرى.
+Profile successfully updated!,Profile successfully updated!,Perfil actualizado con éxito!,تم تحديث الملف الشخصي بنجاح!
+The firstname field is required.,The firstname field is required.,Se requiere el campo Nombre FirstName.,حقل الاسم الأول مطلوب.
+The lastname field is required.,The lastname field is required.,Se requiere el campo LastName.,مطلوب حقل الاسم الأخير.
+The current password field is required.,The current password field is required.,Se requiere el campo de contraseña actual.,حقل كلمة المرور الحالي مطلوب.
+The password field is required.,The password field is required.,Se requiere el campo de contraseña.,حقل كلمة المرور مطلوب.
+Change,Change,Cambiar,يتغير
+Current password didn\'t match,Current password didn\'t match,La contraseña actual no coincidía,كلمة المرور الحالية لم تطابق
+Password successfully updated!,Password successfully updated!,Contraseña actualizada correctamente!,تم تحديث كلمة المرور بنجاح!
+Your account deleted successfully!,Your account deleted successfully!,¡Su cuenta se eliminó con éxito!,تم حذف حسابك بنجاح!
+Are you sure to delete your account?,Are you sure to delete your account?,¿Seguro que eliminará su cuenta?,هل أنت متأكد من حذف حسابك؟
+If you do not think you will use,If you do not think you will use,Si no crees que usarás,إذا كنت لا تعتقد أنك ستستخدم
+"again and like your account deleted. Keep in mind you will not be able to reactivate your account or retrieve any of the content or information you have added. If you would still like your account deleted, click “Delete Account”.?","again and like your account deleted. Keep in mind you will not be able to reactivate your account or retrieve any of the content or information you have added. If you would still like your account deleted, click “Delete Account”.?","De nuevo y me gusta su cuenta eliminada. Tenga en cuenta que no podrá reactivar su cuenta o recuperar ninguno de los contenidos o información que haya agregado. Si aún desea que su cuenta se elimine, haga clic en ""Eliminar cuenta"".","مرة أخرى ومثل حسابك المحذوفة. ضع في اعتبارك أنك لن تتمكن من إعادة تنشيط حسابك أو استرداد أي من المحتوى أو المعلومات التي أضفتها. إذا كنت لا تزال تحب حذف حسابك ، فانقر فوق ""حذف الحساب"".؟"
+Confirm,Confirm,Confirmar,يتأكد
+Close,Close,Cerca,يغلق
+Account successfully verified,Account successfully verified,Cuenta verificada con éxito,الحساب تم التحقق منه بنجاح
+Please verify your mail address. Check your mail inbox to get verification code,Please verify your mail address. Check your mail inbox to get verification code,Verifique su dirección de correo. Verifique su bandeja de entrada de correo para obtener el código de verificación,يرجى التحقق من عنوان البريد الخاص بك. تحقق من صندوق البريد الخاص بك للحصول على رمز التحقق
+Mail Resend Success!,Mail Resend Success!,Correo de reiniciar el éxito!,البريد إعادة تقديم النجاح!
+Please enter the code,Please enter the code,Ingrese el código,الرجاء إدخال الرمز
+We sent a 6 digit code here,We sent a 6 digit code here,Enviamos un código de 6 dígitos aquí,أرسلنا رمزًا مكون من 6 أرقام هنا
+You can resend the code after,You can resend the code after,Puede reenviar el código después,يمكنك إعادة تقديم الرمز بعد
+Submit,Submit,Entregar,يُقدِّم
+Back To,Back To,De regreso,ارجع الى
+Didn't get the code?,Didn't get the code?,¿No obtuvo el código?,لم تحصل على الرمز؟
+Resend,Resend,Revender,إعادة إرسال
+Mail Authorization,Mail Authorization,Autorización de correo,ترخيص البريد
+Reset Your Forgotten Password?,Reset Your Forgotten Password?,Restablecer su contraseña olvidada?,أعد ضبط كلمة المرور المنسية؟
+Take control of your account by resetting your password. Our password recovery page guides you through the necessary steps to securely reset your password.,Take control of your account by resetting your password. Our password recovery page guides you through the necessary steps to securely reset your password.,Tome el control de su cuenta restableciendo su contraseña. Nuestra página de recuperación de contraseña lo guía a través de los pasos necesarios para restablecer de forma segura su contraseña.,تحكم في حسابك عن طريق إعادة تعيين كلمة المرور الخاصة بك. توجهك صفحة استرداد كلمة المرور الخاصة بنا من خلال الخطوات اللازمة لإعادة تعيين كلمة المرور الخاصة بك بشكل آمن.
+Send OTP,Send OTP,Enviar OTP,إرسال OTP
+Verification code sended to your email address.,Verification code sended to your email address.,Código de verificación enviado a su dirección de correo electrónico.,تم إرسال رمز التحقق إلى عنوان بريدك الإلكتروني.
+The credentials field is required.,The credentials field is required.,Se requiere el campo de credenciales.,حقل بيانات الاعتماد مطلوب.
+Verify User,Verify User,Verificar el usuario,تحقق من المستخدم
+Verification code resend success!,Verification code resend success!,¡El código de verificación reenvía el éxito!,رمز التحقق من إعادة تقديم النجاح!
+Password Reset,Password Reset,Restablecimiento de contraseña,إعادة تعيين كلمة المرور
+Reset Your Password,Reset Your Password,Restablecer su contraseña,اعد ضبط كلمه السر
+Enter New Password,Enter New Password,Ingrese nueva clave,أدخل كلمة مرور جديدة
+Enter Confirm Password,Enter Confirm Password,Ingrese Confirmar contraseña,أدخل تأكيد كلمة المرور
+Reset,Reset,Reiniciar,إعادة ضبط
+The password must be at least 6 characters.,The password must be at least 6 characters.,La contraseña debe tener al menos 6 caracteres.,يجب أن تكون كلمة المرور 6 أحرف على الأقل.
+The password confirmation does not match.,The password confirmation does not match.,La confirmación de contraseña no coincide.,لا يتطابق تأكيد كلمة المرور.
+Password reset success. Please login with new password.,Password reset success. Please login with new password.,El éxito de restablecimiento de contraseña. Inicie sesión con una nueva contraseña.,إعادة تعيين كلمة المرور النجاح. يرجى تسجيل الدخول بكلمة مرور جديدة.
+Two Factor Authenticator,Two Factor Authenticator,Autenticador de dos factores,اثنان عامل المصادقة
+Enable,Enable,Permitir,يُمكَِن
+Google Authenticator,Google Authenticator,Autenticador de Google,مصادقة Google
+"Google Authenticator adds an extra layer of security to your online accounts by adding a second step of verification when you sign in. This means that in addition to your password, you'll also need to enter a code that is generated by the Google Authenticator app on your phone.","Google Authenticator adds an extra layer of security to your online accounts by adding a second step of verification when you sign in. This means that in addition to your password, you'll also need to enter a code that is generated by the Google Authenticator app on your phone.","Google Authenticator agrega una capa adicional de seguridad a sus cuentas en línea al agregar un segundo paso de verificación cuando inicia sesión. Esto significa que, además de su contraseña, también necesitará ingresar un código generado por la aplicación Google Authenticator en tu teléfono.",يضيف Google Authenticator طبقة إضافية من الأمان إلى حساباتك عبر الإنترنت عن طريق إضافة خطوة ثانية من التحقق عند تسجيل الدخول. وهذا يعني أنه بالإضافة إلى كلمة المرور الخاصة بك ، ستحتاج أيضًا إلى إدخال رمز تم إنشاؤه بواسطة تطبيق Google Authenticator على هاتفك.
+How to Setup?,How to Setup?,¿Como instalar?,كيفيه التنصيب؟
+Download App,Download App,Descargar aplicación,تحميل التطبيق
+2 factor authentication (Powered by google)?,2 factor authentication (Powered by google)?,¿Autenticación de 2 factores (alimentado por Google)?,2 مصادقة عامل (مدعوم من Google)؟
+Security Setting Updated Successfully!,Security Setting Updated Successfully!,Configuración de seguridad actualizada con éxito!,تم تحديث إعداد الأمان بنجاح!
+Support Tickets,Support Tickets,Boletos de apoyo,تذاكر الدعم الفني
+Add New,Add New,Agregar nuevo,اضف جديد
+Ticket ID,Ticket ID,Identificación de entradas,معرف التذاكر
+User,User,Usuario,مستخدم
+username,username,nombre de usuario,اسم المستخدم
+Subject,Subject,Sujeto,موضوع
+Message,Message,Mensaje,رسالة
+Status,Status,Estado,حالة
+Last Reply,Last Reply,Última respuesta,الرد الأخير
+No data found!,No data found!,¡Datos no encontrados!,لاتوجد بيانات!
+Add New Ticket,Add New Ticket,Agregar nuevo boleto,أضف تذكرة جديدة
+Enter Subject,Enter Subject,Entrar en el sujeto,أدخل الموضوع
+Write Here,Write Here,Escribe aquí,اكتب هنا
+Optional,Optional,Opcional,خياري
+Attachments,Attachments,Archivos adjuntos,المرفقات
+The name field is required.,The name field is required.,Se requiere el campo de nombre.,حقل الاسم مطلوب.
+The email field is required.,The email field is required.,Se requiere el campo de correo electrónico.,حقل البريد الإلكتروني مطلوب.
+The subject field is required.,The subject field is required.,Se requiere el campo de sujeto.,حقل الموضوع مطلوب.
+The attachment field is required.,The attachment field is required.,Se requiere el campo de fijación.,حقل المرفق مطلوب.
+Oops!! Failed to upload attachment. Please try again.,Oops!! Failed to upload attachment. Please try again.,¡¡Ups!! No se pudo cargar el archivo adjunto. Inténtalo de nuevo.,أُووبس!! فشل في تحميل المرفق. حاول مرة اخرى.
+Support ticket created successfully!,Support ticket created successfully!,¡Ticket de apoyo creado con éxito!,تذكرة الدعم التي تم إنشاؤها بنجاح!
+SMS Sending failed! Please try again.,SMS Sending failed! Please try again.,¡El envío de SMS falló! Inténtalo de nuevo.,فشل إرسال الرسائل القصيرة! حاول مرة اخرى.
+This support ticket is closed.,This support ticket is closed.,Este boleto de soporte está cerrado.,تذكرة الدعم هذه مغلقة.
+Support Details,Support Details,Detalles de soporte,تفاصيل الدعم
+Description,Description,Descripción,وصف
+Are you sure to mark as solved,Are you sure to mark as solved,¿Estás seguro de marcar como resuelto?,هل أنت متأكد من أن تحل كما تم حلها
+Because it's not reversible.,Because it's not reversible.,Porque no es reversible.,لأنه غير قابل للعكس.
+Pending Tickets,Pending Tickets,Boletos pendientes,تذاكر معلقة
+Active Tickets,Active Tickets,Boletos activos,تذاكر نشطة
+Solved Tickets,Solved Tickets,Boletos resueltos,حل التذاكر
+All Tickets,All Tickets,Todas las entradas,جميع التذاكر
+All Ticket,All Ticket,Todo el boleto,كل التذاكر
+View All,View All,Ver todo,عرض الكل
+Support Chat,Support Chat,Chat de apoyo,دعم الدردشة
+Conversation,Conversation,Conversación,محادثة
+"This ticket is solved, you can't send message right now.","This ticket is solved, you can't send message right now.","Este boleto está resuelto, no puede enviar un mensaje en este momento.",تم حل هذه التذكرة ، لا يمكنك إرسال رسالة الآن.
+Pending Ticket,Pending Ticket,Boleto pendiente,تذكرة معلقة
+Active Ticket,Active Ticket,Boleto activo,تذكرة نشطة
+Solved Ticket,Solved Ticket,Boleto resuelto,تذكرة حل
+Notification,Notification,Notificación,إشعار

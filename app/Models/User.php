@@ -36,8 +36,33 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'address'           => 'object',
+        'firstname'           => 'string',
+        'lastname'            => 'string',
+        'username'            => 'string',
+        'email'               => 'string',
+        'mobile_code'         => 'string',
+        'mobile'              => 'string',
+        'full_mobile'         => 'string',
+        'password'            => 'string',
+        'refferal_user_id'    => 'integer',
+        'image'               => 'string',
+        'status'              => 'integer',
+        'email_verified_at'   => 'datetime',
+        'address'             => 'object',
+        'email_verified'      => 'integer',
+        'sms_verified'        => 'integer',
+        'kyc_verified'        => 'integer',
+        'ver_code'            => 'integer',
+        'ver_code_send_at'    => 'datetime',
+        'two_factor_verified' => 'integer',
+        'two_factor_status'   => 'integer',
+        'device_id'           => 'string',
+        'social_type'         => 'string',
+        'remember_token'      => 'string',
+        'coupon_status'       => 'integer',
+        'deleted_at'          => 'datetime',
+        'created_at'          => 'datetime',
+        'updated_at'          => 'datetime',
     ];
 
     public function scopeEmailUnverified($query)
@@ -112,12 +137,12 @@ class User extends Authenticatable
         if($status == GlobalConst::ACTIVE) {
             $data = [
                 'class'     => "badge badge--success",
-                'value'     => "Active",
+                'value'     => __("Active"),
             ];
         }else if($status == GlobalConst::BANNED) {
             $data = [
                 'class'     => "badge badge--danger",
-                'value'     => "Banned",
+                'value'     => __("Banned"),
             ];
         }
         return (object) $data;
@@ -132,22 +157,22 @@ class User extends Authenticatable
         if($status == GlobalConst::APPROVED) {
             $data = [
                 'class'     => "badge badge--success",
-                'value'     => "Verified",
+                'value'     =>__("Verified"),
             ];
         }else if($status == GlobalConst::PENDING) {
             $data = [
                 'class'     => "badge badge--warning",
-                'value'     => "Pending",
+                'value'     => __("Pending"),
             ];
         }else if($status == GlobalConst::REJECTED) {
             $data = [
                 'class'     => "badge badge--danger",
-                'value'     => "Rejected",
+                'value'     =>__("Rejected"),
             ];
         }else {
             $data = [
                 'class'     => "badge badge--danger",
-                'value'     => "Unverified",
+                'value'     => __("Unverified"),
             ];
         }
         return (object) $data;

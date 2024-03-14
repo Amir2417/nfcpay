@@ -31,6 +31,12 @@
                         </a>
                     </li>
                     <li class="sidebar-menu-item">
+                        <a href="{{ setRoute('user.kyc.index') }}">
+                            <i class="menu-icon las la-user-alt"></i>
+                            <span class="menu-title">{{__("KYC Verification")}}</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
                         <a href="javascript:void(0)" class="logout-btn">
                             <i class="menu-icon las la-sign-out-alt"></i>
                             <span class="menu-title">{{ __("Logout") }}</span>

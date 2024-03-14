@@ -115,11 +115,9 @@ class SupportTicketController extends Controller
     public function conversation($encrypt_id)
     {
         $page_title        = "Conversation";
-        $breadcrumb        = "Conversation";
         $support_ticket_id = decrypt($encrypt_id);
         $support_ticket    = SupportTicket::findOrFail($support_ticket_id);
         return view('user.sections.support-ticket.conversation', compact(
-            'breadcrumb',
             'page_title',
             'support_ticket',
             

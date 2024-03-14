@@ -1,30 +1,30 @@
 <div class="header mini-sidebar">
     <div class="header-top">
         <div class="header-version-area header-btn">
-            <button class="header-version-bar" title="Version">
+            <button class="header-version-bar" title="{{ __("Version") }}">
                 <i class="las la-moon"></i>
             </button>
         </div>
         <div class="header-search-area header-btn">
-            <button class="header-search-bar header-link" title="Search">
+            <button class="header-search-bar header-link" title="{{ __("Search") }}">
                 <i class="las la-search"></i>
             </button>
             <div class="header-search-wrapper">
                 <div class="position-relative">
-                    <input class="form-control sidebar-search-input" type="search" placeholder="Search . . . ." aria-label="Search">
+                    <input class="form-control sidebar-search-input" type="search" placeholder="{{ __("Search") }} . . . ." aria-label="Search">
                     <span class="las la-search"></span>
                 </div>
                 <div class="sidebar-search-result p-3"></div>
             </div>
         </div>
         <div class="header-fullscreen-area header-btn">
-            <button class="header-fullscreen-bar header-link" title="Fullscreen">
+            <button class="header-fullscreen-bar header-link" title="{{ __("Fullscreen") }}">
                 <i class="fullscreen-open las la-compress" onclick="openFullscreen();"></i>
                 <i class="fullscreen-close las la-compress-arrows-alt" onclick="closeFullscreen();"></i>
             </button>
         </div>
         <div class="header-notification-area header-btn">
-            <button class="header-notification-bar header-link" title="Notification">
+            <button class="header-notification-bar header-link" title="{{ __("Notification") }}">
                 <i class="las la-bell"></i>
                 <span class="bling-area d-none">
                     <span class="bling"></span>
@@ -52,9 +52,6 @@
                         </div>
                     @endforelse
                 </ul>
-                <div class="notification-footer">
-                    {{-- <a href="javascript:void(0)">View All</a> --}}
-                </div>
             </div>
         </div>
         @if (admin_permission_by_name("admin.support.ticket.index"))
@@ -78,19 +75,19 @@
                         @include('admin.components.side-nav-mini.support.link',[
                             'links'     => [
                                 [
-                                    'title'     => "Pending Ticket $span",
+                                    'title'     => __("Pending Ticket").$span,
                                     'route'     => "admin.support.ticket.pending",
                                 ],
                                 [
-                                    'title'     => "Active Ticket",
+                                    'title'     => __("Active Ticket"),
                                     'route'     => "admin.support.ticket.active",
                                 ],
                                 [
-                                    'title'     => "Solved Ticket",
+                                    'title'     => __("Solved Ticket"),
                                     'route'     => "admin.support.ticket.solved",
                                 ],
                                 [
-                                    'title'     => "All Ticket",
+                                    'title'     => __("All Ticket"),
                                     'route'     => "admin.support.ticket.index",
                                 ],
                             ],
@@ -102,19 +99,18 @@
     </div>
     <div class="header-bottom">
         <div class="header-settings-area header-btn">
-            <button class="header-settings-bar header-link" title="Settings">
+            <button class="header-settings-bar header-link" title="{{ __("Settings") }}">
                 <i class="las la-cog"></i>
             </button>
         </div>
         <div class="header-user-area header-btn">
-            <button class="header-user-bar header-link" title="Profile">
+            <button class="header-user-bar header-link" title="{{ __("Profile") }}">
                 <img src="{{ get_image(Auth::user()->image,'admin-profile','profile') }}" alt="user">
             </button>
             <div class="header-user-wrapper">
                 <ul class="header-user-list">
                     <li><a href="{{ setRoute('admin.profile.index') }}">{{ __("Admin Profile") }}</a></li>
                     <li><a href="{{ setRoute('admin.profile.change.password') }}">{{ __("Change Password") }}</a></li>
-                    <li><a href="{{ setRoute('admin.profile.google.2fa.view') }}">{{ __("Google 2FA") }}</a></li>
                 </ul>
             </div>
         </div>

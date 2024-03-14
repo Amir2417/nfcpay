@@ -1,40 +1,34 @@
 @extends('user.layouts.master')
-
-@push('css')
-    
-@endpush
+@section('breadcrumb')
+    @include('user.components.breadcrumb',['breadcrumbs' => [
+        [
+            'name'  => __("Dashboard"),
+            'url'   => setRoute("user.dashboard"),
+        ]
+    ], 'active' => __("KYC Verification")])
+@endsection
 
 @section('content')
-    {{-- <div class="table-content">
-        <div class="row">
-            <div class="header-title">
-
-                @include('user.components.profile.kyc',compact("kyc_data"))
-
-                @if ($user->kyc_verified != global_const()::VERIFIED && $user->kyc_verified != global_const()::PENDING)
-                    <div class="send-add-form row">
-                        <div class="col-lg-10 col-md-10 col-12 form-area">
-                            <div class="add-money-text pb-3">
-                                <span class="text-white">{{ __("Fill up information and verify your KYC.") }}</span>
+<div class="body-wrapper">
+    <div class="row mb-30-none justify-content-center">
+        <div class="col-lg-6 mb-30">
+            <div class="custom-card mt-20">
+                <div class="card-body">
+                    <div class="dash-payment-item-wrapper">
+                        <div class="dash-payment-item active">
+                            <div class="dash-payment-title-area">
+                                <h5 class="title">{{ __("Proof Of Identity") }}</h5>
                             </div>
-
-                            <form class="row g-4" method="POST" action="{{ setRoute('user.kyc.submit') }}" enctype="multipart/form-data">
-                                @csrf
-
-                                @include('user.components.generate-kyc-fields',['fields' => $kyc_fields])
-
-                                <div class="col-12">
-                                    <button type="submit" class="btn--base w-100 text-center">{{ __("Submit_WEB") }}</button>
-                                </div>
-
-                            </form>
-
+                            <div class="dash-payment-body">
+                                @include('user.components.profile.kyc', compact('user_kyc'))
+                            </div>
                         </div>
                     </div>
-                @endif
+                </div>
             </div>
         </div>
-    </div> --}}
+    </div>
+</div>
 @endsection
 
 @push('script')

@@ -21,6 +21,18 @@
                                 <li><a href="developer/developer.html">Developer</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
+                            <div class="header-language">
+                                @php
+                                    $__current_local = session("local") ?? get_default_language_code();
+                                @endphp
+                                <select class="form--control nice-select" name="lang_switcher" id="">
+                                    @foreach ($__languages as $__item)
+                                        <option value="{{ $__item->code }}" @if ($__current_local == $__item->code)
+                                            @selected(true)
+                                        @endif>{{ $__item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="header-action">
                                 @auth
                                     <a href="{{ setRoute('user.dashboard') }}" class="btn--base active">{{ __("Dashboard") }}</a>
@@ -42,3 +54,13 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     End Header
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+@push('script')
+<script>
+    $("select[name=lang_switcher]").change(function(){
+        var selected_value = $(this).val();
+        var submitForm = `<form action="{{ setRoute('frontend.languages.switch') }}" id="local_submit" method="POST"> @csrf <input type="hidden" name="target" value="${$(this).val()}" ></form>`;
+        $("body").append(submitForm);
+        $("#local_submit").submit();
+    });
+</script>
+@endpush
