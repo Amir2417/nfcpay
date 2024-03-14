@@ -91,9 +91,9 @@ class ForgotPasswordController extends Controller
         $request->merge(['token' => $token]);
         $validated = Validator::make($request->all(),[
             'token'         => "required|string|exists:user_password_resets,token",
-            'code'          => "required|numeric|exists:user_password_resets,code",
+            'code.*'        => "required|integer",
         ])->validate();
-
+        $validated['code'] = implode("",$request->code);
         $basic_settings = BasicSettingsProvider::get();
         $otp_exp_seconds = $basic_settings->otp_exp_seconds ?? 0;
 
@@ -107,7 +107,6 @@ class ForgotPasswordController extends Controller
             }
             return redirect()->route('user.password.forgot')->with(['error' => ['Session expired. Please try again.']]);
         }
-
         if($password_reset->code != $validated['code']) {
             throw ValidationException::withMessages([
                 'code'      => "Verification Otp is Invalid",
