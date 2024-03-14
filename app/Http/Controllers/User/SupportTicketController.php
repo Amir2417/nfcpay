@@ -63,7 +63,7 @@ class SupportTicketController extends Controller
         $validated = $validator->validate();
         $validated['token']         = generate_unique_string('support_tickets','token',16);
         $validated['user_id']       = auth()->user()->id;
-        $validated['status']        = 0;
+        $validated['status']        = 3;
         $validated['type']          = SupportTicketConst::TYPE_USER;
         $validated['created_at']    = now();
         $validated = Arr::except($validated,['attachment']);
@@ -114,7 +114,7 @@ class SupportTicketController extends Controller
      */
     public function conversation($encrypt_id)
     {
-        $page_title        = " | Conversation";
+        $page_title        = "Conversation";
         $breadcrumb        = "Conversation";
         $support_ticket_id = decrypt($encrypt_id);
         $support_ticket    = SupportTicket::findOrFail($support_ticket_id);
@@ -137,7 +137,7 @@ class SupportTicketController extends Controller
         $validated = $validator->validate();
 
         $support_ticket = SupportTicket::notSolved($validated['support_token'])->first();
-        if(!$support_ticket) return Response::error(['error' => ['This support ticket is closed.']]);
+        if(!$support_ticket) return Response::error(['error' => [__('This support ticket is closed.')]]);
 
         $data = [
             'support_ticket_id'         => $support_ticket->id,
@@ -151,7 +151,7 @@ class SupportTicketController extends Controller
             $chat_data = SupportChat::create($data);
         }catch(Exception $e) {
             return $e;
-            $error = ['error' => ['SMS Sending failed! Please try again.']];
+            $error = ['error' => [__('SMS Sending failed! Please try again.')]];
             return Response::error($error,null,500);
         }
 

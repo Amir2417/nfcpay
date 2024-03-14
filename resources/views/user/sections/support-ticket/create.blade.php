@@ -19,36 +19,54 @@
         <div class="col-xl-12 col-lg-12 mb-20">
             <div class="custom-card mt-10">
                 <div class="dashboard-header-wrapper">
-                    <h5 class="title">Add New Ticket</h5>
+                    <h5 class="title">{{ __("Add New Ticket") }}</h5>
                 </div>
                 <div class="card-body">
-                    <form class="card-form">
+                    <form class="card-form" action="{{ route('user.support.ticket.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 form-group">
-                                <label>Name<span>*</span></label>
-                                <input type="text" class="form--control" placeholder="Enter Name...">
+                                @include('admin.components.form.input',[
+                                    'label'         => __("Name")."<span>*</span>",
+                                    'name'          => "name",
+                                    'attribute'     => "readonly",
+                                    'placeholder'   => __("Enter Name")."...",
+                                    'value'         => old('name',auth()->user()->full_name)
+                                ])
                             </div>
                             <div class="col-xl-6 col-lg-6 form-group">
-                                <label>Email<span>*</span></label>
-                                <input type="email" class="form--control" placeholder="Enter Email...">
+                                @include('admin.components.form.input',[
+                                    'label'         => __("Email")."<span>*</span>",
+                                    'type'          => "email",
+                                    'name'          => "email",
+                                    'attribute'     => "readonly",
+                                    'placeholder'   => __("Enter Email")."...",
+                                    'value'         => old('email',auth()->user()->email)
+                                ])
                             </div>
                             <div class="col-xl-12 col-lg-12 form-group">
-                                <label>Subject<span>*</span></label>
-                                <input type="text" class="form--control" placeholder="Enter Subject...">
+                                @include('admin.components.form.input',[
+                                    'label'         => __("Subject")."<span>*</span>",
+                                    'name'          => "subject",
+                                    'placeholder'   => __("Enter Subject")."...",
+                                ])
                             </div>
                             <div class="col-xl-12 col-lg-12 form-group">
-                                <label>Message <span class="text--base">(Optional)</span></label>
-                                <textarea class="form--control" placeholder="Write Here…"></textarea>
+                                @include('admin.components.form.textarea',[
+                                    'label'         => __('Message').'<span class="text--base">'.'('.__("Optional").')'.'</span>',
+                                    'name'          => "desc",
+                                    'placeholder'   => __("Write Here")."...",
+                                ])
                             </div>
                             <div class="col-xl-12 col-lg-12 form-group">
-                                <label>Attachments<span>*</span></label>
+                                <label>{{ __("Attachments") }}<span>*</span></label>
                                 <div class="file-holder-wrapper">
-                                    <input type="file" class="file-holder" name="file" id="fileUpload" data-height="130" accept="image/*" data-max_size="20" data-file_limit="15" multiple>
+                                    <input type="file" class="file-holder" name="attachment[]" id="fileUpload" data-height="130" accept="image/*" data-max_size="20" data-file_limit="15" multiple>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-12 col-lg-12">
-                            <button type="submit" class="btn--base w-100"><span class="w-100">Add New</span></button>
+                            <button type="submit" class="btn--base w-100"><span class="w-100">{{ __("Add New") }}</span></button>
                         </div>
                     </form>
                 </div>
