@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Admin\SetupKyc;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -106,5 +107,22 @@ class ProfileController extends Controller
 
         return back()->with(['success' => ['Password successfully updated!']]);
 
+    }
+    /**
+     * delete account 
+     * @param $id
+     * @param \Illuminate\Http\Request $request
+     */
+    public function deleteAccount($id){
+        $user = auth()->user();
+        try{
+            $user->status = 0;
+            $user->save();
+            Auth::logout();
+            return redirect()->route('index')->with(['success' => ['Your account deleted successfully!']]);
+        }catch(Exception $e) {
+            return back()->with(['error' => ['Something went worng! Please try again.']]);
+        }
+        
     }
 }

@@ -22,7 +22,7 @@
                     <h4 class="title">{{ __("Profile Settings") }}</h4>
                     <div class="dashboard-btn-wrapper">
                         <div class="dashboard-btn">
-                            <button type="button" class="btn--base" data-bs-toggle="modal" data-bs-target="#deleteModal">{{ __("Delete Profile") }}</button>
+                            <button type="button" class="btn--base delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal">{{ __("Delete Profile") }}</button>
                         </div>
                     </div>
                 </div>
@@ -169,15 +169,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" id="deleteModalLabel">
-                <h5 class="modal-title">Delete Confirmation</h5>
+                <h5 class="modal-title">{{ __("Are you sure to delete your account?") }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h5 class="title">Are You Sure Want To Delete?</h5>
+                <p>{{ __("If you do not think you will use") }} <span class="text--base">{{ $basic_settings->site_name }}</span> {{ __("again and like your account deleted. Keep in mind you will not be able to reactivate your account or retrieve any of the content or information you have added. If you would still like your account deleted, click “Delete Account”.?") }}</p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn--base bg--danger border--danger text-white">Cancel</button>
-                <button type="submit" class="btn--base">Confirm</button>
+                <button type="submit" class="btn--base bg--danger border--danger text-white">{{ __("Close") }}</button>
+                <form action="{{ setRoute('user.profile.delete',auth()->user()->id)}}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn--base">{{ __("Confirm") }}</button>
+                </form>
             </div>
         </div>
     </div>
@@ -204,5 +207,7 @@
                 placePhoneCode(phoneCodeOnload);
             }, 400);
         });
+
+
     </script>
 @endpush

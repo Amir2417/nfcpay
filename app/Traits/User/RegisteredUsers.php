@@ -22,8 +22,9 @@ trait RegisteredUsers {
 
         try{
             UserWallet::insert($wallets);
+           
         }catch(Exception $e) {
-            // handle error
+          
             throw new Exception("Failed to create wallet! Please try again");
         }
     }

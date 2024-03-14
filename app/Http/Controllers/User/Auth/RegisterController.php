@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\User\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\Admin\BasicSettingsProvider;
+use Exception;
+use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Controller;
+use App\Traits\User\RegisteredUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Auth\Events\Registered;
-use App\Models\User;
-use App\Traits\User\RegisteredUsers;
-use Exception;
-use Illuminate\Support\Facades\Hash;
+use App\Providers\Admin\BasicSettingsProvider;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -64,16 +66,22 @@ class RegisterController extends Controller
 
         $basic_settings             = $this->basic_settings;
 
-        $validated['email_verified']    = ($basic_settings->email_verification == true) ? false : true; 
+        $validated = Arr::except($validated,['agree']);
+        $validated['email_verified']    = ($basic_settings->email_verification == true) ? false : true;
         $validated['sms_verified']      = ($basic_settings->sms_verification == true) ? false : true;
         $validated['kyc_verified']      = ($basic_settings->kyc_verification == true) ? false : true;
         $validated['password']          = Hash::make($validated['password']);
         $validated['username']          = make_username($validated['firstname'],$validated['lastname']);
-        // $validated['referral_id']       = generate_unique_string('users','referral_id',8,'number');
-
+        
+        if(User::where("username",$validated['username'])->exists()) {
+            throw ValidationException::withMessages([
+                'unknown'       => "Username already exists!",
+            ]);
+        }
+        
         event(new Registered($user = $this->create($validated)));
         $this->guard()->login($user);
-
+    
         return $this->registered($request, $user);
     }
 
@@ -91,13 +99,17 @@ class RegisterController extends Controller
         if($basic_settings->secure_password) {
             $password_rule = ["required",Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()];
         }
+        $agree_rule = "nullable";
+        if($basic_settings->agree_policy) {
+            $agree_rule = 'required|in:on';
+        }
 
         return Validator::make($data,[
             'firstname'     => 'required|string|max:60',
             'lastname'      => 'required|string|max:60',
             'email'         => 'required|string|email|max:150|unique:users,email',
             'password'      => $password_rule,
-            'refer'         => 'sometimes|nullable|string|exists:users,referral_id',
+            'agree'         => $agree_rule,
         ]);
     }
 
@@ -124,12 +136,13 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         try{
+           
             $this->createUserWallets($user);
+            
+            return redirect()->intended(route('user.dashboard'));
         }catch(Exception $e) {
-            $this->guard()->logout();
-            $user->delete();
             return redirect()->back()->with(['error' => ['Something went wrong! Please try again']]);
         }
-        return redirect()->intended(route('user.dashboard'));
+        
     }
 }
