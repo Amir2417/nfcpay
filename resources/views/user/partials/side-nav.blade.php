@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     <li class="sidebar-menu-item">
-                        <a href="login.html">
+                        <a href="javascript:void(0)" class="logout-btn">
                             <i class="menu-icon las la-sign-out-alt"></i>
                             <span class="menu-title">{{ __("Logout") }}</span>
                         </a>
@@ -53,3 +53,15 @@
         </div>
     </div>
 </div>
+@push('script')
+<script>
+    $(".logout-btn").click(function(){
+      
+        var actionRoute = "{{ setRoute('user.logout') }}";
+        var target      = 1;
+        var message     = `{{ __("Are you sure to") }} <strong>{{ __("Logout") }}</strong>?`;
+  
+        openAlertModal(actionRoute,target,message,"Logout","POST");
+    });
+  </script>
+@endpush

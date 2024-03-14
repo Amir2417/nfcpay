@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="{{ asset('public/frontend') }}/css/line-awesome.min.css">
 <!-- animate.css -->
 <link rel="stylesheet" href="{{ asset('public/frontend') }}/css/animate.css">
+ <!-- Popup  -->
+ <link rel="stylesheet" href="{{ asset('public/backend/library/popup/magnific-popup.css') }}">
 <!-- nice select css -->
 <link rel="stylesheet" href="{{ asset('public/frontend') }}/css/nice-select.css">
 <!-- select2 css -->

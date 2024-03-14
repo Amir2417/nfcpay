@@ -56,7 +56,6 @@
 </div>
 
 @include('partials.footer-asset')
-@include('admin.partials.notify')
 @include('user.partials.push-notification')
 
 @stack("script")
