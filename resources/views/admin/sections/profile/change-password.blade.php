@@ -13,13 +13,13 @@
             'name'  => __("Dashboard"),
             'url'   => setRoute("admin.dashboard"),
         ]
-    ], 'active' => __("Password Change")])
+    ], 'active' => __("Change Password")])
 @endsection
 
 @section('content')
     <div class="custom-card">
         <div class="card-header">
-            <h6 class="title">{{ __("Password Change") }}</h6>
+            <h6 class="title">{{ __("Change Password") }}</h6>
         </div>
         <div class="card-body">
             <form class="card-form" action="{{ setRoute('admin.profile.change.password.update') }}" method="POST">

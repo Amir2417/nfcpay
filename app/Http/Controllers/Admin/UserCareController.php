@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Constants\GlobalConst;
 use Exception;
 use App\Models\User;
+use App\Models\UserWallet;
+use App\Models\UserMailLog;
+use Illuminate\Support\Arr;
 use App\Models\UserLoginLog;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\UserMailLog;
-use App\Notifications\User\SendMail;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Validator;
+use App\Constants\GlobalConst;
 use App\Http\Helpers\Response;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Notifications\User\SendMail;
+use Illuminate\Support\Facades\Auth;
+use App\Constants\PaymentGatewayConst;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\User\MessageNotification;
 
 class UserCareController extends Controller
 {
@@ -185,7 +189,7 @@ class UserCareController extends Controller
             UserMailLog::create($validated);
             $user->notify(new SendMail((object) $validated));
         }catch(Exception $e) {
-            return back()->with(['error' => ['Something went worng! Please try again']]);
+            return back()->with(['error' => ['Something went worng! Please try again.']]);
         }
         return back()->with(['success' => ['Mail successfully sended']]);
     }
@@ -197,13 +201,12 @@ class UserCareController extends Controller
             'username'              => "required|exists:users,username",
             'firstname'             => "required|string|max:60",
             'lastname'              => "required|string|max:60",
-            'mobile_code'           => "required|string|max:10",
-            'mobile'                => "required|string|max:20",
+            'mobile'                => "nullable|string|max:20",
             'address'               => "nullable|string|max:250",
             'country'               => "nullable|string|max:50",
             'state'                 => "nullable|string|max:50",
             'city'                  => "nullable|string|max:50",
-            'zip_code'              => "nullable|numeric|max_digits:8",
+            'zip_code'              => "nullable|string",
             'email_verified'        => 'required|boolean',
             'two_factor_verified'   => 'required|boolean',
             'kyc_verified'          => 'required|boolean',
@@ -217,9 +220,11 @@ class UserCareController extends Controller
             'zip'           => $validated['zip_code'] ?? "",
             'address'       => $validated['address'] ?? "",
         ];
-        $validated['mobile_code']       = remove_speacial_char($validated['mobile_code']);
-        $validated['mobile']            = remove_speacial_char($validated['mobile']);
-        $validated['full_mobile']       = $validated['mobile_code'] . $validated['mobile'];
+        if($validated['mobile'] == ''){
+            $validated['full_mobile']   = null;
+        }else{
+            $validated['full_mobile']   = remove_speacial_char($validated['mobile']);
+        }
 
         $user = User::where('username', $username)->first();
         if(!$user) return back()->with(['error' => ['Opps! User not exists']]);
@@ -227,7 +232,7 @@ class UserCareController extends Controller
         try {
             $user->update($validated);
         } catch (Exception $e) {
-            return back()->with(['error' => ['Something went worng! Please try again']]);
+            return back()->with(['error' => ['Something went worng! Please try again.']]);
         }
 
         return back()->with(['success' => ['Profile Information Updated Successfully!']]);
@@ -349,5 +354,82 @@ class UserCareController extends Controller
         return view('admin.components.search.user-search',compact(
             'users',
         ));
+    }
+
+    /**
+     * Method for update user wallet balance
+     */
+    public function walletBalanceUpdate(Request $request,$username) {
+
+        $validator = Validator::make($request->all(),[
+            'type'      => "required|string|in:add,subtract",
+            'wallet'    => "required|numeric|exists:user_wallets,id",
+            'amount'    => "required|numeric",
+            'remark'    => "nullable|string|max:200",
+        ]);
+        
+        if($validator->fails()) {
+            return back()->withErrors($validator)->withInput()->with('modal','wallet-balance-update-modal');
+        }
+
+        $validated = $validator->validate();
+        $user_wallet = UserWallet::whereHas('user',function($q) use ($username){
+            $q->where('username',$username);
+        })->find($validated['wallet']);
+        if(!$user_wallet) return back()->with(['error' => ['User wallet not found!']]);
+        
+        DB::beginTransaction();
+        try{
+
+            $user_wallet_balance = 0;
+            $action_type = "";
+
+            switch($validated['type']){
+                case "add":
+                    $action_type = "Added";
+                    $user_wallet_balance = $user_wallet->balance + $validated['amount'];
+                    DB::table($user_wallet->getTable())->where('id',$user_wallet->id)->increment('balance',$validated['amount']);
+                    break;
+                case "subtract":
+                    $action_type = "Subtract";
+                    if($user_wallet->balance >= $validated['amount']) {
+                        $user_wallet_balance = $user_wallet->balance - $validated['amount'];
+                        DB::table($user_wallet->getTable())->where('id',$user_wallet->id)->decrement('balance',$validated['amount']);
+                    }else {
+                        return back()->with(['error' => ['User do not have sufficient balance']]);
+                    }
+                    break;
+            }
+
+            DB::table("transactions")->insertGetId([
+                'type'              => PaymentGatewayConst::TYPEADDSUBTRACTBALANCE,
+                'trx_id'            => generate_unique_string("transactions","trx_id",16),
+                'user_id'           => $user_wallet->user->id,
+                'wallet_id'         => $user_wallet->id,
+                'amount'            => $validated['amount'],
+                'percent_charge'    => 0,
+                'fixed_charge'      => 0,
+                'total_charge'      => 0,
+                'total_payable'     => $validated['amount'],
+                'available_balance' => $user_wallet_balance,
+                'currency_code'     => $user_wallet->currency->code,
+                'remark'            => $validated['remark'],
+                'status'            => PaymentGatewayConst::STATUSSUCCESS,
+                'created_at'        => now(),
+            ]);
+
+            // Send Mail to User
+            $from_or_to = ($action_type == "Added") ? "to" : "from";
+            $data['message']  = "Your wallet balance updated by ". auth()->user()->getRolesString() .". " . $action_type . " (" . $validated['amount'] . $user_wallet->currency->code . ")  ". $from_or_to . " " . $user_wallet->currency->code . " Wallet Balance";
+            $user_wallet->user->notify(new MessageNotification($data));
+
+            DB::commit();
+        }catch(Exception $e) {
+           
+            DB::rollBack();
+            return back()->with(['error' => ['Transaction failed! '. $e->getMessage()]]);
+        }
+
+        return back()->with(['success' => ['Transaction success']]);
     }
 }

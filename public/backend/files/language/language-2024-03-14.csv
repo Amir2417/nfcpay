@@ -136,3 +136,49 @@ Pending Ticket,Pending Ticket,Boleto pendiente,تذكرة معلقة
 Active Ticket,Active Ticket,Boleto activo,تذكرة نشطة
 Solved Ticket,Solved Ticket,Boleto resuelto,تذكرة حل
 Notification,Notification,Notificación,إشعار
+Change Password,Change Password,Cambiar la contraseña,تغيير كلمة المرور
+Current Password,Current Password,Contraseña actual,كلمة السر الحالية
+New Password,New Password,Nueva contraseña,كلمة المرور الجديدة
+Confirm Password,Confirm Password,confirmar Contraseña,تأكيد كلمة المرور
+Active,Active,Activo,نشيط
+Default,Default,Por defecto,تقصير
+Pending,Pending,Pendiente,قيد الانتظار
+Solved,Solved,Resuelto,تم حلها
+Banned,Banned,Prohibido,محظور
+Verified,Verified,Verificado,تم التحقق
+Rejected,Rejected,Rechazado,مرفوض
+Unverified,Unverified,Inconfirmado,لم يتم التحقق منه
+Choose One,Choose One,Elige uno,اختر واحدة
+NID,Not,No,لا
+Passport,Passport,Pasaporte,جواز سفر
+Driving License,Driving License,Licencia de conducir,رخصة قيادة
+Front,Front,Frente,أمام
+Back,Back,Atrás,خلف
+ID Type,ID Type,tipo de identificación,نوع الهوية
+KYC Information,KYC Information,Información de KYC,معلومات KYC
+Your KYC information is submited. Please wait for admin confirmation. When you are KYC verified you will show your submited information here,Your KYC information is submited. Please wait for admin confirmation. When you are KYC verified you will show your submited information here,"Se envía su información de KYC. Espere la confirmación del administrador. Cuando esté verificado KYC, mostrará su información enviada aquí",معلومات KYC الخاصة بك هي وضعت. يرجى انتظار تأكيد المسؤول. عندما يتم التحقق منك KYC ، ستعرض معلوماتك المستردة هنا
+Your KYC information is verified,Your KYC information is verified,Su información de KYC está verificada,تم التحقق من معلومات KYC الخاصة بك
+Your KYC information is rejected.,Your KYC information is rejected.,Su información de KYC es rechazada.,تم رفض معلومات KYC الخاصة بك.
+Please submit your KYC information with valid data.,Please submit your KYC information with valid data.,Envíe su información de KYC con datos válidos.,يرجى إرسال معلومات KYC الخاصة بك مع بيانات صالحة.
+Reject Reason,Reject Reason,Rechazar la razón,رفض السبب
+KYC information successfully submitted,KYC information successfully submitted,La información de KYC presentó con éxito,تم تقديم معلومات KYC بنجاح
+You are already KYC Verified User,You are already KYC Verified User,Ya eres usuario verificado de KYC,أنت بالفعل مستخدم تم التحقق منه KYC
+No need to identity verification!!,No need to identity verification!!,¡No hay necesidad de verificación de identidad!,لا حاجة للتحقق من الهوية !!
+Version,Version,Versión,إصدار
+Search,Search,Buscar,يبحث
+Fullscreen,Fullscreen,Pantalla completa,تكبير الشاشة
+Clear All,Clear All,Limpiar todo,امسح الكل
+No new notification found!,No new notification found!,¡No se encontró una nueva notificación!,لم يتم العثور على إشعار جديد!
+Settings,Settings,Ajustes,إعدادات
+Admin Profile,Admin Profile,Perfil de administración,ملف تعريف المسؤول
+Change Password,Change Password,Cambiar la contraseña,تغيير كلمة المرور
+Language,Language,Idioma,لغة
+English,English,Inglés,إنجليزي
+Layout Mode,Layout Mode,Modo de diseño,وضع التصميم
+Dark Mode,Dark Mode,Modo oscuro,الوضع المظلم
+Topbar Color,Topbar Color,Color topbar,لون الشفر
+Light Mode,Light Mode,Modo de luz,وضع الضوء
+Sidebar Color,Sidebar Color,Color de la barra lateral,لون الشريط الجانبي
+Min Sidebar Color,Min Sidebar Color,Min Color de la barra lateral,لون الشريط الجانبي
+Direction,Direction,Dirección,اتجاه
+RTL Support,Rtl support,Soporte RTL,دعم RTL
