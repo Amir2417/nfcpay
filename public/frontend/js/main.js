@@ -642,3 +642,11 @@ function itemSearchResult(response,tableElement) {
   }
 }
 
+$('textarea').keydown(function (e) {
+  const keyCode = e.which || e.keyCode;
+  if (keyCode === 13 && !e.shiftKey) {
+    e.preventDefault();
+  }
+});
+
+

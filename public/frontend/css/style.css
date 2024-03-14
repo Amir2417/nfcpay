@@ -5288,6 +5288,7 @@ pre.prettyprint {
   font-size: 13px;
   border-radius: 5px;
   color: #ffffff;
+  white-space: pre-wrap;
 }
 .chat-container .media .media-body p::before {
   position: absolute;

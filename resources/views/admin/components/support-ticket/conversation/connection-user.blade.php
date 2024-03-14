@@ -3,7 +3,7 @@
     @if (isset($support_ticket) && isset($support_ticket->token))
         @if ($basic_settings->broadcast_config != null && $basic_settings->broadcast_config->method == "pusher")
 
-            <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+            <script src="https://js.pusher.com/7.2/pusher.js"></script>
             <script>
                 var primaryKey = "{{ $basic_settings->broadcast_config->primary_key ?? '' }}";
                 var cluster = "{{ $basic_settings->broadcast_config->cluster ?? "" }}";
@@ -15,14 +15,9 @@
                 var URL = "{{ $route ?? "" }}";
                 var channel = pusher.subscribe('support.conversation.'+token);
 
-                // console.log(token);
-                // console.log(URL);
-                // console.log(channel);
-
                 channel.bind('support-conversation', function(data) {
                     data = JSON.stringify(data);
                     data = JSON.parse(data);
-                    // console.log(data);
                     var addClass = "";
                     if(data.conversation.sender_type == "USER") {
                         addClass = "media-chat-reverse";
@@ -38,8 +33,11 @@
                     $(".support-chat-area .messages ul").append(chatBlock);
                 });
 
-                $(document).on("keyup",".message-input-event",function(e){
-                    if(e.which == 13) {
+                $(document).on("keyup",".message-input-event",function(event){
+                   
+                    if(event.keyCode == 13 && !event.shiftKey) {
+                        
+
                         $(this).removeClass("message-input-event");
                         eventInit($(this),'message-input-event');
                     }
@@ -52,7 +50,9 @@
                 });
 
                 function eventInit(e,removeClass) {
+                    
                     var inputValue = $(".message-input").val();
+                    
                     if(inputValue.length == 0) return false;
                     var CSRF = "{{ csrf_token() }}";
                     var data = {
@@ -61,8 +61,9 @@
                         support_token: token,
                     };
 
+                    
                     $.post(URL,data,function(response) {
-                        // Executed
+                       
                     }).done(function(response){
                         $(".message-input").val("");
                         $(e).addClass(removeClass);

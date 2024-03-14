@@ -27,7 +27,7 @@ class AuthorizationController extends Controller
      */
     public function showMailFrom($token)
     {
-        $page_title = setPageTitle("Mail Authorization");
+        $page_title = "Mail Authorization";
         $user_authorize = UserAuthorization::where("token",$token)->first();
         $resend_time = 0;
         if(Carbon::now() <= $user_authorize->created_at->addMinutes(GlobalConst::USER_PASS_RESEND_TIME_MINUTE)) {

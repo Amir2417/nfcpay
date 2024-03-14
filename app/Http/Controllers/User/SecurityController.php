@@ -12,7 +12,11 @@ class SecurityController extends Controller
     public function google2FA() {
         $page_title = "Two Factor Authenticator";
         $qr_code = generate_google_2fa_auth_qr();
-        return view('user.sections.security.google-2fa',compact('page_title','qr_code'));
+        
+        return view('user.sections.two-fa-security.index',compact(
+            'page_title',
+            'qr_code',
+        ));
     }
 
     public function google2FAStatusUpdate(Request $request) {

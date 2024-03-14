@@ -25,7 +25,7 @@ Route::prefix("user")->name("user.")->group(function(){
         Route::post('delete-account/{id}','deleteAccount')->name('delete')->middleware(['app.mode']);
     });
 
-    Route::controller(SupportTicketController::class)->prefix("prefix")->name("support.ticket.")->group(function () {
+    Route::controller(SupportTicketController::class)->prefix("support-ticket")->name("support.ticket.")->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');

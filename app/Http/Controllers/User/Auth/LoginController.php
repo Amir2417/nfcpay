@@ -33,7 +33,7 @@ class LoginController extends Controller
     use AuthenticatesUsers, LoggedInUsers;
 
     public function showLoginForm() {
-        $page_title = setPageTitle("User Login");
+        $page_title = "User Login";
         return view('user.auth.login',compact(
             'page_title',
         ));

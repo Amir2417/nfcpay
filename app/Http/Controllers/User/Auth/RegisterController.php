@@ -47,7 +47,7 @@ class RegisterController extends Controller
         $client_ip = request()->ip() ?? false;
         $user_country = geoip()->getLocation($client_ip)['country'] ?? "";
 
-        $page_title = setPageTitle("User Registration");
+        $page_title = "User Registration";
         return view('user.auth.register',compact(
             'page_title',
             'user_country'
