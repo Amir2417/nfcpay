@@ -62,7 +62,7 @@ class ExtensionsController extends Controller
 
         $extension = Extension::find($item_id);
         if (!$extension) {
-            $error = ['error' => ['Extension is not found!.']];
+            $error = ['error' => [__('Extension is not found!')]];
             return Response::error($error,null,404);
         }
 
@@ -75,7 +75,7 @@ class ExtensionsController extends Controller
             return Response::error($error,null,500);
         }
 
-        $success = ['success' => ['Extension status is updated successfully!']];
+        $success = ['success' => [__('Extension status is updated successfully!')]];
         return Response::success($success,null,200);
     }
 }

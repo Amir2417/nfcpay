@@ -7,7 +7,7 @@
 @extends('admin.layouts.master')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('public/backend/css/fontawesome-iconpicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/backend/css/fontawesome-iconpicker.min.css') }}">
     <style>
         .fileholder {
             min-height: 374px !important;
@@ -52,7 +52,6 @@
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
-    
                                 @foreach ($languages as $item)
                                     @php
                                         $lang_code = $item->code;
@@ -60,17 +59,17 @@
                                     <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="modal-{{ $item->name }}" role="tabpanel" aria-labelledby="modal-{{$item->name}}-tab">
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'         => "Title",
-                                                'label_after'   => "*",
+                                                'label'         => __("Title")."*",
                                                 'name'          => $lang_code . "_title",
+                                                'placeholder'   => __("Title")."...",
                                                 'value'         => old($lang_code . "_title",$useful_link->title?->language?->$lang_code?->title ?? "")
                                             ])
                                         </div>
                                         <div class="form-group">
                                             @include('admin.components.form.input-text-rich',[
-                                                'label'         => "Content",
-                                                'label_after'   => "*",
+                                                'label'         => __("Content")."*",
                                                 'name'          => $lang_code . "_content",
+                                                'placeholder'   => __("Content")."...",
                                                 'value'         => old($lang_code . "_content",$useful_link->content?->language?->$lang_code?->content ?? ""),
                                             ])
                                         </div>
@@ -78,20 +77,11 @@
                                 @endforeach
                             </div>
                         </div>
-
-                        {{-- <div class="col-xl-12 col-lg-12 form-group">
-                            @include('admin.components.form.input',[
-                                'label'         => "Slug",
-                                'label_after'   => "* (Use for make page link (URL))",
-                                'name'          => "slug",
-                                'value'         => old("slug",$useful_link->slug),
-                            ])
-                        </div> --}}
                     </div>
                     <div class="col-xl-12 col-lg-12 form-group">
                         @include('admin.components.button.form-btn',[
                             'class'         => "w-100 btn-loading",
-                            'text'          => "Submit",
+                            'text'          => __("Update"),
                             'permission'    => "admin.setup.sections.section.update"
                         ])
                     </div>
@@ -100,7 +90,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-
-@endpush

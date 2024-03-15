@@ -28,24 +28,28 @@
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th>Page Name</th>
+                            <th>{{ __("Page Name") }}</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($setup_pages as $item)
                             <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>
-                                    @include('admin.components.form.switcher',[
-                                        'name'          => 'status',
-                                        'value'         => $item->status,
-                                        'options'       => ['Enable' => 1,'Disable' => 0],
-                                        'onload'        => true,
-                                        'data_target'   => $item->slug,
-                                        'permission'    => "admin.setup.pages.status.update",
-                                    ])
-                                </td>
+                                <td>{{ __($item->title) }}</td>
+                                @if ($item->default == false)
+                                    <td>
+                                        @include('admin.components.form.switcher',[
+                                            'name'          => 'status',
+                                            'value'         => $item->status,
+                                            'options'       => [__('Enable') => 1,__('Disable') => 0],
+                                            'onload'        => true,
+                                            'data_target'   => $item->slug,
+                                            'permission'    => "admin.setup.pages.status.update",
+                                        ])
+                                    </td>
+                                @else
+                                <td><span class="badge badge--success">{{ __("Default") }}</span></td>
+                                @endif
                             </tr>
                         @empty
                             @include('admin.components.alerts.empty',['colspan' => 2])

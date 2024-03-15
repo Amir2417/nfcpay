@@ -1,24 +1,30 @@
 @extends('admin.layouts.master')
 
 @push('css')
+
+    <style>
+        .fileholder {
+            min-height: 374px !important;
+        }
+
+        .fileholder-files-view-wrp.accept-single-file .fileholder-single-file-view,.fileholder-files-view-wrp.fileholder-perview-single .fileholder-single-file-view{
+            height: 330px !important;
+        }
+    </style>
 @endpush
 
 @section('page-title')
-    @include('admin.components.page-title', ['title' => __($page_title)])
+    @include('admin.components.page-title',['title' => __($page_title)])
 @endsection
 
 @section('breadcrumb')
-    @include('admin.components.breadcrumb', [
-        'breadcrumbs' => [
-            [
-                'name' => __('Dashboard'),
-                'url' => setRoute('admin.dashboard'),
-            ],
-        ],
-        'active' => __('Contact Messages'),
-    ])
+    @include('admin.components.breadcrumb',['breadcrumbs' => [
+        [
+            'name'  => __("Dashboard"),
+            'url'   => setRoute("admin.dashboard"),
+        ]
+    ], 'active' => __("Contact Messages")])
 @endsection
-
 @section('content')
     <div class="table-area">
         <div class="table-wrapper">
@@ -30,11 +36,11 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Message</th>
-                            <th>Reply</th>
-                            <th>Created At</th>
+                            <th>{{ __("Name") }}</th>
+                            <th>{{ __("Email") }}</th>
+                            <th>{{ __("Message") }}</th>
+                            <th>{{ __("Reply") }}</th>
+                            <th>{{ __("Created At") }}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -44,7 +50,7 @@
                                 <td>{{ $key + $contact_requests->firstItem() }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>{{ $item->message }}</td>
+                                <td class="text-wrap">{{ $item->message }}</td>
                                 <td>
                                     @if ($item->reply == true)
                                         <span class="badge badge--success">{{ __("Replyed") }}</span>
@@ -67,12 +73,10 @@
                         @endforelse
                     </tbody>
                 </table>
-
             </div>
         </div>
         {{ get_paginate($contact_requests) }}
     </div>
-
     {{-- Send Mail Modal --}}
     @if (admin_permission_by_name("admin.contact.messages.reply"))
         <div id="send-reply" class="mfp-hide large">
@@ -87,16 +91,16 @@
                         <div class="row mb-10-none">
                             <div class="col-xl-12 col-lg-12 form-group">
                                 @include('admin.components.form.input',[
-                                    'label'         => "Subject*",
+                                    'label'         => __("Subject")."*",
                                     'name'          => "subject",
                                     'data_limit'    => 150,
-                                    'placeholder'   => "Write Subject...",
+                                    'placeholder'   => __("Write Subject")."...",
                                     'value'         => old('subject'),
                                 ])
                             </div>
                             <div class="col-xl-12 col-lg-12 form-group">
                                 @include('admin.components.form.input-text-rich',[
-                                    'label'         => "Details*",
+                                    'label'         => __("Details")."*",
                                     'name'          => "message",
                                     'value'         => old('message'),
                                 ])
@@ -105,7 +109,7 @@
                                 @include('admin.components.button.form-btn',[
                                     'class'         => "w-100 btn-loading",
                                     'permission'    => "admin.subscriber.send.mail",
-                                    'text'          => "Send Email",
+                                    'text'          => __("Send Email"),
                                 ])
                             </div>
                         </div>
@@ -114,13 +118,10 @@
             </div>
         </div>
     @endif
-
 @endsection
-
 @push('script')
     <script>
         openModalWhenError("send-reply","#send-reply");
-
         $(".reply-button").click(function(){
             var oldData = JSON.parse($(this).parents("tr").attr("data-item"));
             $("#send-reply").find("input[name=target]").val(oldData.id);

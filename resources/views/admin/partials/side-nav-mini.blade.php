@@ -56,7 +56,7 @@
         </div>
         @if (admin_permission_by_name("admin.support.ticket.index"))
             <div class="header-support-area header-btn">
-                <button class="header-support-bar header-link" title="Support">
+                <button class="header-support-bar header-link" title="{{ __("Support") }}">
                     <i class="las la-headset"></i>
                     @if ($pending_ticket_count > 0)
                         <span class="bling-area">

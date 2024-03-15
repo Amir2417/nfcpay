@@ -82,8 +82,6 @@ class PushNotificationController extends Controller
 
         $methodDistribute = [
             'pusher'        => "sendNotificationWithPusher",
-            // 'firebase'      => "sendNotificationWithFirebase",
-            // 'one-signal'    => "sendNotificationWithOneSignal",
         ];
 
         if(!array_key_exists($saved_method,$methodDistribute)) {

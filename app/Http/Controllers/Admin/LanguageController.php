@@ -156,7 +156,7 @@ class LanguageController extends Controller
         $validated = $validator->validate();
 
         if(Language::whereNot("id",$validated['data_target'])->default()->exists()) {
-            $warning = ['warning' => ['Please deselect your default language first.']];
+            $warning = ['warning' => [__('Please deselect your default language first.')]];
             return Response::warning($warning);
         }
 

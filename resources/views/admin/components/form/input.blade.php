@@ -2,7 +2,7 @@
     @php
         $for_id = preg_replace('/[^A-Za-z0-9\-]/', '', strip_tags(Str::lower($label)));
     @endphp
-    <label for="{{ $for_id ?? "" }}">{!! $label !!}@isset($label_after){!! $label_after !!}@endisset</label>
+    <label for="{{ $for_id ?? "" }}" class="text-capitalize">{!! $label !!}@isset($label_after){!! $label_after !!}@endisset</label>
 @endif
 
 <input type="{{ $type ?? "text" }}" placeholder="{{ $placeholder ?? __("Type Here")."..." }}" name="{{ $name ?? "" }}" class="form--control {{ $class ?? "" }} @error($name ?? false) is-invalid @enderror" {{ $attribute ?? "" }} value="{{ $value ?? "" }}" @isset($data_limit)

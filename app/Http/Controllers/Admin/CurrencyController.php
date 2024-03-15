@@ -156,7 +156,7 @@ class CurrencyController extends Controller
             return Response::error($error,null,500);
         }
 
-        $success = ['success' => ['Currency status updated successfully!']];
+        $success = ['success' => [__('Currency status updated successfully!')]];
         return Response::success($success,null,200);
     }
 
@@ -218,7 +218,6 @@ class CurrencyController extends Controller
             '1' => true,
             '0'  => false,
         ];
-
         // If Default is already available
         if($default[$validated['currency_option']] == true) {
             $check_default = Currency::where('default',true);

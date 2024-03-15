@@ -25,9 +25,6 @@
             <div class="table-header">
                 <h5 class="title">{{ __($page_title) }}</h5>
                 <div class="table-btn-area">
-                    {{-- @include('admin.components.search-input',[
-                        'name'  => 'user_search',
-                    ]) --}}
 
                     @include('admin.components.link.add-default',[
                         'text'          => "Send Mail to All",
@@ -42,7 +39,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Email</th>
+                            <th>{{ __("Email") }}</th>
                             <th></th>
                         </tr>
                     </thead>

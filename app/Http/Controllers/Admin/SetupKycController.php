@@ -27,39 +27,6 @@ class SetupKycController extends Controller
             'kycs',
         ));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -129,16 +96,6 @@ class SetupKycController extends Controller
         return back()->with(['success' => ['Information updated successfully!']]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        
-    }
 
     /**
      * Function for update KYC status
@@ -178,7 +135,7 @@ class SetupKycController extends Controller
             return Response::error($error,null,500);
         }
 
-        $success = ['success' => ['KYC status updated successfully!']];
+        $success = ['success' => [__('KYC status updated successfully!')]];
         return Response::success($success);
 
     }

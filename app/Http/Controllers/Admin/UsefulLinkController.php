@@ -68,23 +68,11 @@ class UsefulLinkController extends Controller
         try{
             UsefulLink::create($section_data);
         }catch(Exception $e) {
-            return back()->with(['error' => ['Something went wrong! Please try again']]);
+            return back()->with(['error' => ['Something went wrong! Please try again.']]);
         }
 
         return back()->with(['success' => ['Useful link added successfully!']]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -175,7 +163,7 @@ class UsefulLinkController extends Controller
             return Response::error($error,null,500);
         }
 
-        $success = ['success' => ['Useful link status updated successfully!']];
+        $success = ['success' => [__('Useful link status updated successfully!')]];
         return Response::success($success,null,200);
     }
 
