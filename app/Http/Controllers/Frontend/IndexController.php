@@ -77,8 +77,8 @@ class IndexController extends Controller
 
         $app_local = get_default_language_code();
         $page_title = $useful_link->title?->language?->$app_local?->title ?? $basic_settings->site_name;
-
-        // return view('frontend.pages.useful-link',compact('page_title','useful_link'));
+  
+        return view('frontend.pages.useful-link',compact('page_title','useful_link'));
     }
 
 
