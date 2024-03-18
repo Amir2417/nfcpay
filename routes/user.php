@@ -10,6 +10,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\AddMoneyController;
 use App\Http\Controllers\User\SecurityController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\SupportTicketController;
 
 Route::prefix("user")->name("user.")->group(function(){
@@ -24,6 +25,12 @@ Route::prefix("user")->name("user.")->group(function(){
         Route::put('update','update')->name('update')->middleware(['app.mode']);
         Route::post('delete-account/{id}','deleteAccount')->name('delete')->middleware(['app.mode']);
     });
+
+    //payment method
+    Route::controller(PaymentController::class)->prefix('payment')->name('payment.')->group(function(){
+        Route::get('index','index')->name('index');
+    });
+
 
     Route::controller(SupportTicketController::class)->prefix("support-ticket")->name("support.ticket.")->group(function () {
         Route::get('/', 'index')->name('index');

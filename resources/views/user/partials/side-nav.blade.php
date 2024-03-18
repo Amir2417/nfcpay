@@ -19,7 +19,7 @@
                         </a>
                     </li>
                     <li class="sidebar-menu-item">
-                        <a href="payments.html">
+                        <a href="{{ setRoute('user.payment.index') }}">
                             <i class="menu-icon las la-credit-card"></i>
                             <span class="menu-title">{{ __("Payments") }}</span>
                         </a>
