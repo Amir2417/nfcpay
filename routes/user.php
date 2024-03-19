@@ -28,7 +28,10 @@ Route::prefix("user")->name("user.")->group(function(){
 
     //payment method
     Route::controller(PaymentController::class)->prefix('payment')->name('payment.')->group(function(){
-        Route::get('index','index')->name('index');
+        Route::get('/','index')->name('index');
+        Route::post('store','store')->name('store');
+        Route::post('update/{slug}','update')->name('update');
+        Route::post('delete/{slug}','delete')->name('delete');
     });
 
 

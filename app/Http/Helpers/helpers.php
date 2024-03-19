@@ -7,6 +7,7 @@ use App\Constants\GlobalConst;
 use App\Models\Admin\Language;
 use App\Constants\LanguageConst;
 use App\Constants\AdminRoleConst;
+use App\Constants\CardPaymentConst;
 use App\Constants\ExtensionConst;
 use App\Models\UserAuthorization;
 use Illuminate\Http\UploadedFile;
@@ -1358,6 +1359,10 @@ function extension_const() {
 
 function global_const() {
     return GlobalConst::class;
+}
+
+function card_payment_const() {
+    return CardPaymentConst::class;
 }
 
 function imageExtenstions() {
