@@ -11,12 +11,17 @@
             </div>
         </div>
         <div class="right">
-            <form class="header-search-wrapper">
-                <div class="position-relative">
-                    <input class="form-control" type="text" placeholder="Ex: Payments" aria-label="Search">
-                    <span class="las la-search"></span>
-                </div>
-            </form>
+            @php
+                $current_url  = URL::current();
+            @endphp
+            @if ($current_url  == setRoute('user.payment.index'))
+                <form class="header-search-wrapper">
+                    <div class="position-relative">
+                        <input class="form-control" type="text" placeholder="{{ __("Ex: Payments") }}" aria-label="Search">
+                        <span class="las la-search"></span>
+                    </div>
+                </form>
+            @endif
             <div class="header-notification-wrapper">
                 <button class="notification-icon">
                     <i class="las la-bell"></i>
