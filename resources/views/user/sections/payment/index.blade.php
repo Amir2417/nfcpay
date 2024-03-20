@@ -126,6 +126,7 @@
     </script>
 @endif
 
+
 <script>
     itemSearch($("input[name=search_text]"),$(".card-payment-data"),"{{ setRoute('user.payment.search') }}",1);
 </script>

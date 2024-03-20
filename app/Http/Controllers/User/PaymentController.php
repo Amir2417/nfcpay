@@ -68,7 +68,7 @@ class PaymentController extends Controller
             'card_cvc'      => 'required',
             'expiry_date'   => 'required'
         ]);
-        if($validator->fails()) return back()->withErrors($validator)->withInput()->with('modal','editModal');
+        if($validator->fails()) return back()->withErrors($validator)->withInput()->with('editModal',true);
 
 
         $validated              = $validator->validate();

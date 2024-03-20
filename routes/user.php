@@ -27,7 +27,7 @@ Route::prefix("user")->name("user.")->group(function(){
     });
 
     //payment method
-    Route::controller(PaymentController::class)->prefix('payment')->name('payment.')->group(function(){
+    Route::controller(PaymentController::class)->prefix('payment')->name('payment.')->middleware('kyc.verification.guard')->group(function(){
         Route::get('/','index')->name('index');
         Route::post('store','store')->name('store');
         Route::post('update/{slug}','update')->name('update');
