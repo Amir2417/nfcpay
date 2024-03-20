@@ -39,7 +39,7 @@ class PaymentController extends Controller
             'expiry_date'       => 'required',
         ]);
         if($validator->fails()){
-            return back()->withErrors($validator)->withInput()->with('modal','addModal');
+            return back()->withErrors($validator)->withInput()->with('modal',true);
         }
         $validated              = $validator->validate();
         $validated['user_id']    = auth()->user()->id;

@@ -117,9 +117,15 @@
         });
     })(jQuery);
 </script>
-<script>
-    openModalWhenError("addModal","#addModal");
-</script>
+
+@if(session('modal'))
+    <script>
+        $(document).ready(function(){
+            $('#addModal').modal('show');
+        });
+    </script>
+@endif
+
 <script>
     itemSearch($("input[name=search_text]"),$(".card-payment-data"),"{{ setRoute('user.payment.search') }}",1);
 </script>
