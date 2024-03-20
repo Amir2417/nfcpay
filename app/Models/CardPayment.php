@@ -26,4 +26,17 @@ class CardPayment extends Model
         'created_at'    => 'datetime',
         'updated_at'    => 'datetime',  
     ];
+
+    //auth relation
+    public function scopeAuth($query){
+        return $query->where('user_id',auth()->user()->id);
+    }
+
+    //search
+    public function scopeSearch($query,$data) {
+
+        return $query->where("name",'LIKE','%'.$data.'%')
+                     ->orWhere("card_number",'LIKE','%'.$data.'%')
+                     ->orderBy('id','desc');
+    }
 }

@@ -6,6 +6,7 @@ use Exception;
 use App\Models\CardPayment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Helpers\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +18,7 @@ class PaymentController extends Controller
      */
     public function index(){
         $page_title     = "Payment";
-        $cards          = CardPayment::orderBy('id','desc')->get();
+        $cards          = CardPayment::auth()->orderBy('id','desc')->get();
 
         return view('user.sections.payment.index',compact(
             'page_title',
@@ -94,5 +95,23 @@ class PaymentController extends Controller
             return back()->with(['error' => ['Something went wrong! Please try again.']]);
         }
         return back()->with(['success' => ['Card payment deleted successfully.']]);
+    }
+    /**
+     * Method for search card payment data
+     */
+    public function search(Request $request){
+        
+        $validator      = Validator::make($request->all(),[
+            'text'      => 'required'
+        ]);
+        if($validator->fails()) {
+            $error = ['error' => $validator->errors()];
+            return Response::error($error,null,400);
+        }
+
+        $validated = $validator->validate();
+        
+        $cards    = CardPayment::auth()->search($validated['text'])->get();
+        return view('user.components.search-card.card-payment',compact('cards'));
     }
 }

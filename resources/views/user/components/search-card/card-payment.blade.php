@@ -1,0 +1,1 @@
+@include('user.components.card-payment-table.card-payment',compact('cards'))

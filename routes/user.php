@@ -32,6 +32,7 @@ Route::prefix("user")->name("user.")->group(function(){
         Route::post('store','store')->name('store');
         Route::post('update/{slug}','update')->name('update');
         Route::post('delete/{slug}','delete')->name('delete');
+        Route::post('search','search')->name('search');
     });
 
 
