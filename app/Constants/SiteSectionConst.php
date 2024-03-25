@@ -4,14 +4,17 @@ namespace App\Constants;
 
 class SiteSectionConst{
     const BANNER_SECTION            = "Banner Section";
-    const BRAND_SECTION             = "Brand Section";
+    const SECURITY_SECTION          = "Security Section";
+    const HOW_ITS_WORK_SECTION      = "How Its Work Section";
+    const DOWNLOAD_APP_SECTION      = "Download App";
+    const STATISTIC_SECTION         = "Statistic Section";
     const ABOUT_US_SECTION          = "About Us Section";
     const SERVICES_SECTION          = "Services Section";
     const FEATURE_SECTION           = "Feature Section";
-    const CLIENT_FEEDBACK_SECTION   = "Client Feedback Section";
+    const TESTIMONIAL               = "Testimonial Section";
     const ANNOUNCEMENT_SECTION      = "Announcement Section";
     const HOW_IT_WORK_SECTION       = "How It Work";
-    const FOOTER_SECTION            =  "Footer Section";
+    const FOOTER_SECTION            = "Footer Section";
     const ABOUT_PAGE_SECTION        = "About Page Section";
     const CONTACT_US_SECTION        = "Contact Us Section";
 

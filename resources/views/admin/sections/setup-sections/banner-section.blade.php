@@ -60,37 +60,30 @@
                                     <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="{{ $item->name }}" role="tabpanel" aria-labelledby="english-tab">
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'     => "Heading*",
+                                                'label'     => __("Title").'*',
+                                                'name'      => $item->code . "_title",
+                                                'value'     => old($item->code . "_title",$data->value->language->$lang_code->title ?? "")
+                                            ])
+                                        </div>
+                                        <div class="form-group">
+                                            @include('admin.components.form.input',[
+                                                'label'     => __("Heading")."(".__("For Separate Heading color use '|' sing to divide").")"."*",
                                                 'name'      => $item->code . "_heading",
                                                 'value'     => old($item->code . "_heading",$data->value->language->$lang_code->heading ?? "")
                                             ])
                                         </div>
                                         <div class="form-group">
-                                            @include('admin.components.form.input',[
-                                                'label'     => "Sub Heading*",
+                                            @include('admin.components.form.textarea',[
+                                                'label'     => __("Sub Heading").'*',
                                                 'name'      => $item->code . "_sub_heading",
                                                 'value'     => old($item->code . "_sub_heading",$data->value->language->$lang_code->sub_heading ?? "")
                                             ])
                                         </div>
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'     => "Button Name*",
+                                                'label'     => __("Button Name").'*',
                                                 'name'      => $item->code . "_button_name",
                                                 'value'     => old($item->code . "_button_name",$data->value->language->$lang_code->button_name ?? "")
-                                            ])
-                                        </div>
-                                        <div class="form-group">
-                                            @include('admin.components.form.input',[
-                                                'label'     => "Button Link*",
-                                                'name'      => $item->code . "_button_link",
-                                                'value'     => old($item->code . "_button_link",$data->value->language->$lang_code->button_link ?? "")
-                                            ])
-                                        </div>
-                                        <div class="form-group">
-                                            @include('admin.components.form.input',[
-                                                'label'     => "Video Link*",
-                                                'name'      => $item->code . "_video_link",
-                                                'value'     => old($item->code . "_video_link",$data->value->language->$lang_code->video_link ?? "")
                                             ])
                                         </div>
                                     </div>
@@ -101,7 +94,7 @@
                     <div class="col-xl-12 col-lg-12 form-group">
                         @include('admin.components.button.form-btn',[
                             'class'         => "w-100 btn-loading",
-                            'text'          => "Submit",
+                            'text'          => __("Update"),
                             'permission'    => "admin.setup.sections.section.update"
                         ])
                     </div>

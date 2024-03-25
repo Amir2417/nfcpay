@@ -252,11 +252,13 @@
 
                         $setup_section_childs  = [
                             setRoute('admin.setup.sections.section','banner'),
-                            setRoute('admin.setup.sections.section','brand'),
+                            setRoute('admin.setup.sections.section','security'),
+                            setRoute('admin.setup.sections.section','how-it-work'),
+                            setRoute('admin.setup.sections.section','download-app'),
+                            setRoute('admin.setup.sections.section','statistic'),
                             setRoute('admin.setup.sections.section','about-us'),
                             setRoute('admin.setup.sections.section','services'),
-                            setRoute('admin.setup.sections.section','feature'),
-                            setRoute('admin.setup.sections.section','clients-feedback'),
+                            setRoute('admin.setup.sections.section','testimonial'),
                             setRoute('admin.setup.sections.section','announcement'),
                             setRoute('admin.setup.sections.section','how-it-work'),
                             setRoute('admin.setup.sections.section','contact-us'),
@@ -276,9 +278,21 @@
                                     <i class="menu-icon las la-ellipsis-h"></i>
                                     <span class="menu-title">{{ __("Banner Section") }}</span>
                                 </a>
-                                <a href="{{ setRoute('admin.setup.sections.section','brand') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','brand')) active @endif">
+                                <a href="{{ setRoute('admin.setup.sections.section','security') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','security')) active @endif">
                                     <i class="menu-icon las la-ellipsis-h"></i>
-                                    <span class="menu-title">{{ __("Brand Section") }}</span>
+                                    <span class="menu-title">{{ __("Security Section") }}</span>
+                                </a>
+                                <a href="{{ setRoute('admin.setup.sections.section','how-it-work') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','how-it-work')) active @endif">
+                                    <i class="menu-icon las la-ellipsis-h"></i>
+                                    <span class="menu-title">{{ __("How Its Work Section") }}</span>
+                                </a>
+                                <a href="{{ setRoute('admin.setup.sections.section','download-app') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','download-app')) active @endif">
+                                    <i class="menu-icon las la-ellipsis-h"></i>
+                                    <span class="menu-title">{{ __("Download App Section") }}</span>
+                                </a>
+                                <a href="{{ setRoute('admin.setup.sections.section','statistic') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','statistic')) active @endif">
+                                    <i class="menu-icon las la-ellipsis-h"></i>
+                                    <span class="menu-title">{{ __("Statistic Section") }}</span>
                                 </a>
                                 <a href="{{ setRoute('admin.setup.sections.section','about-us') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','about-us')) active @endif">
                                     <i class="menu-icon las la-ellipsis-h"></i>
@@ -288,13 +302,9 @@
                                     <i class="menu-icon las la-ellipsis-h"></i>
                                     <span class="menu-title">{{ __("Services Section") }}</span>
                                 </a>
-                                <a href="{{ setRoute('admin.setup.sections.section','feature') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','feature')) active @endif">
+                                <a href="{{ setRoute('admin.setup.sections.section','testimonial') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','testimonial')) active @endif">
                                     <i class="menu-icon las la-ellipsis-h"></i>
-                                    <span class="menu-title">{{ __("Feature Section") }}</span>
-                                </a>
-                                <a href="{{ setRoute('admin.setup.sections.section','clients-feedback') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','clients-feedback')) active @endif">
-                                    <i class="menu-icon las la-ellipsis-h"></i>
-                                    <span class="menu-title">{{ __("Clients Feedback") }}</span>
+                                    <span class="menu-title">{{ __("Testimonial Section") }}</span>
                                 </a>
                                 <a href="{{ setRoute('admin.setup.sections.section','announcement') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','announcement')) active @endif">
                                     <i class="menu-icon las la-ellipsis-h"></i>

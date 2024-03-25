@@ -23,7 +23,7 @@
                                 <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="modal-{{ $item->name }}" role="tabpanel" aria-labelledby="modal-{{$item->name}}-tab">
                                     <div class="form-group">
                                         @include('admin.components.form.textarea',[
-                                            'label'         => "Comment",
+                                            'label'         => __("Comment"),
                                             'label_after'   => "*",
                                             'name'          => $lang_code . "_comment",
                                             'value'         => old($lang_code . "_comment",$data->value->language->$lang_code->comment ?? "")
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-xl-12 col-lg-12 form-group">
                         @include('admin.components.form.input',[
-                            'label'         => "Name",
+                            'label'         => __("Name"),
                             'label_after'   => "*",
                             'name'          => "name",
                             'value'         => old("name",$data->value->language->$lang_code->name ?? "")
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-xl-12 col-lg-12 form-group">
                         @include('admin.components.form.input',[
-                            'label'         => "Designation",
+                            'label'         => __("Designation"),
                             'label_after'   => "*",
                             'name'          => "designation",
                             'value'         => old("designation",$data->value->language->$lang_code->designation ?? "")
@@ -51,20 +51,11 @@
                     </div>
                     <div class="col-xl-12 col-lg-12 form-group">
                         @include('admin.components.form.input-file',[
-                            'label'             => "Image",
+                            'label'             => __("Image"),
                             'name'              => "image",
                             'class'             => "file-holder",
                             'old_files_path'    => files_asset_path("site-section"),
                             'old_files'         => old("old_image"),
-                        ])
-                    </div>
-                    <div class="col-xl-12 col-lg-12 form-group">
-                        @include('admin.components.form.input',[
-                            'label'             => "Star",
-                            'label_after'       => " (Max 5)",
-                            'type'              => "number",
-                            'name'              => "star",
-                            'value'             => old("star"),
                         ])
                     </div>
                     <div class="col-xl-12 col-lg-12 form-group d-flex align-items-center justify-content-between mt-4">

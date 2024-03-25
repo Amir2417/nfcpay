@@ -24,7 +24,7 @@
                                 <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="modal-{{ $item->name }}" role="tabpanel" aria-labelledby="modal-{{$item->name}}-tab">
                                     <div class="form-group">
                                         @include('admin.components.form.input',[
-                                            'label'         => "Title",
+                                            'label'         => __("Title"),
                                             'label_after'   => "*",
                                             'name'          => $lang_code . "_title",
                                             'value'         => old($lang_code . "_title",$data->value->language->$lang_code->title ?? "")
@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="form-group">
                                         @include('admin.components.form.textarea',[
-                                            'label'         => "Description",
+                                            'label'         => __("Description"),
                                             'label_after'   => "*",
                                             'name'          => $lang_code . "_description",
                                             'value'         => old($lang_code . "_description",$data->value->language->$lang_code->description ?? ""),
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-xl-12 col-lg-12 form-group">
                         @include('admin.components.form.input',[
-                            'label'         => "Icon",
+                            'label'         => __("Icon"),
                             'label_after'   => "*",
                             'name'          => "icon",
                             'value'         => old("icon",$data->value->language->$lang_code->icon ?? ""),

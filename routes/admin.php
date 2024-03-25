@@ -210,6 +210,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('item/store/{slug}','sectionItemStore')->name('section.item.store');
         Route::post('item/update/{slug}','sectionItemUpdate')->name('section.item.update');
         Route::delete('item/delete/{slug}','sectionItemDelete')->name('section.item.delete');
+        Route::put('security/status/update/{slug}','securityStatusUpdate')->name('security.status.update');
+        Route::put('statistic/status/update/{slug}','statisticStatusUpdate')->name('statistic.status.update');
+        Route::put('faq/status/update/{slug}','faqStatusUpdate')->name('faq.status.update');
+        Route::put('service/status/update/{slug}','serviceStatusUpdate')->name('service.status.update');
 
         // Announcement Section
         Route::controller(AnnouncementController::class)->prefix("announcement")->name('announcement.')->group(function(){

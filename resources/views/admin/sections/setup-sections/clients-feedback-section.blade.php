@@ -58,7 +58,7 @@
                                     <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="{{ $item->name }}" role="tabpanel" aria-labelledby="english-tab">
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'         => "Heading",
+                                                'label'         => __("Heading"),
                                                 'label_after'   => "*",
                                                 'name'          => $item->code . "_heading",
                                                 'value'         => old($item->code . "_heading",$data->value->language->$lang_code->heading ?? "")
@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'         => "Sub Heading",
+                                                'label'         => __("Sub Heading"),
                                                 'label_after'   => "*",
                                                 'name'          => $item->code . "_sub_heading",
                                                 'value'         => old($item->code . "_sub_heading",$data->value->language->$lang_code->sub_heading ?? "")
@@ -80,7 +80,7 @@
                     <div class="col-xl-12 col-lg-12 form-group">
                         @include('admin.components.button.form-btn',[
                             'class'         => "w-100 btn-loading",
-                            'text'          => "Update",
+                            'text'          => __("Update"),
                             'permission'    => "admin.setup.sections.section.update"
                         ])
                     </div>
@@ -100,9 +100,9 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Designation</th>
-                            <th>Comment</th>
+                            <th>{{ __("Name") }}</th>
+                            <th>{{ __("Designation") }}</th>
+                            <th>{{ __("Comment") }}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -162,7 +162,7 @@
                                     <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="modal-{{ $item->name }}" role="tabpanel" aria-labelledby="modal-{{$item->name}}-tab">
                                         <div class="form-group">
                                             @include('admin.components.form.textarea',[
-                                                'label'         => "Comment",
+                                                'label'         => __("Comment"),
                                                 'label_after'   => "*",
                                                 'name'          => $lang_code . "_comment_edit",
                                                 'value'         => old($lang_code . "_comment_edit")
@@ -174,7 +174,7 @@
                         </div>
                         <div class="col-xl-12 col-lg-12 form-group">
                             @include('admin.components.form.input',[
-                                'label'         => "Name",
+                                'label'         => __("Name"),
                                 'label_after'   => "*",
                                 'name'          => "name_edit",
                                 'value'         => old("name_edit")
@@ -182,7 +182,7 @@
                         </div>
                         <div class="col-xl-12 col-lg-12 form-group">
                             @include('admin.components.form.input',[
-                                'label'         => "Designation",
+                                'label'         => __("Designation"),
                                 'label_after'   => "*",
                                 'name'          => "designation_edit",
                                 'value'         => old("designation_edit")
@@ -191,20 +191,11 @@
                         <input type="hidden" name="old_image" value="{{ old('old_image') }}">
                         <div class="col-xl-12 col-lg-12 form-group">
                             @include('admin.components.form.input-file',[
-                                'label'             => "Image",
+                                'label'             => __("Image"),
                                 'name'              => "image_edit",
                                 'class'             => "file-holder",
                                 'old_files_path'    => files_asset_path("site-section"),
                                 'old_files'         => old("old_image"),
-                            ])
-                        </div>
-                        <div class="col-xl-12 col-lg-12 form-group">
-                            @include('admin.components.form.input',[
-                                'label'             => "Star",
-                                'label_after'       => " (Max 5)",
-                                'type'              => "number",
-                                'name'              => "star_edit",
-                                'value'             => old("star_edit"),
                             ])
                         </div>
                         <div class="col-xl-12 col-lg-12 form-group d-flex align-items-center justify-content-between mt-4">
@@ -239,7 +230,7 @@
 
             var actionRoute =  "{{ setRoute('admin.setup.sections.section.item.delete',$slug) }}";
             var target = oldData.id;
-            var message     = `Are you sure to <strong>delete</strong> item?`;
+            var message     = `{{ __("Are you sure to") }} <strong>{{ __("delete") }}</strong> {{ __("this item") }}?`;
 
             openDeleteModal(actionRoute,target,message);
         });

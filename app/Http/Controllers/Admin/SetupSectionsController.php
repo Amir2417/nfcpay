@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Constants\GlobalConst;
+use App\Http\Helpers\Response;
 use App\Models\Admin\Language;
 use App\Constants\LanguageConst;
 use App\Models\Admin\SiteSections;
@@ -37,17 +38,37 @@ class SetupSectionsController extends Controller
                 'view'      => "bannerView",
                 'update'    => "bannerUpdate",
             ],
-            'brand'    => [
-                'view'      => "brandView",
-                'itemStore'     => "brandItemStore",
-                'itemDelete'    => "brandItemDelete",
+            'security'          => [
+                'view'          => "securityView",
+                'update'        => "securityUpdate",
+                'itemStore'     => "securityItemStore",
+                'itemUpdate'    => "securityItemUpdate",
+                'itemDelete'    => "securityItemDelete",
+            ],
+            'how-it-work'       => [
+                'view'          => "howItsWorkView",
+                'update'        => "howItsWorkUpdate",
+                'itemStore'     => "howItsWorkItemStore",
+                'itemUpdate'    => "howItsWorkItemUpdate",
+                'itemDelete'    => "howItsWorkItemDelete"
+            ],
+            'download-app'      => [
+                'view'          => "downloadAppView",
+                'update'        => "downloadAppUpdate",
+                'itemStore'     => "downloadAppItemStore",
+                'itemUpdate'    => "downloadAppItemUpdate",
+                'itemDelete'    => "downloadAppItemDelete"
+            ],
+            'statistic'         => [
+                'view'          => "statisticView",
+                'update'        => "statisticUpdate",
+                'itemStore'     => "statisticItemStore",
+                'itemUpdate'    => "statisticItemUpdate",
+                'itemDelete'    => "statisticItemDelete"
             ],
             'about-us'  => [
                 'view'          => "aboutUsView",
                 'update'        => "aboutUsUpdate",
-                'itemStore'     => "aboutUsItemStore",
-                'itemUpdate'    => "aboutUsItemUpdate",
-                'itemDelete'    => "aboutUsItemDelete",
             ],
             'services'  => [
                 'view'          => "servicesView",
@@ -60,20 +81,16 @@ class SetupSectionsController extends Controller
                 'view'      => "featureView",
                 'update'    => "featureUpdate",
             ],
-            'clients-feedback' => [
-                'view'          => "clientsFeedbackView",
-                'update'        => "clientsFeedbackUpdate",
-                'itemStore'     => "clientsFeedbackItemStore",
-                'itemUpdate'    => "clientsFeedbackItemUpdate",
-                'itemDelete'    => "clientsFeedbackItemDelete",
+            'testimonial' => [
+                'view'          => "testimonialView",
+                'update'        => "testimonialUpdate",
+                'itemStore'     => "testimonialItemStore",
+                'itemUpdate'    => "testimonialItemUpdate",
+                'itemDelete'    => "testimonialItemDelete",
             ],
             'announcement' => [
                 'view'          => "announcementView",
                 'update'        => "announcementUpdate",
-            ],
-            'how-it-work' => [
-                'view'          => "howItWorkView",
-                'update'        => "howItWorkUpdate",
             ],
             'about-page'  => [
                 'view'          => "aboutPageView",
@@ -179,11 +196,10 @@ class SetupSectionsController extends Controller
     public function bannerUpdate(Request $request,$slug) {
 
         $basic_field_name = [
+            'title' => "required|string|max:100",
             'heading' => "required|string|max:100",
             'sub_heading' => "required|string|max:500",
             'button_name' => "required|string|max:50",
-            'button_link' => "required|string|max:255",
-            'video_link'  => "nullable|url",
         ];
 
         $slug = Str::slug(SiteSectionConst::BANNER_SECTION);
@@ -205,44 +221,475 @@ class SetupSectionsController extends Controller
 
         return back()->with(['success' => ['Section updated successfully!']]);
     }
-
-
     /**
-     * Method for show brand section page
+     * Method for distribute update method for any section by using slug
+     * @param string $slug
+     * @param \Illuminate\Http\Request  $request
+     * @return method
+     */
+    public function securityView($slug){
+        $page_title     = "Security Section";
+        $section_slug   = Str::slug(SiteSectionConst::SECURITY_SECTION);
+        $data           = SiteSections::getData($section_slug)->first();
+        $languages      = $this->languages;
+
+        return view('admin.sections.setup-sections.security-section',compact(
+            'page_title',
+            'data',
+            'languages',
+            'slug'
+        ));
+    }
+    /**
+     * Mehtod for update security section information
+     * @param string $slug
+     * @param \Illuminate\Http\Request  $request
+    */
+    public function securityUpdate(Request $request,$slug) {
+        
+        $basic_field_name   = [
+            'title'         => 'required|string|max:100',
+            'heading'       => 'required|string|max:100',
+        ];
+
+        $slug           = Str::slug(SiteSectionConst::SECURITY_SECTION);
+        $section        = SiteSections::where("key",$slug)->first();
+        if($section != null ){
+            $data       = json_decode(json_encode($section->value),true);
+        }else{
+            $data       = [];
+        }
+
+        $data['language']      = $this->contentValidate($request,$basic_field_name);
+        $update_data['key']    = $slug;
+        $update_data['value']  = $data;
+        
+        try{
+            SiteSections::updateOrCreate(['key'=>$slug],$update_data);
+        }catch(Exception $e){
+            return back()->with(['error'=>'Something went wrong! Please try again.']);
+        }
+        return back()->with(['success'  =>  ['Section updated successfully!']]);
+
+    }
+    /**
+     * Mehtod for store security item information
+     * @param string $slug
+     * @param \Illuminate\Http\Request $request
+    */
+    public function securityItemStore(Request $request,$slug) {
+        $basic_field_name  = [
+            'item_title'     => "required|string|max:255",
+            'item_heading'       => "required|string|max:500",
+            
+        ];
+
+        $language_wise_data = $this->contentValidate($request,$basic_field_name,"security-add");
+        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
+        $slug = Str::slug(SiteSectionConst::SECURITY_SECTION);
+        $section = SiteSections::where("key",$slug)->first();
+
+        if($section != null) {
+            $section_data = json_decode(json_encode($section->value),true);
+        }else {
+            $section_data = [];
+        }
+        $validator  = Validator::make($request->all(),[
+            'icon'              => "required|string",
+        ]);
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','security-add');
+        $validated = $validator->validate();
+        $unique_id = uniqid();
+        
+        $section_data['items'][$unique_id]['language'] = $language_wise_data;
+        $section_data['items'][$unique_id]['status']   = 1;
+        $section_data['items'][$unique_id]['id']       = $unique_id;
+        $section_data['items'][$unique_id]['icon']              = $validated['icon'];
+        $update_data['key']     = $slug;
+        $update_data['value']   = $section_data;
+       
+        try{
+            SiteSections::updateOrCreate(['key' => $slug],$update_data);
+        }catch(Exception $e) {
+            return back()->with(['error' => ['Something went worng! Please try again']]);
+        }
+
+        return back()->with(['success'   => ['Section item added successfully!']]);
+    }
+    /**
+     * Mehtod for update security item information
+     * @param string $slug
+     * @param \Illuminate\Http\Request $request
+    */
+    public function securityItemUpdate(Request $request,$slug) {
+        $request->validate([
+            'target'         =>'required|string',
+        ]);
+
+        $basic_field_name = [
+            'item_title_edit'  => "required|string|max:255",
+            'item_heading_edit'    => "required|string|max:500",
+        ];
+
+        $slug              = Str::slug(SiteSectionConst::SECURITY_SECTION);
+        $section           = SiteSections::getData($slug)->first();
+
+        if(!$section) return back()->with(['error' => ['Section Not Found!']]);
+        $section_values    = json_decode(json_encode($section->value),true);
+        
+        if(!isset($section_values['items'])) return back()->with(['error' => ['Section Item Not Found!']]);
+        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['[error' => ['Section Item is invalid']]);
+
+        $language_wise_data = $this->contentValidate($request,$basic_field_name,"security-edit");
+        
+        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
+        $language_wise_data = array_map(function($language){
+            return replace_array_key($language,'_edit');
+        },$language_wise_data);
+        $validator  = Validator::make($request->all(),[
+            'icon_edit'              => "required|string",
+        ]);
+        $validated = $validator->validate();
+        $section_values['items'][$request->target]['language'] = $language_wise_data;
+        $section_values['items'][$request->target]['icon'] = $validated['icon_edit'];
+
+        try{
+            $section->update([
+                'value'  =>$section_values,
+            ]);
+        }catch(Exception $e){
+            return back()->with(['error' => ['Something went wrong! Please try again']]);
+        }
+
+        return back()->with(['success'   => ['Information updated successfully!']]);    
+    }
+    /**
+     * Mehtod for delete security item information
      * @param string $slug
      * @return view
      */
-    public function brandView($slug) {
-        $page_title = "Brand Section";
-        $section_slug = Str::slug(SiteSectionConst::BRAND_SECTION);
-        $data = SiteSections::getData($section_slug)->first();
-        $languages = $this->languages;
+    public function securityItemDelete(request $request,$slug){
+        $request->validate([
+            'target'    =>'required|string',
+        ]);
 
-        return view('admin.sections.setup-sections.brand-section',compact(
+        $slug           = Str::slug(SiteSectionConst::SECURITY_SECTION);
+        $section        = SiteSections::getData($slug)->first();
+        if(!$section) return back()->with(['error' => ['Section not found!']]);
+        $section_values = json_decode(json_encode($section->value),true);
+
+        if(!isset($section_values['items'])) return back()->with(['error' => ['Section item not found!']]);
+        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item not found!']]);
+        try{
+            unset($section_values['items'][$request->target]);
+            $section->update([
+                'value' => $section_values,
+            ]);
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+        return back()->with(['success' => ['Section item deleted successfully!']]);
+    }
+    /**
+     * Mehtod for update security item status 
+     * @param string $slug
+     * @return view
+     */
+    public function securityStatusUpdate(Request $request,$slug) {
+        
+        $validator = Validator::make($request->all(),[
+            'status'                    => 'required|boolean',
+            'data_target'               => 'required|string',
+        ]);
+        
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return Response::error($validator->errors()->all(),null,400);
+        }
+
+        $slug           = Str::slug(SiteSectionConst::SECURITY_SECTION);
+        $section        = SiteSections::where("key",$slug)->first();
+        if($section != null ){
+            $data       = json_decode(json_encode($section->value),true);
+        }else{
+            $data       = [];
+        }
+        if(array_key_exists("items",$data) && array_key_exists($request->data_target,$data['items'])) {
+            $data['items'][$request->data_target]['status'] = ($request->status == 1) ? 0 : 1;
+        }else {
+            return Response::error(['Items not found or invalid!'],[],404);
+        }
+
+        $section->update([
+            'value'     => $data,
+        ]);
+
+        return Response::success(['Section item status updated successfully!'],[],200);
+        
+    }
+/**
+     * Method for show how its work section page
+     * @param string $slug
+     * @return view
+     */
+    public function howItsWorkView($slug){
+        $page_title     = "How Its Work Section";
+        $section_slug   = Str::slug(SiteSectionConst::HOW_ITS_WORK_SECTION);
+        $data           = SiteSections::getData($section_slug)->first();
+        $languages      = $this->languages;
+     
+        return view('admin.sections.setup-sections.how-its-work-section',compact(
             'page_title',
             'data',
             'languages',
             'slug',
         ));
     }
-
-
     /**
-     * Method for store brand item
+     * Method for update howItsWork section page
+     * @param string $slug
+     * @return view
+     */
+    public function howItsWorkUpdate(Request $request,$slug){
+
+        $basic_field_name = [
+            'title'       => 'required|string|max:100',
+            'heading'     => 'required|string|max:100',
+        ];
+
+        $slug     = Str::slug(SiteSectionConst::HOW_ITS_WORK_SECTION);
+        $section  = SiteSections::where("key",$slug)->first();
+        if($section != null ){
+            $data    = json_decode(json_encode($section->value),true);
+        }else{
+            $data    =[];
+        }
+        $validator  = Validator::make($request->all(),[
+            'image'            => "nullable|image|max:10240",
+        ]);
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput();
+
+        $validated = $validator->validate();
+       
+        $data['image']    = $section->value->image ?? "";
+
+        if($request->hasFile("image")){
+            $data['image']= $this->imageValidate($request,"image",$section->value->image ?? null);
+        }
+
+        $data['language']     = $this->contentValidate($request,$basic_field_name);
+
+        $update_data['key']   = $slug;
+        $update_data['value'] = $data;
+        
+        
+        try{
+            SiteSections::updateOrCreate(["key"=>$slug],$update_data);
+        }catch(Exception $e){
+            return back()->with(['error' => ['Something went wrong! Please try again']]);
+        }
+
+        return back()->with(['success' => ['Section updated successfully!']]);
+     
+    }
+    /**
+     * Method for store howItsWork item
      * @param string $slug
      * @param \Illuminate\Http\Request  $request
      */
-    public function brandItemStore(Request $request,$slug) {
-        $slug = Str::slug(SiteSectionConst::BRAND_SECTION);
-        $section = SiteSections::where("key",$slug)->first();
+    public function howItsWorkItemStore(Request $request,$slug) {
+        $basic_field_name = [
+            'item_title'       => 'required|string|max:100',
+            'item_heading'       => 'required|string',
+        ];
 
-        $validator = Validator::make($request->all(),[
-            'image'     => "required|mimes:png,jpg,svg,webp,jpeg|max:10240",
-        ]);
-        if($validator->fails()) {
-            return back()->withErrors($validator)->withInput()->with('modal','brand-add');
+
+        $language_wise_data = $this->contentValidate($request,$basic_field_name,"HowItsWork-add");
+        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
+        
+        $slug       = Str::slug(SiteSectionConst::HOW_ITS_WORK_SECTION);
+        $section    = SiteSections::where('key',$slug)->first();
+        if($section != null){
+            $section_data = json_decode(json_encode($section->value),true);
+        }else{
+            $section_data = [];
         }
+        $unique_id =uniqid();
+
+        $validator  = Validator::make($request->all(),[
+            'icon'            => "required|string|max:100",
+        ]);
+
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','HowItsWork-add');
         $validated = $validator->validate();
+
+        $section_data['items'][$unique_id]['language'] = $language_wise_data;
+        $section_data['items'][$unique_id]['id']       = $unique_id;
+        $section_data['items'][$unique_id]['icon']     = $validated['icon'];
+
+        $update_data['key']   = $slug;
+        $update_data['value'] = $section_data;
+        
+        try{
+            SiteSections::updateOrCreate(['key' => $slug],$update_data);
+        }catch(Exception $e){
+            return back()->with(['error' => ['Something went worng! Please try again.']]);
+        }
+        return back()->with(['success' => ['Section item added successfully!']]);
+    }
+    
+    /**
+     * Method for update howItsWork item
+     * @param string $slug
+     * @return view
+     */
+    public function howItsWorkItemUpdate(Request $request,$slug){
+        $request->validate([
+            'target'           => 'required|string',
+        ]);
+
+        $basic_field_name      = [
+            "item_title_edit"  => "required|string|max:100",
+            "item_heading_edit"  => "required|string",
+        ];
+        
+        $slug        = Str::slug(SiteSectionConst::HOW_ITS_WORK_SECTION);
+        $section     = SiteSections::getData($slug)->first();
+        if(!$section) return back()->with(['error' => ['Section not found!']]);
+        $section_values = json_decode(json_encode($section->value),true);
+        if(!isset($section_values["items"])) return back()->with(['error' => ['Section item not found']]);
+        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item is invalid!']]);
+
+        $language_wise_data = $this->contentValidate($request,$basic_field_name,"HowItsWork-edit");
+        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
+         
+        $language_wise_data = array_map(function($language){
+            return replace_array_key($language,"_edit");
+        },$language_wise_data);
+
+        $validator  = Validator::make($request->all(),[
+            'icon_edit'            => "required|string|max:100",
+        ]);
+
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','HowItsWork-edit');
+        $validated = $validator->validate();
+
+        $section_values['items'][$request->target]['language'] = $language_wise_data;
+        $section_values['items'][$request->target]['icon']     = $validated['icon_edit'];
+        
+       
+       try{
+            $section->update([
+                'value' => $section_values,
+            ]);
+       }catch(Exception $e){
+            return back()->with(['error' => ['Something Went wrong! Please try again.']]);
+       }
+       return back()->with(['success' => ['Section item updated successfully!']]);
+    }
+    /**
+     * Method for delete howItsWork item
+     * @param string $slug
+     * @return view
+     */
+    public function howItsWorkItemDelete(Request $request,$slug){
+        $request->validate([
+            'target' => 'required|string',
+        ]);
+
+        $slug     = Str::slug(SiteSectionConst::HOW_ITS_WORK_SECTION);
+        $section  = SiteSections::getData($slug)->first();
+        if(!$section) return back()->with(['error' => ['Section not found!']]);
+        $section_values  = json_decode(json_encode($section->value),true);
+        if(!isset($section_values['items'])) return back()->with(['error' => ['Section Item not Found!']]);
+        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item is invalid']]);
+
+        try{
+            unset($section_values['items'][$request->target]);
+            $section->update([
+                'value' => $section_values,
+            ]);
+        }catch(Exception $e){
+            return back()->with(['error' => ['Something went wrong! Please try again.']]);
+        }
+        return back()->with(['success' => ['Section item deleted successfully!']]);    
+    }
+    /**
+     * Method for show download app section
+     * @param string $slug
+     * @param \Illuminate\Http\Request $request
+     */
+    public function downloadAppView($slug){
+        $page_title     = "Download App Section";
+        $section_slug   = Str::slug(SiteSectionConst::DOWNLOAD_APP_SECTION);
+        $data           = SiteSections::getData($section_slug)->first();
+        $languages      = $this->languages;
+
+        return view('admin.sections.setup-sections.download-app-section',compact(
+            'page_title',
+            'data',
+            'languages',
+            'slug'
+        ));
+    }
+    /**
+     * Method for update download app section
+     * @param string
+     * @param \Illuminate\\Http\Request $request
+     */
+    
+    public function downloadAppUpdate(Request $request,$slug){
+        $basic_field_name = [
+            'title'       => 'required|string|max:100',
+            'heading'     => 'required|string|max:100',
+            'sub_heading' => 'required|string',
+        ];
+
+        $slug             = Str::slug(SiteSectionConst::DOWNLOAD_APP_SECTION);
+        $section          = SiteSections::where("key",$slug)->first();
+
+        if($section      != null){
+            $data         = json_decode(json_encode($section->value),true);
+        }else{
+            $data         = [];
+        }
+        $validator  = Validator::make($request->all(),[
+            'image'            => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
+        ]);
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput();
+
+        $validated = $validator->validate();
+       
+        $data['image']    = $section->value->image ?? "";
+
+        if($request->hasFile("image")){
+            $data['image']= $this->imageValidate($request,"image",$section->value->image ?? null);
+        }
+
+        $data['language']     = $this->contentValidate($request,$basic_field_name);
+        $update_data['key']   = $slug;
+        $update_data['value'] = $data;
+        try{
+            SiteSections::updateOrCreate(['key' => $slug],$update_data);
+        }catch(Exception $e){
+            return back()->with(['error' => ['Something went wrong! Please try again.']]);
+        }
+        return back()->with( ['success' => ['Section updated successfully!']]);
+
+    }
+    /**
+     * Method for store download app item
+     * @param string $slug
+     * @param \Illuminate\Http\Request  $request
+    */
+    public function downloadAppItemStore(Request $request,$slug) {
+        $basic_field_name = [
+            'item_title'    => "required|string|max:2555",
+        ];
+
+        $language_wise_data = $this->contentValidate($request,$basic_field_name,"download-app-add");
+        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
+        $slug    = Str::slug(SiteSectionConst::DOWNLOAD_APP_SECTION);
+        $section = SiteSections::where("key",$slug)->first();
 
         if($section != null) {
             $section_data = json_decode(json_encode($section->value),true);
@@ -251,55 +698,337 @@ class SetupSectionsController extends Controller
         }
         $unique_id = uniqid();
 
-        $section_data['items'][$unique_id]['id'] = $unique_id;
-        $section_data['items'][$unique_id]['image'] = "";
+        $validator  = Validator::make($request->all(),[
+            'link'            => "required|url",
+            'image'           => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
+        ]);
 
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','download-app-add');
+        $validated = $validator->validate();
+
+        $section_data['items'][$unique_id]['language']     = $language_wise_data;
+        $section_data['items'][$unique_id]['id']           = $unique_id;
+        $section_data['items'][$unique_id]['image']        = "";
+        $section_data['items'][$unique_id]['link']        = $validated['link'];
+        $section_data['items'][$unique_id]['created_at']   = now();
         if($request->hasFile("image")) {
-            $section_data['items'][$unique_id]['image'] = $this->imageValidate($request,"image",$section->value?->items?->image ?? null);
+            $section_data['items'][$unique_id]['image']    = $this->imageValidate($request,"image",$section->value->items->image ?? null);
         }
 
         $update_data['key']     = $slug;
         $update_data['value']   = $section_data;
-
         try{
             SiteSections::updateOrCreate(['key' => $slug],$update_data);
         }catch(Exception $e) {
-            return back()->with(['error' => ['Something went wrong! Please try again']]);
+            return back()->with(['error' => ['Something went worng! Please try again']]);
         }
 
         return back()->with(['success' => ['Section item added successfully!']]);
     }
-
     /**
-     * Method for delete brand item
+     * Method for update download app item
      * @param string $slug
-     * @param \Illuminate\Http\Request  $request
+     * @return view
      */
-    public function brandItemDelete(Request $request,$slug) {
+    public function downloadAppItemUpdate(Request $request,$slug){
         $request->validate([
-            'target'    => 'required|string',
+            'target'           => 'required|string',
         ]);
-        $slug = Str::slug(SiteSectionConst::BRAND_SECTION);
+
+        $basic_field_name      = [
+            'item_title_edit'     => "required|string|max:2555",
+        ];
+
+        $slug    = Str::slug(SiteSectionConst::DOWNLOAD_APP_SECTION);
         $section = SiteSections::getData($slug)->first();
         if(!$section) return back()->with(['error' => ['Section not found!']]);
         $section_values = json_decode(json_encode($section->value),true);
         if(!isset($section_values['items'])) return back()->with(['error' => ['Section item not found!']]);
         if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item is invalid!']]);
 
+        $request->merge(['old_image' => $section_values['items'][$request->target]['image'] ?? null]);
+
+        $language_wise_data = $this->contentValidate($request,$basic_field_name,"download-app-edit");
+        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
+
+        $language_wise_data = array_map(function($language) {
+            return replace_array_key($language,"_edit");
+        },$language_wise_data);
+        $validator      = Validator::make($request->all(),[
+            'link'      => "required|url",
+            'image'     => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
+        ]);
+
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','download-app-edit');
+        $validated = $validator->validate();
+
+        $section_values['items'][$request->target]['language']      = $language_wise_data;
+        $section_values['items'][$request->target]['link']          = $validated['link'];
+
+        if($request->hasFile("image")) {
+            $section_values['items'][$request->target]['image']    = $this->imageValidate($request,"image",$section_values['items'][$request->target]['image'] ?? null);
+        }
         try{
-            $image_link = get_files_path('site-section') . '/' . $section_values['items'][$request->target]['image'];
-            unset($section_values['items'][$request->target]);
-            delete_file($image_link);
             $section->update([
-                'value'     => $section_values,
+                'value' => $section_values,
             ]);
         }catch(Exception $e) {
-            return back()->with(['error' => ['Something went wrong! Please try again.']]);
+            return back()->with(['error' => ['Something went worng! Please try again']]);
         }
 
-        return back()->with(['success' => ['Section item delete successfully!']]);
+        return back()->with(['success' => ['Information updated successfully!']]);
     }
+    /**
+     * Method for delete download app item
+     * @param string $slug
+     * @return view
+     */
+    public function downloadAppItemDelete(Request $request,$slug){
+        $request->validate([
+            'target'     => 'required|string',
+        ]);
 
+        $slug         = Str::slug(SiteSectionConst::DOWNLOAD_APP_SECTION);
+        $section      = SiteSections::getData($slug)->first();
+        if(!$section) return back()->with(['error' => ['Section not found!']]);
+        $section_values = json_decode(json_encode($section->value),true);
+        if(!isset($section_values['items'])) return back()->with(['error' => ['Section item not found!']]);
+        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item is invalid!']]);
+
+        try{
+            $image_name = $section_values['items'][$request->target]['image'];
+            unset($section_values['items'][$request->target]);
+            $image_path = get_files_path('site-section') . '/' . $image_name;
+            delete_file($image_path);
+            $section->update([
+                'value'    => $section_values,
+            ]);
+
+        }catch(Exception $e){
+            return back()->with(['error' => ['Something went wrong! Please try again.']]);
+        }
+        return back()->with(['success' => ['Section item deleted successfully!']]);
+    }
+    /**
+     * Method for show statistic section
+     * @param string $slug
+     * @param \Illuminate\Http\Request $request
+     */
+    public function statisticView($slug){
+        $page_title     = "Statistic Section";
+        $section_slug   = Str::slug(SiteSectionConst::STATISTIC_SECTION);
+        $data           = SiteSections::getData($section_slug)->first();
+        $languages      = $this->languages;
+
+        return view('admin.sections.setup-sections.statistic-section',compact(
+            'page_title',
+            'data',
+            'languages',
+            'slug'
+        ));
+    }
+    /**
+     * Method for update statistics section
+     * @param string
+     * @param \Illuminate\\Http\Request $request
+     */
+    
+    public function statisticUpdate(Request $request,$slug){
+        $basic_field_name = [
+            'title'       => 'required|string|max:100',
+            'heading'     => 'required|string|max:100',
+            'sub_heading' => 'required|string',
+        ];
+
+        $slug             = Str::slug(SiteSectionConst::STATISTIC_SECTION);
+        $section          = SiteSections::where("key",$slug)->first();
+
+        if($section      != null){
+            $data         = json_decode(json_encode($section->value),true);
+        }else{
+            $data         = [];
+        }
+        $validator  = Validator::make($request->all(),[
+            'image'            => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
+        ]);
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput();
+
+        $validated = $validator->validate();
+       
+        $data['image']    = $section->value->image ?? "";
+
+        if($request->hasFile("image")){
+            $data['image']= $this->imageValidate($request,"image",$section->value->image ?? null);
+        }
+
+        $data['language']     = $this->contentValidate($request,$basic_field_name);
+        $update_data['key']   = $slug;
+        $update_data['value'] = $data;
+        try{
+            SiteSections::updateOrCreate(['key' => $slug],$update_data);
+        }catch(Exception $e){
+            return back()->with(['error' => ['Something went wrong! Please try again.']]);
+        }
+        return back()->with( ['success' => ['Section updated successfully!']]);
+
+    }
+    /**
+     * Method for store statistics item
+     * @param string $slug
+     * @param \Illuminate\Http\Request  $request
+     */
+    public function statisticItemStore(Request $request,$slug) {
+        $basic_field_name   = [
+            'title'       => "required|string|max:255",
+        ];
+
+        $language_wise_data = $this->contentValidate($request,$basic_field_name,"statistic-add");
+        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
+        $slug    = Str::slug(SiteSectionConst::STATISTIC_SECTION);
+        $section = SiteSections::where("key",$slug)->first();
+
+        if($section != null) {
+            $section_data = json_decode(json_encode($section->value),true);
+        }else {
+            $section_data = [];
+        }
+        $unique_id  = uniqid();
+
+        $validator  = Validator::make($request->all(),[
+            'counter_value'     => "required|string",
+        ]);
+
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','statistic-add');
+        $validated = $validator->validate();
+
+        $section_data['items'][$unique_id]['language']          = $language_wise_data;
+        $section_data['items'][$unique_id]['id']                = $unique_id;
+        $section_data['items'][$unique_id]['status']            = 1;
+        $section_data['items'][$unique_id]['counter_value']     = $validated['counter_value'];
+        
+
+        $update_data['key']     = $slug;
+        $update_data['value']   = $section_data;
+        
+        try{
+            SiteSections::updateOrCreate(['key' => $slug],$update_data);
+        }catch(Exception $e) {
+            return back()->with(['error' => ['Something went worng! Please try again']]);
+        }
+
+        return back()->with(['success' => ['Section item added successfully!']]);
+    }
+    /**
+     * Method for update statistics item section page
+     * @param string $slug
+     * @return view
+     */
+    public function statisticItemUpdate(Request $request,$slug){
+        $request->validate([
+            'target'           => 'required|string',
+        ]);
+
+        $basic_field_name      = [
+            "title_edit"  => "required|string|max:100",
+        ];
+        
+        $slug        = Str::slug(SiteSectionConst::STATISTIC_SECTION);
+        $section     = SiteSections::getData($slug)->first();
+        if(!$section) return back()->with(['error' => ['Section not found!']]);
+        $section_values = json_decode(json_encode($section->value),true);
+        if(!isset($section_values["items"])) return back()->with(['error' => ['Section item not found']]);
+        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item is invalid!']]);
+
+        $language_wise_data = $this->contentValidate($request,$basic_field_name,"statistic-edit");
+        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
+         
+        $language_wise_data = array_map(function($language){
+            return replace_array_key($language,"_edit");
+        },$language_wise_data);
+
+        $validator  = Validator::make($request->all(),[
+            'counter_value_edit'   => "required|string|max:100",
+        ]);
+
+        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','statistic-edit');
+        $validated = $validator->validate();
+
+        $section_values['items'][$request->target]['language']          = $language_wise_data;
+        $section_values['items'][$request->target]['counter_value']     = $validated['counter_value_edit'];
+        
+       
+       try{
+            $section->update([
+                'value' => $section_values,
+            ]);
+       }catch(Exception $e){
+            return back()->with(['error' => ['Something Went wrong! Please try again.']]);
+       }
+       return back()->with(['success' => ['Section item updated successfully!']]);
+    }
+    /**
+     * Method for update statistics status section page
+     * @param string $slug
+     * @return view
+     */
+    public function statisticStatusUpdate(Request $request,$slug) {
+        
+        $validator = Validator::make($request->all(),[
+            'status'                    => 'required|boolean',
+            'data_target'               => 'required|string',
+        ]);
+        
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return Response::error($validator->errors()->all(),null,400);
+        }
+
+        $slug           = Str::slug(SiteSectionConst::STATISTIC_SECTION);
+        $section        = SiteSections::where("key",$slug)->first();
+        if($section != null ){
+            $data       = json_decode(json_encode($section->value),true);
+        }else{
+            $data       = [];
+        }
+        if(array_key_exists("items",$data) && array_key_exists($request->data_target,$data['items'])) {
+            $data['items'][$request->data_target]['status'] = ($request->status == 1) ? 0 : 1;
+        }else {
+            return Response::error(['Items not found or invalid!'],[],404);
+        }
+
+        $section->update([
+            'value'     => $data,
+        ]);
+
+        return Response::success(['Section item status updated successfully!'],[],200);
+        
+    }
+    /**
+     * Method for delete statistics item section information
+     * @param string $slug
+     * @param \Illuminate\Http\Request  $request
+     */
+    public function statisticItemDelete(Request $request,$slug){
+        $request->validate([
+            'target'  => 'required|string',
+        ]);
+
+        $slug         = Str::slug(SiteSectionConst::STATISTIC_SECTION);
+        $section      = SiteSections::getData($slug)->first();
+        if(!$section) return back()->with(['error' => ['Section not found!']]);
+        $section_values = json_decode(json_encode($section->value),true);
+        if(!isset($section_values['items'])) return back()->with(['error' => ['Section item not found!']]);
+        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item is invalid!']]);
+
+        try{
+            unset($section_values['items'][$request->target]);
+            $section->update([
+                'value' => $section_values,
+            ]);
+        }catch(Exception $e){
+            return back()->with(['error' => ['Something went wrong! Please try again.']]);
+        }
+        return back()->with(['success'   => ['Section item deleted successfully!']]);
+    }
     /**
      * Method for show about us section page
      * @param string $slug
@@ -327,8 +1056,9 @@ class SetupSectionsController extends Controller
     public function aboutUsUpdate(Request $request,$slug) {
 
         $basic_field_name = [
+            'title'       => "required|string|max:100",
             'heading'       => "required|string|max:100",
-            'sub_heading'   => "required|string|max:255",
+            'sub_heading'   => "required|string|max:1000",
         ];
 
         $slug = Str::slug(SiteSectionConst::ABOUT_US_SECTION);
@@ -357,126 +1087,6 @@ class SetupSectionsController extends Controller
 
         return back()->with(['success' => ['Section updated successfully!']]);
     }
-
-    /**
-     * Method for store about us item
-     * @param string $slug
-     * @param \Illuminate\Http\Request  $request
-     */
-    public function aboutUsItemStore(Request $request,$slug) {
-
-        $basic_field_name = [
-            'title'         => "required|string|max:255",
-            'description'   => "required|string|max:500",
-        ];
-
-        $validator = Validator::make($request->all(),[
-            'icon'      => "required|string|max:255",
-        ]);
-        if($validator->fails()) return back()->withErrors($validator)->withInput()->with('modal','about-us-item-add');
-        $validated = $validator->validate();
-
-        $language_wise_data = $this->contentValidate($request,$basic_field_name,"about-us-item-add");
-        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
-        $slug = Str::slug(SiteSectionConst::ABOUT_US_SECTION);
-        $section = SiteSections::where("key",$slug)->first();
-
-        if($section != null) {
-            $section_data = json_decode(json_encode($section->value),true);
-        }else {
-            $section_data = [];
-        }
-        $unique_id = uniqid();
-
-        $section_data['items'][$unique_id]['language'] = $language_wise_data;
-        $section_data['items'][$unique_id]['id'] = $unique_id;
-        $section_data['items'][$unique_id]['icon'] = $validated['icon'];
-
-        $update_data['key'] = $slug;
-        $update_data['value']   = $section_data;
-
-        try{
-            SiteSections::updateOrCreate(['key' => $slug],$update_data);
-        }catch(Exception $e) {
-            return back()->with(['error' => ['Something went wrong! Please try again']]);
-        }
-
-        return back()->with(['success' => ['Section item added successfully!']]);
-    }
-
-    /**
-     * Method for update about us item
-     * @param string $slug
-     * @param \Illuminate\Http\Request  $request
-     */
-    public function aboutUsItemUpdate(Request $request,$slug) {
-
-        $request->validate([
-            'target'        => "required|string",
-            'icon_edit'     => "required|string|max:255",
-        ]);
-
-        $basic_field_name = [
-            'title_edit'     => "required|string|max:255",
-            'description_edit'   => "required|string|max:500",
-        ];
-
-        $slug = Str::slug(SiteSectionConst::ABOUT_US_SECTION);
-        $section = SiteSections::getData($slug)->first();
-        if(!$section) return back()->with(['error' => ['Section not found!']]);
-        $section_values = json_decode(json_encode($section->value),true);
-        if(!isset($section_values['items'])) return back()->with(['error' => ['Section item not found!']]);
-        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item is invalid!']]);
-
-        $language_wise_data = $this->contentValidate($request,$basic_field_name,"about-us-item-edit");
-        if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
-
-        $language_wise_data = array_map(function($language) {
-            return replace_array_key($language,"_edit");
-        },$language_wise_data);
-
-        $section_values['items'][$request->target]['language'] = $language_wise_data;
-        $section_values['items'][$request->target]['icon']    = $request->icon_edit;
-
-        try{
-            $section->update([
-                'value' => $section_values,
-            ]);
-        }catch(Exception $e) {
-            return back()->with(['error' => ['Something went wrong! Please try again']]);
-        }
-
-        return back()->with(['success' => ['Information updated successfully!']]);
-    }
-
-    /**
-     * Method for delete about us item
-     * @param string $slug
-     * @param \Illuminate\Http\Request  $request
-     */
-    public function aboutUsItemDelete(Request $request,$slug) {
-        $request->validate([
-            'target'    => 'required|string',
-        ]);
-        $slug = Str::slug(SiteSectionConst::ABOUT_US_SECTION);
-        $section = SiteSections::getData($slug)->first();
-        if(!$section) return back()->with(['error' => ['Section not found!']]);
-        $section_values = json_decode(json_encode($section->value),true);
-        if(!isset($section_values['items'])) return back()->with(['error' => ['Section item not found!']]);
-        if(!array_key_exists($request->target,$section_values['items'])) return back()->with(['error' => ['Section item is invalid!']]);
-
-        try{
-            unset($section_values['items'][$request->target]);
-            $section->update([
-                'value'     => $section_values,
-            ]);
-        }catch(Exception $e) {
-            return back()->with(['error' => ['Something went wrong! Please try again.']]);
-        }
-
-        return back()->with(['success' => ['Section item delete successfully!']]);
-    }
-
     /**
      * Method for show services section page
      * @param string $slug
@@ -650,68 +1260,16 @@ class SetupSectionsController extends Controller
     }
 
 
-    /**
-     * Method for show Feature section page
-     * @param string $slug
-     * @return view
-     */
-    public function featureView($slug) {
-        $page_title = "Feature Section";
-        $section_slug = Str::slug(SiteSectionConst::FEATURE_SECTION);
-        $data = SiteSections::getData($section_slug)->first();
-        $languages = $this->languages;
-
-        return view('admin.sections.setup-sections.feature-section',compact(
-            'page_title',
-            'data',
-            'languages',
-            'slug',
-        ));
-    }
-
-    /**
-     * Method for update Feature section information
-     * @param string $slug
-     * @param \Illuminate\Http\Request  $request
-     */
-    public function featureUpdate(Request $request,$slug) {
-        $basic_field_name = [
-            'heading'       => "required|string|max:100",
-            'sub_heading'   => "required|string|max:255",
-            'description'   => "required|string|max:2000",
-            'button_name'   => "required|string|max:50",
-            'button_link'   => "required|string|max:255"
-        ];
-
-        $slug = Str::slug(SiteSectionConst::FEATURE_SECTION);
-        $section = SiteSections::where("key",$slug)->first();
-        $data['image'] = $section->value->image ?? null;
-        if($request->hasFile("image")) {
-            $data['image']      = $this->imageValidate($request,"image",$section->value->image ?? null);
-        }
-
-        $data['language']  = $this->contentValidate($request,$basic_field_name);
-        $update_data['value']  = $data;
-        $update_data['key']    = $slug;
-
-        try{
-            SiteSections::updateOrCreate(['key' => $slug],$update_data);
-        }catch(Exception $e) {
-            return back()->with(['error' => ['Something went wrong! Please try again.']]);
-        }
-
-        return back()->with(['success' => ['Section updated successfully!']]);
-    }
-
+    
 
     /**
      * Method for show clients feedback section page
      * @param string $slug
      * @return view
      */
-    public function clientsFeedbackView($slug) {
-        $page_title = "Client Feedback Section";
-        $section_slug = Str::slug(SiteSectionConst::CLIENT_FEEDBACK_SECTION);
+    public function testimonialView($slug) {
+        $page_title = "Testimonial Section";
+        $section_slug = Str::slug(SiteSectionConst::TESTIMONIAL);
         $data = SiteSections::getData($section_slug)->first();
         $languages = $this->languages;
 
@@ -728,13 +1286,13 @@ class SetupSectionsController extends Controller
      * @param string $slug
      * @param \Illuminate\Http\Request  $request
      */
-    public function clientsFeedbackUpdate(Request $request,$slug) {
+    public function testimonialUpdate(Request $request,$slug) {
         $basic_field_name = [
             'heading' => "required|string|max:100",
             'sub_heading' => "required|string|max:255",
         ];
 
-        $slug = Str::slug(SiteSectionConst::CLIENT_FEEDBACK_SECTION);
+        $slug = Str::slug(SiteSectionConst::TESTIMONIAL);
         $section = SiteSections::where("key",$slug)->first();
 
         if($section != null) {
@@ -762,7 +1320,7 @@ class SetupSectionsController extends Controller
      * @param string $slug
      * @param \Illuminate\Http\Request  $request
      */
-    public function clientsFeedbackItemStore(Request $request,$slug) {
+    public function testimonialItemStore(Request $request,$slug) {
 
         $basic_field_name = [
             'comment'    => "required|string|max:1000",
@@ -770,7 +1328,7 @@ class SetupSectionsController extends Controller
 
         $language_wise_data = $this->contentValidate($request,$basic_field_name,"client-feedback-add");
         if($language_wise_data instanceof RedirectResponse) return $language_wise_data;
-        $slug = Str::slug(SiteSectionConst::CLIENT_FEEDBACK_SECTION);
+        $slug = Str::slug(SiteSectionConst::TESTIMONIAL);
         $section = SiteSections::where("key",$slug)->first();
 
         if($section != null) {
@@ -785,17 +1343,15 @@ class SetupSectionsController extends Controller
             'name'              => "required|string|max:255",
             'designation'       => "required|string|max:500",
             'image'             => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
-            'star'              => "required|integer|gt:0|lt:6"
         ]);
         if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','client-feedback-add');
         $validated = $validator->validate();
 
-        $section_data['items'][$unique_id]['language'] = $language_wise_data;
+        $section_data['items'][$unique_id]['language']      = $language_wise_data;
         $section_data['items'][$unique_id]['id']            = $unique_id;
         $section_data['items'][$unique_id]['image']         = "";
         $section_data['items'][$unique_id]['name']          = $validated['name'];
         $section_data['items'][$unique_id]['designation']   = $validated['designation'];
-        $section_data['items'][$unique_id]['star']          = $validated['star'];
 
         if($request->hasFile("image")) {
             $section_data['items'][$unique_id]['image'] = $this->imageValidate($request,"image",$section->value->items->image ?? null);
@@ -818,12 +1374,11 @@ class SetupSectionsController extends Controller
      * @param string $slug
      * @param \Illuminate\Http\Request  $request
      */
-    public function clientsFeedbackItemUpdate(Request $request,$slug) {
+    public function testimonialItemUpdate(Request $request,$slug) {
         $validator = Validator::make($request->all(),[
             'target'                => "required|string",
             'name_edit'             => "required|string|max:255",
             'designation_edit'      => "required|string|max:500",
-            'star_edit'             => "required|integer|gt:0|lt:6",
             'image_edit'            => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
         ]);
 
@@ -837,7 +1392,7 @@ class SetupSectionsController extends Controller
             'comment_edit'     => "required|string|max:1000",
         ];
 
-        $slug = Str::slug(SiteSectionConst::CLIENT_FEEDBACK_SECTION);
+        $slug = Str::slug(SiteSectionConst::TESTIMONIAL);
         $section = SiteSections::getData($slug)->first();
         if(!$section) return back()->with(['error' => ['Section not found!']]);
         $section_values = json_decode(json_encode($section->value),true);
@@ -854,7 +1409,6 @@ class SetupSectionsController extends Controller
         $section_values['items'][$request->target]['language']          = $language_wise_data;
         $section_values['items'][$request->target]['name']              = $request->name_edit;
         $section_values['items'][$request->target]['designation']       = $request->designation_edit;
-        $section_values['items'][$request->target]['star']              = $request->star_edit;
 
         $section_values['items'][$request->target]['image']     = $section_values['items'][$request->target]['image'] ?? "";
         if($request->hasFile("image_edit")) {
@@ -877,11 +1431,11 @@ class SetupSectionsController extends Controller
      * @param string $slug
      * @param \Illuminate\Http\Request  $request
      */
-    public function clientsFeedbackItemDelete(Request $request,$slug) {
+    public function testimonialItemDelete(Request $request,$slug) {
         $request->validate([
             'target'    => 'required|string',
         ]);
-        $slug = Str::slug(SiteSectionConst::CLIENT_FEEDBACK_SECTION);
+        $slug = Str::slug(SiteSectionConst::TESTIMONIAL);
         $section = SiteSections::getData($slug)->first();
         if(!$section) return back()->with(['error' => ['Section not found!']]);
         $section_values = json_decode(json_encode($section->value),true);
@@ -972,61 +1526,6 @@ class SetupSectionsController extends Controller
 
 
     /**
-     * Method for show How It Work section page
-     * @param string $slug
-     * @return view
-     */
-    public function howItWorkView($slug) {
-        $page_title = "How It Work Section";
-        $section_slug = Str::slug(SiteSectionConst::HOW_IT_WORK_SECTION);
-        $data = SiteSections::getData($section_slug)->first();
-        $languages = $this->languages;
-
-        return view('admin.sections.setup-sections.how-it-work-section',compact(
-            'page_title',
-            'data',
-            'languages',
-            'slug',
-        ));
-    }
-
-    /**
-     * Method for update How It Work section information
-     * @param string $slug
-     * @param \Illuminate\Http\Request  $request
-     */
-    public function howItWorkUpdate(Request $request,$slug) {
-
-        $basic_field_name = [
-            'heading'       => "required|string|max:100",
-            'sub_heading'   => "required|string|max:255",
-            'description'   => "required|string|max:1000",
-            'content'      => "required|string|max:3000",
-            'button_name'   => "required|string|max:50",
-            'button_link'   => "required|string|max:255"
-        ];
-
-        $slug = Str::slug(SiteSectionConst::HOW_IT_WORK_SECTION);
-        $section = SiteSections::where("key",$slug)->first();
-        $data['image'] = $section->value->image ?? null;
-        if($request->hasFile("image")) {
-            $data['image']      = $this->imageValidate($request,"image",$section->value->image ?? null);
-        }
-
-        $data['language']  = $this->contentValidate($request,$basic_field_name);
-        $update_data['value']  = $data;
-        $update_data['key']    = $slug;
-
-        try{
-            SiteSections::updateOrCreate(['key' => $slug],$update_data);
-        }catch(Exception $e) {
-            return back()->with(['error' => ['Something went wrong! Please try again.']]);
-        }
-
-        return back()->with(['success' => ['Section updated successfully!']]);
-    }
-
-    /**
      * Method for show footer section page
      * @param string $slug
      * @return view
@@ -1051,21 +1550,13 @@ class SetupSectionsController extends Controller
      * @param \Illuminate\Http\Request  $request
      */
     public function footerUpdate(Request $request,$slug) {
-        $basic_field_name = [
-            'contact_heading'   => "required|string|max:255",
-            'contact_desc'      => "required|string|max:1000",
-        ];
-
-        $data['contact']['language']   = $this->contentValidate($request,$basic_field_name);
-
+        $slug   = Str::slug(SiteSectionConst::FOOTER_SECTION);
+        $section   = SiteSections::where('key',$slug)->first();
         $validated = Validator::make($request->all(),[
-            'contact_address'   => "required|string|max:255",
-            'contact_phone'     => "required|string|max:50",
-            'contact_email'     => "required|email|max:150",
-            'icon'              => "required|array",
-            'icon.*'            => "required|string|max:200",
-            'link'              => "required|array",
-            'link.*'            => "required|string|url|max:255",
+            'icon'                 => "nullable|array",
+            'icon.*'               => "nullable|string|max:200",
+            'link'                 => "nullable|array",
+            'link.*'               => "nullable|url|max:255",
         ])->validate();
 
         // generate input fields
@@ -1077,12 +1568,11 @@ class SetupSectionsController extends Controller
             ];
         }
 
-        $data['contact']['social_links']    = $social_links;
-        $data['contact']['address']         = $validated['contact_address'];
-        $data['contact']['phone']           = $validated['contact_phone'];
-        $data['contact']['email']           = $validated['contact_email'];
-
-        $slug = Str::slug(SiteSectionConst::FOOTER_SECTION);
+        $data['social_links']    = $social_links;
+        $data['footer']['image']      = $section->value->footer->image ?? "";
+        if($request->hasFile("image")) {
+            $data['footer']['image']  = $this->imageValidate($request,"image",$section->value->footer->image ?? null);
+        }
 
         try{
             SiteSections::updateOrCreate(['key' => $slug],[
