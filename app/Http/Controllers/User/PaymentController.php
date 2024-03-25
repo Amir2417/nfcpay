@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Helpers\Response;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
@@ -34,7 +35,7 @@ class PaymentController extends Controller
             'card_type'         => 'required',
             'card_option'       => 'required',
             'name'              => 'required',
-            'card_number'       => 'required',
+            'card_number'       => ['required', 'regex:/^[0-9]{16}$/'],
             'card_cvc'          => 'required',
             'expiry_date'       => 'required',
         ]);
@@ -42,8 +43,22 @@ class PaymentController extends Controller
             return back()->withErrors($validator)->withInput()->with('modal',true);
         }
         $validated              = $validator->validate();
-        $validated['user_id']    = auth()->user()->id;
+        $validated['user_id']   = auth()->user()->id;
+        $exp_date               = $request->expiry_date;
+        $month_data             = substr($exp_date, 0, 2);
+        $year_data              = substr($exp_date,2,4);
+        if($month_data > 12){
+            return back()->with(['error' => ['Invalid Month.']]);
+        }
+        $current_year = Carbon::now()->format('y');
+        if($current_year > $year_data){
+            return back()->with(['error' => ['Invalid Year.']]);
+        }
+        $expiry_date                = $month_data .'/'.$year_data;
+        $validated['expiry_date']   = $expiry_date;
+
         $validated['slug']      = Str::uuid();
+
         try{
             CardPayment::create($validated);
         }catch(Exception $e){

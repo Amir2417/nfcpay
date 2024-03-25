@@ -75,11 +75,11 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 form-group">
                             <label>{{ __("Card Number") }}<span>*</span></label>
-                            <input type="tel" class="form--control custom-input" name="card_number" placeholder="{{ __("Enter Number") }}...">
+                            <input type="tel" class="form--control custom-input number-input" name="card_number" placeholder="{{ __("Enter Number") }}...">
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 form-group">
                             <label>{{ __("CVV/CVC") }}<span>*</span></label>
-                            <input type="tel" class="form--control custom-input" name="card_cvc" placeholder="{{ __("CVV/CVC") }}...">
+                            <input type="tel" class="form--control custom-input number-input" name="card_cvc" placeholder="{{ __("CVV/CVC") }}...">
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 form-group">
                             <label>{{ __("Exp Date") }}<span>*</span></label>
