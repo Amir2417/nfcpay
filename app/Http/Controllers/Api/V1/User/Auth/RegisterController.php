@@ -51,11 +51,11 @@ class RegisterController extends Controller
         $validated['kyc_verified']      = ($basic_settings->kyc_verification == true) ? false : true;
         $validated['password']          = Hash::make($validated['password']);
         $validated['username']          = make_username($validated['firstname'],$validated['lastname']);
-
         if(User::where("username",$validated['username'])->exists()) return Response::error([__('User already exists!')],[],400);
-
+        
         try{
             event(new Registered($user = $this->create($validated)));
+           
         }catch(Exception $e) {
             return Response::error([__('Registration failed! Please try again')],[],500);
         }
@@ -72,7 +72,6 @@ class RegisterController extends Controller
         }catch(Exception $e) {
             return Response::error([__('Failed to generate user token! Please try again')],[],500);
         }
-
         return $this->registered($request, $user, $token);
     }
 

@@ -63,11 +63,10 @@ class ProfileController extends Controller
             'firstname'     => "required|string|max:60",
             'lastname'      => "required|string|max:60",
             'country'       => "required|string|max:50",
-            'mobile_code'   => "required|string|max:20",
             'mobile'        => "required|string|max:20",
             'state'         => "nullable|string|max:50",
             'city'          => "nullable|string|max:50",
-            'postal_code'   => "nullable|numeric",
+            'zip_code'   => "nullable|numeric",
             'address'       => "nullable|string|max:250",
             'image'         => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
         ]);
@@ -76,9 +75,7 @@ class ProfileController extends Controller
 
         $validated = $validator->validate();
         $validated['mobile']        = get_only_numeric_data($validated['mobile']);
-        $validated['mobile_code']   = get_only_numeric_data($validated['mobile_code']);
-        $complete_phone             = $validated['mobile_code'] . $validated['mobile'];
-        $validated['full_mobile']   = $complete_phone;
+        $validated['full_mobile']   = $validated['mobile'];
 
         $user = auth()->guard(get_auth_guard())->user();
 
@@ -90,7 +87,7 @@ class ProfileController extends Controller
             'country'       =>$validated['country'],
             'state'         => $validated['state'] ?? "", 
             'city'          => $validated['city'] ?? "", 
-            'postal_code'   => $validated['postal_code'] ?? "", 
+            'zip'      => $validated['zip_code'] ?? "", 
             'address'       => $validated['address'] ?? "",
         ];
 

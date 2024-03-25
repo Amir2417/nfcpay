@@ -1345,7 +1345,6 @@ function mailVerificationTemplate($user) {
         $user->notify(new SendAuthorizationCode((object) $data));
         DB::commit();
     }catch(Exception $e) {
-        dd($e->getMessage());
         DB::rollBack();
         return back()->with(['error' => ['Something went worng! Please try again']]);
     }
