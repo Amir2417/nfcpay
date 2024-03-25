@@ -11,7 +11,7 @@
         <div class="row justify-content-center align-items-center mb-30-none">
             <div class="col-xl-6 col-lg-6 mb-30">
                 <div class="how-it-works-thumb">
-                    <img src="{{ asset(@$how_it_work->value->image,'site-section') }}" alt="element">
+                    <img src="{{ get_image(@$how_it_work->value->image,'site-section') }}" alt="element">
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 mb-30">

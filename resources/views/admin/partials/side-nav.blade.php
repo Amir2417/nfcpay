@@ -254,8 +254,8 @@
                             setRoute('admin.setup.sections.section','banner'),
                             setRoute('admin.setup.sections.section','security'),
                             setRoute('admin.setup.sections.section','how-it-work'),
-                            setRoute('admin.setup.sections.section','download-app'),
                             setRoute('admin.setup.sections.section','statistic'),
+                            setRoute('admin.setup.sections.section','download-app'),
                             setRoute('admin.setup.sections.section','about-us'),
                             setRoute('admin.setup.sections.section','services'),
                             setRoute('admin.setup.sections.section','testimonial'),
@@ -286,13 +286,13 @@
                                     <i class="menu-icon las la-ellipsis-h"></i>
                                     <span class="menu-title">{{ __("How Its Work Section") }}</span>
                                 </a>
-                                <a href="{{ setRoute('admin.setup.sections.section','download-app') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','download-app')) active @endif">
-                                    <i class="menu-icon las la-ellipsis-h"></i>
-                                    <span class="menu-title">{{ __("Download App Section") }}</span>
-                                </a>
                                 <a href="{{ setRoute('admin.setup.sections.section','statistic') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','statistic')) active @endif">
                                     <i class="menu-icon las la-ellipsis-h"></i>
                                     <span class="menu-title">{{ __("Statistic Section") }}</span>
+                                </a>
+                                <a href="{{ setRoute('admin.setup.sections.section','download-app') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','download-app')) active @endif">
+                                    <i class="menu-icon las la-ellipsis-h"></i>
+                                    <span class="menu-title">{{ __("Download App Section") }}</span>
                                 </a>
                                 <a href="{{ setRoute('admin.setup.sections.section','about-us') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','about-us')) active @endif">
                                     <i class="menu-icon las la-ellipsis-h"></i>

@@ -1503,6 +1503,31 @@ function pusher_unsubscribe($user_type, $user_id) {
     }
 }
 
+function numeric_unit_converter($number) {
+    $data['number'] = 0;
+    $data['unit'] = "";
+    if($number >= 1000 && $number < 1000000) {
+        $convert_number = $number / 1000;
+        $data['number'] = (double) $convert_number;
+        $data['unit'] = "K";
+    }else if($number >= 1000000 && $number < 1000000000) {
+        $convert_number = $number / 1000000;
+        $data['number'] = (double) $convert_number;
+        $data['unit'] = "M";
+    }else if($number >= 1000000000 && $number < 1000000000000) {
+        $convert_number = $number / 1000000000;
+        $data['number'] = (double) $convert_number;
+        $data['unit'] = "B";
+    }else if($number >= 1000000000000) {
+        $convert_number = $number / 1000000000000;
+        $data['number'] = (double) $convert_number;
+        $data['unit'] = "T";
+    }else {
+        $data['number'] = $number;
+        $data['unit'] = "";
+    }
+    return (object) $data;
+}
 function generate_google_2fa_auth_qr() {
     $google2FA = new \PragmaRX\Google2FA\Google2FA();
     $secret_key = $google2FA->generateSecretKey();
