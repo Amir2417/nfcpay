@@ -105,20 +105,17 @@
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>{{ __("Title") }}</th>
+                            <th>{{ __("Heading") }}</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($data->value->items ?? [] as $key => $item)
                             <tr data-item="{{ json_encode($item) }}">
-                                <td>
-                                    <ul class="user-list">
-                                        <li><i class="{{ $item->icon ?? ""}}"></i></li>
-                                    </ul>
-                                </td>
-                                <td> {{ $item->language->$system_default_lang->item_title ?? "" }} </td>
+                                
+                                <td>{{ Str::words($item->language->$system_default_lang->item_title ?? "", 6, '...') }}</td>
+                                <td>{{ Str::words($item->language->$system_default_lang->item_heading ?? "", 10, '...') }}</td>
                                 <td>
                                     <button class="btn btn--base edit-modal-button"><i class="las la-pencil-alt"></i></button>
                                     <button class="btn btn--base btn--danger delete-modal-button" ><i class="las la-trash-alt"></i></button>

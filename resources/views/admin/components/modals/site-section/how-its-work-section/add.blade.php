@@ -40,14 +40,6 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="form-group">
-                        @include('admin.components.form.input',[
-                            'label'     => __("Icon")."*",
-                            'name'      => "icon",
-                            'class'     => "form--control icp icp-auto iconpicker-element iconpicker-input",
-                            'value'     => old("icon",$data->value->icon ?? ""),
-                        ])
-                    </div>
                     <div class="col-xl-12 col-lg-12 form-group d-flex align-items-center justify-content-between mt-4">
                         <button type="button" class="btn btn--danger modal-close">{{ __("Cancel") }}</button>
                         <button type="submit" class="btn btn--base">{{ __("Add") }}</button>

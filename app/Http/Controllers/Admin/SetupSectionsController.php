@@ -515,17 +515,9 @@ class SetupSectionsController extends Controller
         }
         $unique_id =uniqid();
 
-        $validator  = Validator::make($request->all(),[
-            'icon'            => "required|string|max:100",
-        ]);
-
-        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','HowItsWork-add');
-        $validated = $validator->validate();
-
         $section_data['items'][$unique_id]['language'] = $language_wise_data;
         $section_data['items'][$unique_id]['id']       = $unique_id;
-        $section_data['items'][$unique_id]['icon']     = $validated['icon'];
-
+        
         $update_data['key']   = $slug;
         $update_data['value'] = $section_data;
         
@@ -566,16 +558,7 @@ class SetupSectionsController extends Controller
             return replace_array_key($language,"_edit");
         },$language_wise_data);
 
-        $validator  = Validator::make($request->all(),[
-            'icon_edit'            => "required|string|max:100",
-        ]);
-
-        if($validator->fails()) return back()->withErrors($validator->errors())->withInput()->with('modal','HowItsWork-edit');
-        $validated = $validator->validate();
-
         $section_values['items'][$request->target]['language'] = $language_wise_data;
-        $section_values['items'][$request->target]['icon']     = $validated['icon_edit'];
-        
        
        try{
             $section->update([
