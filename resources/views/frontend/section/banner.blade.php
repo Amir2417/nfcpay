@@ -34,7 +34,7 @@
             </div>
             <div class="col-xl-6 col-lg-6 mb-30">
                 <div class="banner-thumb">
-                    <img src="{{ get_image($banner->value->image,'site-section') }}" alt="banner">
+                    <img src="{{ get_image(@$banner->value->image,'site-section') }}" alt="banner">
                 </div>
             </div>
         </div>
