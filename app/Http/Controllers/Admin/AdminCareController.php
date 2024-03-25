@@ -534,7 +534,7 @@ class AdminCareController extends Controller
             }
         }
 
-        $page_title = __("Role Permission (") . $permission->name . ")";
+        $page_title = __("Role Permission")."(" . $permission->name . ")";
 
         return view('admin.sections.admin-care.role.assign-permission', compact(
             "permission",

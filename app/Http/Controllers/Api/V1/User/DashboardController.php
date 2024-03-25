@@ -97,6 +97,7 @@ class DashboardController extends Controller
     }
 
     public function notifications() {
+        
         return Response::warning(['This section is under maintenance!'],[],503);
     }
 }

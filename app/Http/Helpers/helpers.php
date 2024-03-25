@@ -1437,63 +1437,28 @@ function get_only_numeric_data($string) {
 }
 
 function get_api_languages(){
-
     $lang = Language::get()->map(function($data,$index){
-
         if(file_exists(base_path('lang/') . $data->code . '.json') == false) return false;
-
         $json = json_decode(file_get_contents(base_path('lang/') . $data->code . '.json'),true);
         $lan_key_values = [];
         if($json != null) {
             foreach($json as $lan_key=>$item) {
                 $lan_key_original = $lan_key;
-                $lan_key = preg_replace('/[^A-Za-z]/i',' ',strtolower($lan_key));
-                if(strlen($lan_key) > 30) {
-                    // $lan_key = substr($lan_key,0,20);
-                    $word_array = explode(" ",$lan_key);
-                    $count_char = 0;
-                    foreach($word_array as $word_key => $word) {
-                        $count_char += strlen($word);
-                        if($count_char > 30) {
-                            $get_limit_val = array_splice($word_array,0,$word_key);
-                            $lan_key = implode(" ",$get_limit_val);
-                            $count_char = 0;
-                            break;
-                        }
-                    }
-                }
-
-                // Make Key Readable
-                $var_array = explode(" ",$lan_key);
-                foreach($var_array as $key=>$var) {
-                    if($key > 0) {
-                        $var_array[$key] = ucwords($var);
-                    }
-                }
-
-                $lan_key = implode("",$var_array);
-
-                if(array_key_exists($lan_key,$lan_key_values) && $lan_key_values[$lan_key] != $item) {
-                    throw new Exception("Duplicate Key Found! Please check/update this key [$lan_key_original]");
-                }
-
-                ($lan_key != "") ? $lan_key_values[$lan_key] = $item : "";
+                if(Str::startsWith($lan_key_original, "appL")) $lan_key_values[$lan_key] = $item;
             }
         }
-
         return [
             'name'                  => $data->name,
             'code'                  => $data->code,
             'status'                => $data->status,
-            'dir'                   => $data->dir,
-            'translate_key_values'  =>$lan_key_values,
+            'dir'                   => $data->dir ?? "ltr",
+            'translate_key_values'  => $lan_key_values,
         ];
     })->reject(function($value) {
         return $value == false;
     });
-
     return $lang;
-}
+} 
 
 
 /**
