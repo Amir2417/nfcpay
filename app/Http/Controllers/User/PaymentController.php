@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use Exception;
+use Carbon\Carbon;
 use App\Models\CardPayment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Helpers\Response;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PaymentController extends Controller
 {
@@ -35,9 +36,9 @@ class PaymentController extends Controller
             'card_type'         => 'required',
             'card_option'       => 'required',
             'name'              => 'required',
-            'card_number'       => ['required', 'regex:/^[0-9]{16}$/'],
+            'card_number'       => 'required|min:12|max:24',
             'card_cvc'          => 'required',
-            'expiry_date'       => 'required',
+            'expiry_date'       => 'required|min:4|max:4',
         ]);
         if($validator->fails()){
             return back()->withErrors($validator)->withInput()->with('modal',true);
@@ -79,16 +80,31 @@ class PaymentController extends Controller
             'card_type'     => 'required',
             'card_option'   => 'required',
             'name'          => 'required',
-            'card_number'   => 'required',
+            'card_number'   => 'required|min:12|max:24',
             'card_cvc'      => 'required',
-            'expiry_date'   => 'required'
+            'expiry_date'   => 'required|min:4|max:4'
         ]);
         if($validator->fails()) return back()->withErrors($validator)->withInput()->with('editModal',true);
-
-
-        $validated              = $validator->validate();
-        $validated['user_id']   = auth()->user()->id;
         
+        $validated              = $validator->validate();
+        if(CardPayment::whereNot('id',$card->id)->where('card_number',$validated['card_number'])->exists()){
+            throw ValidationException::withMessages([
+                'name'  => "Card number already exists!",
+            ]);
+        }
+        $validated['user_id']   = auth()->user()->id;
+        $exp_date               = $request->expiry_date;
+        $month_data             = substr($exp_date, 0, 2);
+        $year_data              = substr($exp_date,2,4);
+        if($month_data > 12){
+            return back()->with(['error' => ['Invalid Month.']]);
+        }
+        $current_year = Carbon::now()->format('y');
+        if($current_year > $year_data){
+            return back()->with(['error' => ['Invalid Year.']]);
+        }
+        $expiry_date                = $month_data .'/'.$year_data;
+        $validated['expiry_date']   = $expiry_date;
         try{
             $card->update($validated);
         }catch(Exception $e){

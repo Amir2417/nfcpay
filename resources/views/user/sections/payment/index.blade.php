@@ -71,19 +71,19 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 form-group">
                             <label>{{ __("Card Holder Name") }}<span>*</span></label>
-                            <input type="text" class="form--control custom-input" name="name" placeholder="{{ __("Enter Name") }}...">
+                            <input type="text" class="form--control custom-input" name="name" value="{{ old('name') }}" placeholder="{{ __("Enter Name") }}...">
                         </div>
                         <div class="col-xl-6 col-lg-6 form-group">
                             <label>{{ __("Card Number") }}<span>*</span></label>
-                            <input type="tel" class="form--control custom-input number-input" name="card_number" placeholder="{{ __("Enter Number") }}...">
+                            <input type="tel" class="form--control custom-input number-input" name="card_number" value="{{ old('card_number') }}" placeholder="{{ __("Enter Number") }}...">
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 form-group">
                             <label>{{ __("CVV/CVC") }}<span>*</span></label>
-                            <input type="tel" class="form--control custom-input number-input" name="card_cvc" placeholder="{{ __("CVV/CVC") }}...">
+                            <input type="tel" class="form--control custom-input number-input" name="card_cvc" value="{{ old('card_cvc') }}" placeholder="{{ __("CVV/CVC") }}...">
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 form-group">
                             <label>{{ __("Exp Date") }}<span>*</span></label>
-                            <input type="tel" class="form--control custom-input" name="expiry_date" placeholder="{{ __("Enter Date") }}...">
+                            <input type="tel" class="form--control custom-input" name="expiry_date" value="{{ old('expiry_date') }}" placeholder="{{ __("Enter Date") }}...">
                         </div>
                     </div>
                     <div class="modal-footer">
