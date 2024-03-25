@@ -133,8 +133,6 @@
 
     @include('admin.components.modals.site-section.add-client-feedback-item')
 
-
-    {{-- Client Update --}}
     <div id="client-feedback-update" class="mfp-hide large">
         <div class="modal-data">
             <div class="modal-header px-0">
@@ -213,7 +211,6 @@
 @push('script')
     <script src="{{ asset('public/backend/js/fontawesome-iconpicker.js') }}"></script>
     <script>
-        // icon picker
         $('.icp-auto').iconpicker();
     </script>
     <script>

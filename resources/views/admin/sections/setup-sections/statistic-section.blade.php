@@ -179,7 +179,6 @@
         });
         
         $(document).ready(function(){
-            // Switcher
             switcherAjax("{{ setRoute('admin.setup.sections.statistic.status.update',$slug) }}");
         })
         
