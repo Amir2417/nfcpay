@@ -51,7 +51,6 @@ class RegisterController extends Controller
         $validated['kyc_verified']      = ($basic_settings->kyc_verification == true) ? false : true;
         $validated['password']          = Hash::make($validated['password']);
         $validated['username']          = make_username($validated['firstname'],$validated['lastname']);
-        // $validated['referral_id']       = generate_unique_string('users','referral_id',8,'number');
 
         if(User::where("username",$validated['username'])->exists()) return Response::error([__('User already exists!')],[],400);
 
@@ -96,7 +95,6 @@ class RegisterController extends Controller
             'lastname'      => 'required|string|max:60',
             'email'         => 'required|string|email|max:150|unique:users,email',
             'password'      => $password_rule,
-            'refer'         => 'sometimes|nullable|string|exists:users,referral_id',
         ]);
     }
 
