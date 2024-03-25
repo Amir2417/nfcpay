@@ -54,9 +54,7 @@ class DashboardController extends Controller
             'updated_at',
         ]);
 
-        // Chart Data
-        $monthly_day_list = CarbonPeriod::between(now()->startOfDay()->subDays(30),today()->endOfDay())->toArray();
-        $define_day_value = array_fill_keys(array_values($monthly_day_list),"0.00");
+        
 
         // User Information
         $user_info = auth()->user()->only([
@@ -83,68 +81,10 @@ class DashboardController extends Controller
             'default_image'     => files_asset_path_basename("profile-default"),
         ];
 
-        // Chart Data
-        $add_money_record = Transaction::where('type',PaymentGatewayConst::TYPEADDMONEY)
-                            ->whereBetween('created_at',[now()->subDays(30),today()->endOfDay()])
-                            ->where('user_type',GlobalConst::USER)
-                            ->where('user_id',auth()->user()->id)
-                            ->select([
-                                DB::raw('DATE(created_at) as date'),
-                                DB::raw("(sum(receive_amount)) as total_amount"),
-                            ])
-                            ->groupBy('date')
-                            ->pluck("total_amount","date")
-                            ->toArray();
-
         
-        $money_out_record = Transaction::where('type',PaymentGatewayConst::TYPEWITHDRAW)
-                                        ->whereBetween('created_at',[now()->subDays(30),today()->endOfDay()])
-                                        ->where('user_type',GlobalConst::USER)
-                                        ->where('user_id',auth()->user()->id)
-                                        ->select([
-                                            DB::raw('DATE(created_at) as date'),
-                                            DB::raw("(sum(request_amount)) as total_amount"),
-                                        ])
-                                        ->groupBy('date')
-                                        ->pluck("total_amount","date")
-                                        ->toArray();
-
-        $add_money_statistics = [];
-        $money_out_statistics = [];
-        foreach($define_day_value as $timestamp => $value) {
-
-            $add_money_statistics[$timestamp]['timestamp']  = $timestamp;
-            $add_money_statistics[$timestamp]['value']      = $value;
-
-            $money_out_statistics[$timestamp]['timestamp']  = $timestamp;
-            $money_out_statistics[$timestamp]['value']      = $value;
-
-            // add money record 
-            foreach($add_money_record as $date => $amount) {
-                if(Carbon::parse($timestamp)->toDateString() == Carbon::parse($date)->toDateString()) {
-                    $add_money_statistics[$timestamp]['value']  = (string) $amount;
-                }
-            }
-
-            // money out record 
-            foreach($money_out_record as $date => $amount) {
-                if(Carbon::parse($timestamp)->toDateString() == Carbon::parse($date)->toDateString()) {
-                    $money_out_statistics[$timestamp]['value']  = (string) $amount;
-                }
-            }
-            
-        }
 
         return Response::success([__('User dashboard data fetch successfully!')],[
             'instructions'  => [
-                'transaction_types' => [
-                    PaymentGatewayConst::TYPEADDMONEY,
-                    PaymentGatewayConst::TYPETRANSFERMONEY,
-                    PaymentGatewayConst::TYPEWITHDRAW,
-                ],
-                'recent_transactions'   => [
-                    'status'        => '1: Success, 2: Pending, 3: Hold, 4: Rejected',
-                ],
                 'user_info'         => [
                     'kyc_verified'  => "0: Default, 1: Approved, 2: Pending, 3:Rejected",
                 ]
@@ -152,11 +92,6 @@ class DashboardController extends Controller
             
             'user_info'     => $user_info,
             'wallets'       => $user_wallets,
-            'recent_transactions'   => $transactions,
-            'chart_data'        => [
-                'add_money_statistics'      => array_values($add_money_statistics),
-                'money_out_statistics'      => array_values($money_out_statistics),
-            ],
             'profile_image_paths'   => $profile_image_paths,
         ]);
     }
