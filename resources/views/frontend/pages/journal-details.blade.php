@@ -16,7 +16,7 @@
                         <img src="{{ get_image(@$journal->data->image, 'site-section') }}" alt="blog">
                     </div>
                     <div class="blog-content">
-                        <span class="date"><i class="las la-calendar"></i> {{ \Carbon\Carbon::parse($journal->created_at)->format('F j, Y') }}</span>
+                        <span class="date"><i class="las la-calendar"></i> {{ \Carbon\Carbon::parse(@$journal->created_at)->format('F j, Y') }}</span>
                         <h3 class="title">{{ @$journal->data->language->$app_local->title }}</h3>
                         <p>{!! @$journal->data->language->$app_local->description !!}</p>
                     </div>
@@ -28,8 +28,8 @@
                         <h4 class="widget-title">{{ __("Categories") }}</h4>
                         <div class="category-widget-box">
                             <ul class="category-list">
-                                @foreach ($category as $item)
-                                    <li><a href="{{ setRoute('frontend.journal.category',$item->name->language->$app_local->name) }}">{{ $item->name->language->$app_local->name ?? "" }} <span>{{ $item->announcements_count }}</span></a></li>
+                                @foreach (@$category ?? [] as $item)
+                                    <li><a href="{{ setRoute('frontend.journal.category',$item->id) }}">{{ $item->name->language->$app_local->name ?? "" }} <span>{{ $item->announcements_count }}</span></a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -37,7 +37,7 @@
                     <div class="widget-box mb-30">
                         <h4 class="widget-title">{{ __("Recent Posts") }}</h4>
                         <div class="popular-widget-box">
-                            @foreach ($recent_posts as $item)
+                            @foreach (@$recent_posts ?? [] as $item)
                                 <div class="single-popular-item d-flex flex-wrap align-items-center">
                                     <div class="popular-item-thumb">
                                         <a href="{{ setRoute('journal.details',$item->slug) }}"><img src="{{ get_image($item->data->image , 'site-section') }}" alt="blog"></a>
@@ -58,7 +58,7 @@
                         <h4 class="widget-title">{{ __("Tags") }}</h4>
                         <div class="tag-widget-box">
                             @php
-                                $tags    = $journal->data->language->$app_local->tags ?? [];
+                                $tags    = @$journal->data->language->$app_local->tags ?? [];
                             @endphp
                             <ul class="tag-list">
                                 @foreach ($tags as $item)

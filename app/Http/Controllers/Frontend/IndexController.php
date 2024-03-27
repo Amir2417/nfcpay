@@ -159,19 +159,16 @@ class IndexController extends Controller
      * @param $slug
      * @param Illuminate\Http\Request $request
      */
-    public function journalCategory($slug){
+    public function journalCategory($id){
         $page_title             = "Journal Details";
-        $journal                = Announcement::where('slug',$slug)->first();
-        if(!$journal) return back()->with(['error' => ['Something went wrong! Please try again.']]);
-        $category               = AnnouncementCategory::withCount('announcements')->where('status',true)->get();
-        
-        $recent_posts           = Announcement::where('status',true)->where('slug','!=',$slug)->get();
+        $blog_category          = AnnouncementCategory::where('id',$id)->first();
+        if(!$blog_category) abort(404);
+        $blogs                  = Announcement::where('announcement_category_id',$blog_category->id)->latest()->paginate(6);
 
-        return view('frontend.pages.journal-details',compact(
+        return view('frontend.pages.journal-category',compact(
             'page_title',
-            'journal',
-            'category',
-            'recent_posts'
+            'blogs',
+            'blog_category',
         ));
 
     }
