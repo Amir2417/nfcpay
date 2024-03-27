@@ -40,16 +40,28 @@
             <form class="card-form" action="{{ setRoute('admin.setup.sections.section.update',$slug) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row justify-content-center mb-10-none">
-                    <div class="col-xl-4 col-lg-4 form-group">
-                        @include('admin.components.form.input-file',[
-                            'label'             => "Image:",
-                            'name'              => "image",
-                            'class'             => "file-holder",
-                            'old_files_path'    => files_asset_path("site-section"),
-                            'old_files'         => $data->value->image ?? "",
-                        ])
-                    </div>
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-6 col-lg-6 form-group">
+                                @include('admin.components.form.input-file',[
+                                    'label'             => __("Image One"),
+                                    'name'              => "image_one",
+                                    'class'             => "file-holder",
+                                    'old_files_path'    => files_asset_path("site-section"),
+                                    'old_files'         => $data->value->image_one ?? "",
+                                ])
+                            </div>
+                            <div class="col-xl-6 col-lg-6 form-group">
+                                @include('admin.components.form.input-file',[
+                                    'label'             => __("Image Two"),
+                                    'name'              => "image_two",
+                                    'class'             => "file-holder",
+                                    'old_files_path'    => files_asset_path("site-section"),
+                                    'old_files'         => $data->value->image_two ?? "",
+                                ])
+                            </div>
+                        </div>
+                        
                         <div class="product-tab">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -68,8 +80,8 @@
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
                                                 'label'     => __("Title").'*',
-                                                'name'      => $item->code . "_heading",
-                                                'value'     => old($item->code . "_heading",$data->value->language->$lang_code->heading ?? "")
+                                                'name'      => $item->code . "_title",
+                                                'value'     => old($item->code . "_title",$data->value->language->$lang_code->title ?? "")
                                             ])
                                         </div>
                                         <div class="form-group">

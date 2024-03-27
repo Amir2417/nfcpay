@@ -11,6 +11,8 @@ Route::name('frontend.')->group(function() {
         Route::get('link/{slug}','usefulLink')->name('useful.links');
         Route::post('languages/switch','languageSwitch')->name('languages.switch');
 
-        
+        //pages
+        Route::get('about','about')->name('about');
+
     });
 });

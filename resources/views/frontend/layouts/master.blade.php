@@ -23,7 +23,15 @@
     End Body Overlay
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <div class="main-section-wrapper">
-    @include('frontend.partials.header')
+    @php
+        $class = "two";
+        if(Route::is("index")) {
+            $class = "";
+        }
+    @endphp
+    @include('frontend.partials.header',[
+        'class'     => $class,
+    ])
 
     @yield("content")
 

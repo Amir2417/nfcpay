@@ -1053,9 +1053,13 @@ class SetupSectionsController extends Controller
             $data = [];
         }
 
-        $data['image'] = $section->value->image ?? null;
-        if($request->hasFile("image")) {
-            $data['image']      = $this->imageValidate($request,"image",$section->value->image ?? null);
+        $data['image_one'] = $section->value->image_one ?? null;
+        $data['image_two'] = $section->value->image_two ?? null;
+        if($request->hasFile("image_one")) {
+            $data['image_one']      = $this->imageValidate($request,"image_one",$section->value->image_one ?? null);
+        }
+        if($request->hasFile("image_two")) {
+            $data['image_two']      = $this->imageValidate($request,"image_two",$section->value->image_two ?? null);
         }
 
         $data['language']  = $this->contentValidate($request,$basic_field_name);

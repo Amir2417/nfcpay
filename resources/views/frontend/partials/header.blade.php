@@ -4,7 +4,7 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Start Header
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<header class="header-section">
+<header class="header-section {{ $class ?? "two" }}">
     <div class="header">
         <div class="header-bottom-area">
             <div class="container">

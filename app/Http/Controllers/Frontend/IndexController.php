@@ -93,4 +93,14 @@ class IndexController extends Controller
 
         return back()->with(['success' => ['Language Switch to ' . $language->name ]]);
     }
+
+    /**
+     * Method for view about page
+     * @return view
+     */
+    public function about(){
+        $page_title     = "About";
+        
+        return view('frontend.pages.about',compact('page_title'));
+    }
 }

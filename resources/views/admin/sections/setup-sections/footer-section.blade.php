@@ -40,7 +40,7 @@
             <form class="card-form" action="{{ setRoute('admin.setup.sections.section.update',$slug) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row justify-content-center mb-10-none">
-                    <div class="col-xl-6 col-lg-6 form-group">
+                    <div class="col-xl-4 col-lg-4 form-group">
                         @include('admin.components.form.input-file',[
                             'label'             => __("Image"),
                             'name'              => "image",
