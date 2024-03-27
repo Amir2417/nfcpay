@@ -61,9 +61,9 @@
                                                                                                                
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'     => __("Section Title")."*",
+                                                'label'     => __("Title")."*",
                                                 'name'      => $lang_code . "_title",
-                                                'placeholder'=> __('Section Title').'...',
+                                                'placeholder'=> __('Title').'...',
                                                 'value'     => old($lang_code . "_title",$data->value->language->$lang_code->title ?? "")
                                             ])
                                         </div>

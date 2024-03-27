@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'     => __("Heading").'*',
+                                                'label'     => __("Heading")."(".__("For Separate Heading color use '|' sing to divide").")"."*",
                                                 'name'      => $item->code . "_heading",
                                                 'value'     => old($item->code . "_heading",$data->value->language->$lang_code->heading ?? "")
                                             ])
