@@ -17,7 +17,7 @@
                         @php
                             $header = explode('|', @$banner->value->language->$app_local->heading ?? "");
                         @endphp
-                        @if(isset($header) ||   $header != null)
+                        @if(isset($header) || $header != null)
                         <h1 class="title">@isset($header[0]) {{ $header[0] }} @endisset 
                             <span>
                                 @isset($header[1]) {{ $header[1] }} @endisset

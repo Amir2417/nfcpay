@@ -1,3 +1,9 @@
+@php
+    $app_local      = get_default_language_code();
+    $slug           = Illuminate\Support\Str::slug(App\Constants\SiteSectionConst::FOOTER_SECTION);
+    $footer         = App\Models\Admin\SiteSections::getData($slug)->first();
+    $useful_links   = App\Models\Admin\UsefulLink::where('status',true)->get()
+@endphp
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Start Footer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9,11 +15,9 @@
                     <a class="site-logo site-title" href="{{ setRoute('frontend.index') }}"><img src="{{ get_logo($basic_settings) }}" alt="site-logo"></a>
                 </div>
                 <ul class="footer-social">
-                    <li><a href="#0"><i class="fab fa-facebook"></i></a></li>
-                    <li><a href="#0"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#0" class="active"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#0"><i class="fab fa-github"></i></a></li>
-                    <li><a href="#0"><i class="fab fa-dribbble"></i></a></li>
+                    @foreach (@$footer->value->social_links ?? [] as $item)
+                        <li><a href="{{ @$item->link }}"><i class="{{ @$item->icon }}"></i></a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -22,12 +26,12 @@
         <div class="container">
             <div class="footer-bottom-wrapper">
                 <ul class="footer-list">
-                    <li><a href="#0">Privacy policy</a></li>
-                    <li><a href="#0">Refund Policy</a></li>
-                    <li><a href="#0">Terms of service</a></li>
+                    @foreach (@$useful_links ?? [] as $item)
+                        <li><a href="{{ setRoute('frontend.useful.links',$item->slug) }}">{{ $item->title->language->$app_local->title }}</a></li>
+                    @endforeach
                 </ul>
                 <div class="copyright-area">
-                    <p>© 2024 <a href="index.html">NFCPay</a> is Proudly Powered by AppDevs</p>
+                    <p>© 2024 <a href="{{ setRoute('frontend.index') }}">{{ $basic_settings->site_name }}</a> {{ __("is Proudly Powered by AppDevs") }}</p>
                 </div>
             </div>
         </div>
