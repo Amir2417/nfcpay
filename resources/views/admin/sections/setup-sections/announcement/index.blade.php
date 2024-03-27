@@ -47,10 +47,9 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Created At</th>
+                            <th>{{ __("Title") }}</th>
+                            <th>{{ __("Description") }}</th>
+                            <th>{{ __("Status") }}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -72,13 +71,12 @@
                                     @include('admin.components.form.switcher',[
                                         'name'          => 'status',
                                         'value'         => $item->status,
-                                        'options'       => ['Active' => 1,'Deactive' => 0],
+                                        'options'       => [__('Active') => 1,__('Deactive') => 0],
                                         'onload'        => true,
                                         'data_target'   => $item->id,
                                         'permission'    => "admin.setup.sections.announcement.status.update",
                                     ])
                                 </td>
-                                <td>{{ $item->created_at->format("d-m-y h:i:s") }}</td>
                                 <td>
                                     @include('admin.components.link.edit-default',[
                                         'href'          => setRoute('admin.setup.sections.announcement.edit',$item->id),
@@ -116,7 +114,7 @@
 
             var actionRoute =  "{{ setRoute('admin.setup.sections.announcement.delete') }}";
             var target      = oldData.id;
-            var message     = `Are you sure to delete this announcement?`;
+            var message     = `{{ __("Are you sure to delete this announcement?") }}`;
 
             openDeleteModal(actionRoute,target,message);
         });

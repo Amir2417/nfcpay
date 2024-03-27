@@ -1676,8 +1676,6 @@ class SetupSectionsController extends Controller
         $total_announcements = $announcements->count();
         $active_announcements = $announcements->where("status",GlobalConst::ACTIVE)->count();
 
-        // dd($announcements,$categories);
-
         return view('admin.sections.setup-sections.announcement-section',compact(
             'page_title',
             'data',
@@ -1697,8 +1695,8 @@ class SetupSectionsController extends Controller
      */
     public function announcementUpdate(Request $request,$slug) {
         $basic_field_name = [
-            'heading' => "required|string|max:100",
-            'sub_heading' => "required|string|max:255",
+            'title' => "required|string|max:100",
+            'heading' => "required|string|max:255",
         ];
 
         $slug = Str::slug(SiteSectionConst::ANNOUNCEMENT_SECTION);

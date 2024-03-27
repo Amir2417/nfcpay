@@ -15,5 +15,8 @@ Route::name('frontend.')->group(function() {
         Route::get('about','about')->name('about');
         Route::get('service','service')->name('service');
         Route::get('contact','contact')->name('contact');
+        Route::get('journal','webJournal')->name('web.journal');
+        Route::get('journal-details/{slug}','journalDetails')->name('journal.details');
+        Route::get('journal-category/{slug}','journalCategory')->name('journal.category');
     });
 });

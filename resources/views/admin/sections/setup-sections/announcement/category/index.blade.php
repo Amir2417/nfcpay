@@ -35,7 +35,7 @@
                 <h5 class="title">{{ __("Categories") }}</h5>
                 <div class="table-btn-area">
                     @include('admin.components.link.add-default',[
-                        'text'          => "Add Category",
+                        'text'          => __("Add Category"),
                         'href'          => "#category-add",
                         'class'         => "modal-btn",
                         'permission'    => "admin.setup.sections.announcement.category.store",
@@ -47,8 +47,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Status</th>
-                            <th>Created At</th>
+                            <th>{{ __("Status") }}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -60,13 +59,12 @@
                                     @include('admin.components.form.switcher',[
                                         'name'          => 'status',
                                         'value'         => $item->status,
-                                        'options'       => ['Active' => 1,'Deactive' => 0],
+                                        'options'       => [__('Active') => 1,__('Deactive') => 0],
                                         'onload'        => true,
                                         'data_target'   => $item->id,
                                         'permission'    => "admin.setup.sections.announcement.category.status.update",
                                     ])
                                 </td>
-                                <td>{{ $item->created_at->format("d-m-y h:i:s") }}</td>
                                 <td>
                                     @include('admin.components.link.edit-default',[
                                         'href'          => "javascript:void(0)",
@@ -117,7 +115,7 @@
                                             <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="{{ $item->name }}" role="tabpanel" aria-labelledby="english-tab">
                                                 <div class="col-xl-12 col-lg-12 form-group">
                                                     @include('admin.components.form.input',[
-                                                        'label'         => 'Name',
+                                                        'label'         => __('Name'),
                                                         'label_after'   => '*',
                                                         'name'          => $item->code . "_name",
                                                         'value'         => old($item->code . "_name")
@@ -168,7 +166,7 @@
                                             <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="{{ $item->name }}" role="tabpanel" aria-labelledby="english-tab">
                                                 <div class="col-xl-12 col-lg-12 form-group">
                                                     @include('admin.components.form.input',[
-                                                        'label'         => 'Name',
+                                                        'label'         => __('Name'),
                                                         'label_after'   => '*',
                                                         'name'          => $item->code . "_name_edit",
                                                         'value'         => old($item->code . "_name_edit")
@@ -211,7 +209,7 @@
 
             var actionRoute =  "{{ setRoute('admin.setup.sections.announcement.category.delete') }}";
             var target      = oldData.id;
-            var message     = `Are you sure to delete <strong>${oldData?.name?.language[appLocal]?.name}</strong> category?`;
+            var message     = `{{ __("Are you sure to delete") }} <strong>${oldData?.name?.language[appLocal]?.name}</strong> {{ __("category?") }}`;
 
             openDeleteModal(actionRoute,target,message);
         });

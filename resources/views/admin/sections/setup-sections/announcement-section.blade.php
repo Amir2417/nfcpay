@@ -58,16 +58,16 @@
                                     <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="{{ $item->name }}" role="tabpanel" aria-labelledby="english-tab">
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'     => "Heading*",
-                                                'name'      => $item->code . "_heading",
-                                                'value'     => old($item->code . "_heading",$data->value->language->$lang_code->heading ?? "")
+                                                'label'     => __("Title")."*",
+                                                'name'      => $item->code . "_title",
+                                                'value'     => old($item->code . "_title",$data->value->language->$lang_code->title ?? "")
                                             ])
                                         </div>
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'     => "Sub Heading*",
-                                                'name'      => $item->code . "_sub_heading",
-                                                'value'     => old($item->code . "_sub_heading",$data->value->language->$lang_code->sub_heading ?? "")
+                                                'label'     => __("Heading")."(".__("For Separate Heading color use '|' sing to divide").")"."*",
+                                                'name'      => $item->code . "_heading",
+                                                'value'     => old($item->code . "_heading",$data->value->language->$lang_code->heading ?? "")
                                             ])
                                         </div>
                                     </div>

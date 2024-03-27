@@ -13,6 +13,7 @@ use App\Constants\SiteSectionConst;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\InvestmentPlan;
 use App\Models\Frontend\Announcement;
+use App\Models\Frontend\AnnouncementCategory;
 use App\Models\Frontend\ContactRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -119,5 +120,59 @@ class IndexController extends Controller
         $page_title     = "Contact";
 
         return view('frontend.pages.contact',compact('page_title'));
+    }
+    /**
+     * Method for view web journal page
+     * @return view  
+     */
+    public function webJournal(){
+        $page_title     = "Web Journal";
+        $journals        = Announcement::with(['category'])->where('status',true)->latest()->paginate(10);
+
+        return view('frontend.pages.journal',compact(
+            'page_title',
+            'journals'
+        ));
+    }
+    /**
+     * Method for journal details page
+     * @param $slug
+     * @param Illuminate\Http\Request $request
+     */
+    public function journalDetails($slug){
+        $page_title             = "Journal Details";
+        $journal                = Announcement::where('slug',$slug)->first();
+        if(!$journal) return back()->with(['error' => ['Something went wrong! Please try again.']]);
+        $category               = AnnouncementCategory::withCount('announcements')->where('status',true)->get();
+        $recent_posts           = Announcement::where('status',true)->where('slug','!=',$slug)->get();
+
+        return view('frontend.pages.journal-details',compact(
+            'page_title',
+            'journal',
+            'category',
+            'recent_posts'
+        ));
+
+    }
+    /**
+     * Method for journal details page
+     * @param $slug
+     * @param Illuminate\Http\Request $request
+     */
+    public function journalCategory($slug){
+        $page_title             = "Journal Details";
+        $journal                = Announcement::where('slug',$slug)->first();
+        if(!$journal) return back()->with(['error' => ['Something went wrong! Please try again.']]);
+        $category               = AnnouncementCategory::withCount('announcements')->where('status',true)->get();
+        
+        $recent_posts           = Announcement::where('status',true)->where('slug','!=',$slug)->get();
+
+        return view('frontend.pages.journal-details',compact(
+            'page_title',
+            'journal',
+            'category',
+            'recent_posts'
+        ));
+
     }
 }
