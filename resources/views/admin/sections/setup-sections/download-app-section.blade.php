@@ -163,6 +163,7 @@
             var oldData = JSON.parse($(this).parents("tr").attr("data-item"));
             var editModal = $("#download-app-edit");
 
+            console.log("data",oldData.icon_image);
             editModal.find("form").first().find("input[name=target]").val(oldData.id);
             editModal.find("input[name="+default_language+"_item_title_edit]").val(oldData.language[default_language].item_title);
             editModal.find("input[name=icon_edit]").val(oldData.icon);
@@ -170,9 +171,13 @@
             
             $.each(languages,function(index,item){
                 editModal.find("input[name="+item.code+"_item_title_edit]").val((oldData.language[item.code] == undefined ) ? '' : oldData.language[item.code].item_title);
+                editModal.find("input[name="+item.code+"_item_header_edit]").val((oldData.language[item.code] == undefined ) ? '' : oldData.language[item.code].item_header);
             });
             editModal.find("input[name=image]").attr("data-preview-name",oldData.image);
+            editModal.find("input[name=icon_image]").attr("data-preview-name",oldData.icon_image);
+           
             fileHolderPreviewReInit("#download-app-edit input[name=image]");
+            fileHolderPreviewReInit("#download-app-edit input[name=icon_image]");
             openModalBySelector("#download-app-edit");
         });
 

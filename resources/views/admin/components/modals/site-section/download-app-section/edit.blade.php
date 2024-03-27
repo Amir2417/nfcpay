@@ -29,6 +29,13 @@
                                             'value'     => old($lang_code . "_item_title_edit",$data->value->language->$lang_code->item_title ?? "")
                                         ])
                                     </div>   
+                                    <div class="form-group">
+                                        @include('admin.components.form.input',[
+                                            'label'     => __("Header")."*",
+                                            'name'      => $lang_code . "_item_header_edit",
+                                            'value'     => old($lang_code . "_item_header_edit",$data->value->language->$lang_code->item_header ?? "")
+                                        ])
+                                    </div>   
                                 </div>
                             @endforeach
                         </div>
@@ -40,15 +47,27 @@
                             'value'     => old("link")
                         ])
                     </div> 
-                    <div class="form-group">
-                        @include('admin.components.form.input-file',[
-                            'label'             => __("Image"),
-                            'name'              => "image",
-                            'class'             => "file-holder",
-                            'old_files_path'    => files_asset_path("site-section"),
-                            'old_files'         => old("old_image"),
-                        ])
+                    <div class="row justify-content-center">
+                        <div class="col-xl-6 col-lg-6 form-group">
+                            @include('admin.components.form.input-file',[
+                                'label'             => __("Icon Image"),
+                                'name'              => "icon_image",
+                                'class'             => "file-holder",
+                                'old_files_path'    => files_asset_path("site-section"),
+                                'old_files'         => old("old_image"),
+                            ])
+                        </div>
+                        <div class="col-xl-6 col-lg-6 form-group">
+                            @include('admin.components.form.input-file',[
+                                'label'             => __("Image"),
+                                'name'              => "image",
+                                'class'             => "file-holder",
+                                'old_files_path'    => files_asset_path("site-section"),
+                                'old_files'         => old("old_image"),
+                            ])
+                        </div>
                     </div>
+                    
                     <div class="col-xl-12 col-lg-12 form-group d-flex align-items-center justify-content-between mt-4">
                         <button type="button" class="btn btn--danger modal-close">{{ __("Cancel") }}</button>
                         <button type="submit" class="btn btn--base">{{ __("Update") }}</button>

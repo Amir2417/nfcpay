@@ -674,6 +674,7 @@ class SetupSectionsController extends Controller
     public function downloadAppItemStore(Request $request,$slug) {
         $basic_field_name = [
             'item_title'    => "required|string|max:2555",
+            'item_header'    => "required|string|max:2555",
         ];
 
         $language_wise_data = $this->contentValidate($request,$basic_field_name,"download-app-add");
@@ -690,6 +691,7 @@ class SetupSectionsController extends Controller
 
         $validator  = Validator::make($request->all(),[
             'link'            => "required|url",
+            'icon_image'      => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
             'image'           => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
         ]);
 
@@ -699,12 +701,16 @@ class SetupSectionsController extends Controller
         $section_data['items'][$unique_id]['language']     = $language_wise_data;
         $section_data['items'][$unique_id]['id']           = $unique_id;
         $section_data['items'][$unique_id]['image']        = "";
-        $section_data['items'][$unique_id]['link']        = $validated['link'];
+        $section_data['items'][$unique_id]['icon_image']   = "";
+        $section_data['items'][$unique_id]['link']         = $validated['link'];
         $section_data['items'][$unique_id]['created_at']   = now();
         if($request->hasFile("image")) {
             $section_data['items'][$unique_id]['image']    = $this->imageValidate($request,"image",$section->value->items->image ?? null);
         }
-
+        if($request->hasFile("icon_image")) {
+            $section_data['items'][$unique_id]['icon_image']    = $this->imageValidate($request,"icon_image",$section->value->items->icon_image ?? null);
+        }
+        
         $update_data['key']     = $slug;
         $update_data['value']   = $section_data;
         try{
@@ -727,6 +733,7 @@ class SetupSectionsController extends Controller
 
         $basic_field_name      = [
             'item_title_edit'     => "required|string|max:2555",
+            'item_header_edit'     => "required|string|max:2555",
         ];
 
         $slug    = Str::slug(SiteSectionConst::DOWNLOAD_APP_SECTION);
@@ -746,6 +753,7 @@ class SetupSectionsController extends Controller
         },$language_wise_data);
         $validator      = Validator::make($request->all(),[
             'link'      => "required|url",
+            'icon_image'=> "nullable|image|mimes:jpg,png,svg,webp|max:10240",
             'image'     => "nullable|image|mimes:jpg,png,svg,webp|max:10240",
         ]);
 
@@ -757,6 +765,9 @@ class SetupSectionsController extends Controller
 
         if($request->hasFile("image")) {
             $section_values['items'][$request->target]['image']    = $this->imageValidate($request,"image",$section_values['items'][$request->target]['image'] ?? null);
+        }
+        if($request->hasFile("icon_image")) {
+            $section_values['items'][$request->target]['icon_image']    = $this->imageValidate($request,"icon_image",$section_values['items'][$request->target]['icon_image'] ?? null);
         }
         try{
             $section->update([
