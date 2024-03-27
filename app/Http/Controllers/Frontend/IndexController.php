@@ -103,4 +103,13 @@ class IndexController extends Controller
         
         return view('frontend.pages.about',compact('page_title'));
     }
+    /**
+     * Method for view service page
+     * @return view
+     */
+    public function service(){
+        $page_title     = "Service";
+
+        return view('frontend.pages.service',compact('page_title'));
+    }
 }

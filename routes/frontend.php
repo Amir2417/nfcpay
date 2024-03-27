@@ -13,6 +13,7 @@ Route::name('frontend.')->group(function() {
 
         //pages
         Route::get('about','about')->name('about');
+        Route::get('service','service')->name('service');
 
     });
 });
