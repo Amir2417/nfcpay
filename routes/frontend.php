@@ -10,5 +10,7 @@ Route::name('frontend.')->group(function() {
         Route::post("contact/message/send","contactMessageSend")->name("contact.message.send");
         Route::get('link/{slug}','usefulLink')->name('useful.links');
         Route::post('languages/switch','languageSwitch')->name('languages.switch');
+
+        
     });
 });

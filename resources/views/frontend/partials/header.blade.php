@@ -1,3 +1,6 @@
+@php
+    $menues = App\Models\Admin\SetupPage::where('status',true)->get();
+@endphp
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Start Header
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -12,14 +15,17 @@
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="las la-bars"></span>
                         </button>
+                        @php
+                            $current_url = URL::current();
+                        @endphp
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav main-menu ms-auto me-auto">
-                                <li><a href="index.html" class="active">Home</a></li>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="service.html">Services</a></li>
-                                <li><a href="blog.html">Web Journal</a></li>
-                                <li><a href="developer/developer.html">Developer</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                @foreach ($menues as $item)
+                                    @php
+                                        $title = $item->title ?? "";
+                                    @endphp
+                                    <li><a href="{{ url($item->url) }}" class=" @if($current_url == url($item->url)) active @endif ">{{ __($title) }} <i class="fas fa-caret-right"></i></a></li>
+                                @endforeach
                             </ul>
                             <div class="header-language">
                                 @php
