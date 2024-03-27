@@ -56,7 +56,6 @@ class IndexController extends Controller
         $validated = Validator::make($request->all(),[
             'name'      => "required|string|max:255",
             'email'     => "required|email|string|max:255",
-            'phone'     => "required|string|max:255",
             'message'   => "required|string|max:5000",
         ])->validate();
 
@@ -111,5 +110,14 @@ class IndexController extends Controller
         $page_title     = "Service";
 
         return view('frontend.pages.service',compact('page_title'));
+    }
+    /**
+     * Method for view contact page 
+     * @return view
+     */
+    public function contact(){
+        $page_title     = "Contact";
+
+        return view('frontend.pages.contact',compact('page_title'));
     }
 }

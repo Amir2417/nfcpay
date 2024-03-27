@@ -1973,8 +1973,8 @@ class SetupSectionsController extends Controller
      */
     public function contactUsUpdate(Request $request,$slug) {
         $basic_field_name = [
-            'heading'       => "required|string|max:100",
-            'sub_heading'   => "required|string|max:255",
+            'title'       => "required|string|max:100",
+            'heading'   => "required|string|max:255",
         ];
 
         $slug = Str::slug(SiteSectionConst::CONTACT_US_SECTION);

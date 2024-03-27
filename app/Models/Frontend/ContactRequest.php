@@ -10,4 +10,12 @@ class ContactRequest extends Model
     use HasFactory;
     
     protected $guarded = ['id'];
+
+    protected $casts    = [
+        'id'            => 'integer',
+        'name'          => 'string',
+        'email'         => 'string',
+        'message'       => 'string',
+        'reply'         => 'integer'
+    ];
 }
