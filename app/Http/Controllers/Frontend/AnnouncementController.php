@@ -115,7 +115,7 @@ class AnnouncementController extends Controller
             return Response::error($error, null, 500);
         }
 
-        $success = ['success' => ['Category status updated successfully!']];
+        $success = ['success' => [__('Category status updated successfully!')]];
         return Response::success($success, null, 200);
     }
 
@@ -226,7 +226,7 @@ class AnnouncementController extends Controller
             return Response::error($error, null, 500);
         }
 
-        $success = ['success' => ['Announcement status updated successfully!']];
+        $success = ['success' => [__('Announcement status updated successfully!')]];
         return Response::success($success, null, 200);
     }
 

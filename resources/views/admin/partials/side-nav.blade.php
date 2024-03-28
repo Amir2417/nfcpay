@@ -261,7 +261,6 @@
                             setRoute('admin.setup.sections.section','services'),
                             setRoute('admin.setup.sections.section','testimonial'),
                             setRoute('admin.setup.sections.section','announcement'),
-                            setRoute('admin.setup.sections.section','how-it-work'),
                             setRoute('admin.setup.sections.section','contact-us'),
                             setRoute('admin.setup.sections.section','footer'),
                             setRoute('admin.setup.sections.section','login'),
@@ -315,10 +314,6 @@
                                 <a href="{{ setRoute('admin.setup.sections.section','announcement') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','announcement')) active @endif">
                                     <i class="menu-icon las la-ellipsis-h"></i>
                                     <span class="menu-title">{{ __("Announcements") }}</span>
-                                </a>
-                                <a href="{{ setRoute('admin.setup.sections.section','how-it-work') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','how-it-work')) active @endif">
-                                    <i class="menu-icon las la-ellipsis-h"></i>
-                                    <span class="menu-title">{{ __("How It Work Section") }}</span>
                                 </a>
                                 <a href="{{ setRoute('admin.setup.sections.section','contact-us') }}" class="nav-link @if ($current_url == setRoute('admin.setup.sections.section','contact-us')) active @endif">
                                     <i class="menu-icon las la-ellipsis-h"></i>

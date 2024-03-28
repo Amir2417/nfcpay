@@ -427,7 +427,7 @@ class SetupSectionsController extends Controller
             'value'     => $data,
         ]);
 
-        return Response::success(['Section item status updated successfully!'],[],200);
+        return Response::success([__('Section item status updated successfully!')],[],200);
         
     }
 /**
@@ -997,7 +997,7 @@ class SetupSectionsController extends Controller
             'value'     => $data,
         ]);
 
-        return Response::success(['Section item status updated successfully!'],[],200);
+        return Response::success([__('Section item status updated successfully!')],[],200);
         
     }
     /**
@@ -1453,7 +1453,7 @@ class SetupSectionsController extends Controller
             'value'     => $data,
         ]);
 
-        return Response::success(['Section item status updated successfully!'],[],200);
+        return Response::success([__('Section item status updated successfully!')],[],200);
         
     }
 

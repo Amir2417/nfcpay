@@ -27,7 +27,7 @@
             <div class="footer-bottom-wrapper">
                 <ul class="footer-list">
                     @foreach (@$useful_links ?? [] as $item)
-                        <li><a href="{{ setRoute('frontend.useful.links',$item->slug) }}">{{ $item->title->language->$app_local->title }}</a></li>
+                        <li><a href="{{ setRoute('frontend.useful.links',$item->slug) }}">{{ @$item->title->language->$app_local->title }}</a></li>
                     @endforeach
                 </ul>
                 <div class="copyright-area">

@@ -66,7 +66,7 @@
                                 <div class="tab-pane @if (get_default_language_code() == $item->code) fade show active @endif" id="{{ $item->name }}" role="tabpanel" aria-labelledby="english-tab">                                                                   
                                     <div class="form-group">
                                         @include('admin.components.form.input',[
-                                            'label'     => __("Section Title")."*",
+                                            'label'     => __("Title")."*",
                                             'name'      => $lang_code . "_title",
                                             'value'     => old($lang_code . "_title",$data->value->language->$lang_code->title ?? "")
                                         ])

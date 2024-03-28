@@ -1,7 +1,7 @@
 <div id="statistic-add" class="mfp-hide large">
     <div class="modal-data">
         <div class="modal-header px-0">
-            <h5 class="modal-title">{{ __("Add Statistic") }}</h5>
+            <h5 class="modal-title">{{ __("Add Item") }}</h5>
         </div>
         <div class="modal-form-data">
             <form class="modal-form" method="POST" action="{{ setRoute('admin.setup.sections.section.item.store',$slug) }}" enctype="multipart/form-data">

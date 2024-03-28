@@ -36,7 +36,7 @@
                 <div class="row justify-content-center mb-10-none">
                     <div class="col-xl-4 col-lg-4 form-group">
                         @include('admin.components.form.input-file',[
-                            'label'             => "Image:",
+                            'label'             => __("Image"),
                             'name'              => "image",
                             'class'             => "file-holder",
                             'old_files_path'    => files_asset_path("site-section"),

@@ -11,7 +11,7 @@
         <div class="row justify-content-center align-items-center mb-30">
             <div class="col-xl-6 col-lg-6 mb-30">
                 <div class="app-thumb">
-                    <img src="{{ asset('public/frontend') }}/images/element/app.png" alt="element">
+                    <img src="{{ get_image(@$data->value->image,'site-section') }}" alt="element">
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 mb-30">

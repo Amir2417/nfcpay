@@ -40,7 +40,7 @@
                 <div class="row justify-content-center mb-10-none">
                     <div class="col-xl-4 col-lg-4 form-group">
                         @include('admin.components.form.input-file',[
-                            'label'             => "Image:",
+                            'label'             => __("Image"),
                             'name'              => "image",
                             'class'             => "file-holder",
                             'old_files_path'    => files_asset_path("site-section"),
@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="form-group">
                                             @include('admin.components.form.input',[
-                                                'label'         => "Title",
+                                                'label'         => __("Title"),
                                                 'label_after'   => "*",
                                                 'name'          => $item->code . "_title",
                                                 'value'         => old($item->code . "_title",$announcement->data?->language?->$lang_code?->title ?? null),
@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="form-group">
                                             @include('admin.components.form.input-text-rich',[
-                                                'label'         => "Description",
+                                                'label'         => __("Description"),
                                                 'label_after'   => "*",
                                                 'name'          => $item->code . "_description",
                                                 'value'         => old($item->code . "_description",$announcement->data?->language?->$lang_code?->description ?? null)
@@ -109,14 +109,13 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-12 col-lg-12 form-group">
                         @include('admin.components.button.form-btn',[
                             'class'         => "w-100 btn-loading",
-                            'text'          => "Submit",
+                            'text'          => __("Submit"),
                             'permission'    => "admin.setup.sections.section.update"
                         ])
                     </div>

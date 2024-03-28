@@ -38,7 +38,7 @@
                     @else
                         @include('admin.components.form.switcher',[
                             'name'          => 'status',
-                            'value'         => $item->status,
+                            'value'         => __($item->status),
                             'options'       => [__('Active') => 1,__('Banned') => 0],
                             'onload'        => true,
                             'data_target'   => $item->username,
