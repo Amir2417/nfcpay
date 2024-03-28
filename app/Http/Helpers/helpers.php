@@ -417,6 +417,9 @@ function files_path($slug)
         'language-file'     => [
             'path'          => 'backend/files/language',
         ],
+        'nfcpay-config'     => [
+            'path'          => 'backend/images/config',
+        ],
         'site-section'         => [
             'path'          => 'frontend/images/site-section',
         ],

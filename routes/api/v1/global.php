@@ -14,3 +14,9 @@ Route::controller(SettingController::class)->prefix("settings")->group(function(
     Route::get("onboard-screens","onboardScreens");
     Route::get("languages","getLanguages");
 });
+
+//create token
+Route::controller(SettingController::class)->group(function(){
+    //create token
+    Route::post('create-token','createToken');
+});

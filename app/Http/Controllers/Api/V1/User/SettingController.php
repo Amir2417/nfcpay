@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\User;
 
 use Exception;
+use Illuminate\Http\Request;
 use App\Constants\GlobalConst;
 use App\Http\Helpers\Response;
 use App\Models\Admin\Language;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Admin\AppOnboardScreens;
 use App\Providers\Admin\CurrencyProvider;
 use App\Providers\Admin\BasicSettingsProvider;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
@@ -103,5 +105,20 @@ class SettingController extends Controller
         return Response::success([__("Language data fetch successfully!")],[
             'languages' => $api_languages,
         ],200);
+    }
+    /**
+     * Method for create token
+     */
+    public function createToken(Request $request){
+        $validator      = Validator::make($request->all(),[
+            'order_id'  => 'required',
+            'amount'    => 'required',
+            'currency'  => 'required'
+        ]);
+        if($validator->fails()){
+            Response::error($validator->errors()->all(),[]);
+        }
+        $validated      = $validator->validate();
+        
     }
 }

@@ -29,7 +29,12 @@
                     'title'     => __("Dashboard"),
                     'icon'      => "menu-icon las la-rocket",
                 ])
-                
+
+                @include('admin.components.side-nav.link',[
+                    'route'     => 'admin.nfc.pay.config.index',
+                    'title'     => __("NFCPay Config"),
+                    'icon'      => "menu-icon las la-cogs",
+                ])
                 {{-- Section Default --}}
                 @include('admin.components.side-nav.link-group',[
                     'group_title'       => __("Default"),

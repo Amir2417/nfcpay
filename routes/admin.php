@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\PaymentGatewaysController;
 use App\Http\Controllers\Frontend\AnnouncementController;
 use App\Http\Controllers\Admin\PushNotificationController;
 use App\Http\Controllers\Admin\AppOnboardScreensController;
+use App\Http\Controllers\Admin\NFCPayConfigController;
 use App\Http\Controllers\Admin\PaymentGatewayCurrencyController;
 
 // All Admin Route Is Here
@@ -57,6 +58,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('google/2fa','google2FAStatusUpdate')->name('google.2fa.status.update');
     });
  
+    //nfc pay config
+    Route::controller(NFCPayConfigController::class)->prefix('config')->name('nfc.pay.config.')->group(function(){
+        Route::get('/','index')->name('index');
+        Route::put('update/{slug}','update')->name('update');
+    });
+
     // Setup Currency Section
     Route::controller(CurrencyController::class)->prefix('currency')->name('currency.')->group(function () {
         Route::get('index', 'index')->name('index');
