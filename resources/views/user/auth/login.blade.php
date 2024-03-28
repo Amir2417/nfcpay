@@ -1,4 +1,8 @@
-
+@php
+    $app_local  = get_default_language_code();
+    $slug       = Illuminate\Support\Str::slug(App\Constants\SiteSectionConst::LOGIN_SECTION);
+    $login      = App\Models\Admin\SiteSections::getData($slug)->first();
+@endphp
 @extends('layouts.master')
 
 @push('css')
@@ -19,8 +23,8 @@
                 <div class="account-logo">
                     <a class="site-logo site-title" href="{{ setRoute('frontend.index') }}"><img src="{{ get_logo($basic_settings) }}" alt="site-logo"></a>
                 </div>
-                <h4 class="title">Login Information</h4>
-                <p>Please input your email and login to your account to get access to your dashboard.</p>
+                <h4 class="title">{{ @$login->value->language->$app_local->title }}</h4>
+                <p>{{ @$login->value->language->$app_local->heading }}</p>
                 <form action="{{ setRoute('user.login.submit') }}" class="account-form" method="POST">
                     @csrf
                     <div class="row">

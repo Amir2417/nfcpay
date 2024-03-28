@@ -40,7 +40,7 @@
                             @foreach (@$recent_posts ?? [] as $item)
                                 <div class="single-popular-item d-flex flex-wrap align-items-center">
                                     <div class="popular-item-thumb">
-                                        <a href="{{ setRoute('journal.details',$item->slug) }}"><img src="{{ get_image($item->data->image , 'site-section') }}" alt="blog"></a>
+                                        <a href="{{ setRoute('frontend.journal.details',$item->slug) }}"><img src="{{ get_image($item->data->image , 'site-section') }}" alt="blog"></a>
                                     </div>
                                     <div class="popular-item-content">
                                         @php
@@ -48,7 +48,7 @@
                                             $formattedDate = date('M d, Y', strtotime($date));
                                         @endphp
                                         <span class="date">{{ $formattedDate }}</span>
-                                        <h6 class="title"><a href="{{ setRoute('journal.details',$item->slug) }}">{{ Str::words($item->data->language->$app_local->title ?? "","5","...") }}</a></h6>
+                                        <h6 class="title"><a href="{{ setRoute('frontend.journal.details',$item->slug) }}">{{ Str::words($item->data->language->$app_local->title ?? "","5","...") }}</a></h6>
                                     </div>
                                 </div>
                             @endforeach

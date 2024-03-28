@@ -1,3 +1,8 @@
+@php
+    $app_local      = get_default_language_code();
+    $slug           = Illuminate\Support\Str::slug(App\Constants\SiteSectionConst::REGISTER_SECTION);
+    $register       = App\Models\Admin\SiteSections::getData($slug)->first();
+@endphp
 @extends('layouts.master')
 
 @push('css')
@@ -18,8 +23,8 @@
                 <div class="account-logo">
                     <a class="site-logo site-title" href="{{ setRoute('frontend.index') }}"><img src="{{ get_logo($basic_settings) }}" alt="site-logo"></a>
                 </div>
-                <h4 class="title">Register Information</h4>
-                <p>Please input your details and register to your account to get access to your dashboard.</p>
+                <h4 class="title">{{ @$register->value->language->$app_local->title }}</h4>
+                <p>{{ @$register->value->language->$app_local->heading }}</p>
                 <form action="{{ setRoute('user.register.submit') }}" class="account-form" method="POST" autocomplete="on">
                     @csrf
                     <div class="row">

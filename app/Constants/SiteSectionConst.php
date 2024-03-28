@@ -18,6 +18,8 @@ class SiteSectionConst{
     const ABOUT_PAGE_SECTION        = "About Page Section";
     const CONTACT_US_SECTION        = "Contact Us Section";
     const FAQ_SECTION               = "Faq Section";
+    const LOGIN_SECTION             = "Login Section";
+    const REGISTER_SECTION          = "Register Section";
 
 
     const SOLUTIONS_SECTION         = "Solutions Section";
